@@ -1400,8 +1400,8 @@ Help me: [collect](https://www.nextflow.io/docs/latest/operator.html#collect), [
 
 Need help!
 
-After collecting the output from the previous process.
-You can concatenate a it using the below example code under script section.
+Try and use the pseudo code given below.
+Use the groovy println function to check the format
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="hide"}
 process dummy_process{
@@ -1412,6 +1412,8 @@ script:
 def space_separated = filefromchannel.join(" ")
 def string_separated = filefromchannel.join(" my_path/")
 
+println (space_separated) 
+println (string_separated)
 }
 ```
 
