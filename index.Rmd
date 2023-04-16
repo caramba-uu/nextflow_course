@@ -1337,6 +1337,8 @@ Help me: [params scope](https://www.nextflow.io/docs/latest/config.html#scope-pa
 As talked before the pipeline in the part 1 does mass spectrometry data pre-processing using XCMS software suite. In this part of the exercise, you will need to build a pipeline from scratch that does the same thing using OpenMS. You can of course use the pipeline in part 1 as a template and try to modify it to do that. 
 
 
+Tip: Use echo to print the shell command executed by the nextflow, to verify the input and output are of desired format. You can pass **-echo true** to the nextflow command or have a directive **echo true** under a process to print for the respective process.
+
 ### Assignment 1 (Build an OpenMS pipeline)
 
 This is what you need to do
@@ -1394,6 +1396,24 @@ Please also note that the inputs to this tool are given by `-in`, the outputs by
 Finally, this process needs quite a bit of RAM to go forward. Set the memory for this to probably around 10 GB or even more!
 
 Help me: [collect](https://www.nextflow.io/docs/latest/operator.html#collect), [joining in the process!](https://groups.google.com/g/nextflow/c/V7kKJzyZs98), [memory](https://www.nextflow.io/docs/latest/process.html#memory)
+
+
+Need help!
+
+After collecting the output from the previous process.
+You can concatenate a it using the below example code under script section.
+
+```{bash, attr.source='.numberLines',eval=FALSE, class.source="hide"}
+process dummy_process{
+input:
+file filefromchannel from input_ch
+
+script:
+def space_separated = filefromchannel.join(" ")
+def string_separated = filefromchannel.join(" my_path/")
+
+}
+```
 
 
 
