@@ -671,8 +671,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Finally, this process needs quite a bit of RAM to go forward. Set the memory for this to probably around 10 GB or even more!</p>
 <p>Help me: <a href="https://www.nextflow.io/docs/latest/operator.html#collect">collect</a>, <a href="https://groups.google.com/g/nextflow/c/V7kKJzyZs98">joining in the process!</a>, <a href="https://www.nextflow.io/docs/latest/process.html#memory">memory</a></p>
 <p>Need help!</p>
-<p>After collecting the output from the previous process.
-You can concatenate a it using the below example code under script section.</p>
+<p>Try and use the pseudo code given below.
+Use the groovy println function to check the format</p>
 <div class="sourceCode" id="cb96"><pre class="sourceCode numberSource bash hide numberLines"><code class="sourceCode bash"><span id="cb96-1"><a href="nextflow-assigments.html#cb96-1"></a><span class="ex">process</span> dummy_process{</span>
 <span id="cb96-2"><a href="nextflow-assigments.html#cb96-2"></a><span class="ex">input:</span></span>
 <span id="cb96-3"><a href="nextflow-assigments.html#cb96-3"></a><span class="fu">file</span> filefromchannel from input_ch</span>
@@ -681,7 +681,9 @@ You can concatenate a it using the below example code under script section.</p>
 <span id="cb96-6"><a href="nextflow-assigments.html#cb96-6"></a><span class="ex">def</span> space_separated = filefromchannel.join<span class="er">(</span><span class="st">&quot; &quot;</span><span class="kw">)</span></span>
 <span id="cb96-7"><a href="nextflow-assigments.html#cb96-7"></a><span class="ex">def</span> string_separated = filefromchannel.join<span class="er">(</span><span class="st">&quot; my_path/&quot;</span><span class="kw">)</span></span>
 <span id="cb96-8"><a href="nextflow-assigments.html#cb96-8"></a></span>
-<span id="cb96-9"><a href="nextflow-assigments.html#cb96-9"></a><span class="er">}</span></span></code></pre></div>
+<span id="cb96-9"><a href="nextflow-assigments.html#cb96-9"></a><span class="ex">println</span> <span class="er">(</span><span class="ex">space_separated</span><span class="kw">)</span> </span>
+<span id="cb96-10"><a href="nextflow-assigments.html#cb96-10"></a><span class="ex">println</span> <span class="er">(</span><span class="ex">string_separated</span><span class="kw">)</span></span>
+<span id="cb96-11"><a href="nextflow-assigments.html#cb96-11"></a><span class="er">}</span></span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>The third process is called <code>process_masstrace_linker_pos_OpenMS</code> and is used to link (merge) multiple files into a single file
 <ol start="7" style="list-style-type: decimal">
