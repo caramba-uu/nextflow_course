@@ -1281,6 +1281,8 @@ You are now ready to start!
 
 *For part 1, you should send us the modified main.nf and nextflow.config. For part 2, you will have to send us a main.nf, nextflow.config and a PCA plot!*
 
+**IMPORTANT: some time Uppmax file system might cause some of the processes to fail, if this happens, rerun the workflow with -resume option. This might actually pass the step that was previously shown as failed!**
+
 ## Part 1
 
 In this part, we will run a small pipeline together. The pipeline is already in a folder that you need to copy to your personal space. We assume that you are now in `nextflow_lab`
@@ -1337,7 +1339,7 @@ Help me: [params scope](https://www.nextflow.io/docs/latest/config.html#scope-pa
 As talked before the pipeline in the part 1 does mass spectrometry data pre-processing using XCMS software suite. In this part of the exercise, you will need to build a pipeline from scratch that does the same thing using OpenMS. You can of course use the pipeline in part 1 as a template and try to modify it to do that. 
 
 
-Tip: Use echo to print the shell command executed by the nextflow, to verify the input and output are of desired format. You can pass **-echo true** to the nextflow command or have a directive **echo true** under a process to print for the respective process.
+**Tip: Use echo to print the shell command executed by the nextflow, to verify the input and output are of desired format. You can pass "-echo true" to the nextflow command or have a directive "echo true" under a process to print for the respective process.**
 
 ### Assignment 1 (Build an OpenMS pipeline)
 
@@ -1400,8 +1402,8 @@ Help me: [collect](https://www.nextflow.io/docs/latest/operator.html#collect), [
 
 Need help!
 
-Try and use the pseudo code given below.
-Use the groovy println function to check the format
+Use the pseudo code given below for getting the desired input and output format.  
+Use println function from groovy to check the format.
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="hide"}
 process dummy_process{
@@ -1464,7 +1466,5 @@ Given the output from the last step of the pipeline, do a PCA on the data. The o
 Can you add your script (PCA) as an extra node part of the pipeline? You don’t have to use containers, you can use conda or whatever you like! There are R and Python already available in the container, you can also use [conda](https://www.nextflow.io/docs/latest/process.html#conda) or [modules](https://www.nextflow.io/docs/latest/process.html#module)
 
 If you don’t know what PCA is or how to do it, please let us know!
-
-**IMPORTANT: some time Uppmax file system might cause some of the processes to fail, if this happens, rerun the workflow with -resume option. This might actually pass the step that was previously shown as failed!**
 
 **If you encounter issues with Uppmax being way too slow or does not do anything, please let up know!**
