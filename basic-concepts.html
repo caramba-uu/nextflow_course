@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2023-04-16" />
+<meta name="date" content="2023-04-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -443,7 +443,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -456,7 +456,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -581,37 +581,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The Nextflow scripting language is an extension of the Groovy programming language. Groovy is a powerful programming language for the Java virtual machine. The Nextflow syntax has been specialized to ease the writing of computational pipelines in a declarative manner.</p>
 <p>Nextflow can execute any piece of Groovy code or use any library for the JVM platform.</p>
 <p>For example,</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r nohide numberLines"><code class="sourceCode r"><span id="cb7-1"><a href="basic-concepts.html#cb7-1"></a>println <span class="st">&quot;Hello, World!&quot;</span> <span class="co">#1</span></span>
-<span id="cb7-2"><a href="basic-concepts.html#cb7-2"></a> </span>
-<span id="cb7-3"><a href="basic-concepts.html#cb7-3"></a>x <span class="ot">=</span> <span class="dv">1</span> <span class="co">#2</span></span>
-<span id="cb7-4"><a href="basic-concepts.html#cb7-4"></a>println x</span>
-<span id="cb7-5"><a href="basic-concepts.html#cb7-5"></a> </span>
-<span id="cb7-6"><a href="basic-concepts.html#cb7-6"></a>x <span class="ot">=</span> new <span class="fu">java.util.Date</span>() <span class="co">#2</span></span>
-<span id="cb7-7"><a href="basic-concepts.html#cb7-7"></a>println x</span>
-<span id="cb7-8"><a href="basic-concepts.html#cb7-8"></a> </span>
-<span id="cb7-9"><a href="basic-concepts.html#cb7-9"></a>x <span class="ot">=</span> <span class="sc">-</span><span class="fl">3.1499392</span> <span class="co">#2</span></span>
-<span id="cb7-10"><a href="basic-concepts.html#cb7-10"></a>println x</span>
-<span id="cb7-11"><a href="basic-concepts.html#cb7-11"></a> </span>
-<span id="cb7-12"><a href="basic-concepts.html#cb7-12"></a>x <span class="ot">=</span> false <span class="co">#2</span></span>
-<span id="cb7-13"><a href="basic-concepts.html#cb7-13"></a>println x</span>
-<span id="cb7-14"><a href="basic-concepts.html#cb7-14"></a> </span>
-<span id="cb7-15"><a href="basic-concepts.html#cb7-15"></a>x <span class="ot">=</span> <span class="st">&quot;Hi&quot;</span> <span class="co">#2</span></span>
-<span id="cb7-16"><a href="basic-concepts.html#cb7-16"></a>println x</span>
-<span id="cb7-17"><a href="basic-concepts.html#cb7-17"></a></span>
-<span id="cb7-18"><a href="basic-concepts.html#cb7-18"></a>myList <span class="ot">=</span> [<span class="dv">1776</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">33</span>, <span class="dv">99</span>, <span class="dv">0</span>, <span class="dv">928734928763</span>] <span class="co">#3</span></span>
-<span id="cb7-19"><a href="basic-concepts.html#cb7-19"></a>println myList</span>
-<span id="cb7-20"><a href="basic-concepts.html#cb7-20"></a></span>
-<span id="cb7-21"><a href="basic-concepts.html#cb7-21"></a>square <span class="ot">=</span> { it <span class="sc">*</span> it } <span class="co">#4</span></span>
-<span id="cb7-22"><a href="basic-concepts.html#cb7-22"></a>println <span class="fu">square</span>(<span class="dv">9</span>)</span>
-<span id="cb7-23"><a href="basic-concepts.html#cb7-23"></a> </span>
-<span id="cb7-24"><a href="basic-concepts.html#cb7-24"></a>printMapClosure <span class="ot">=</span> { key, value <span class="ot">-&gt;</span></span>
-<span id="cb7-25"><a href="basic-concepts.html#cb7-25"></a>   println <span class="st">&quot;$key = $value&quot;</span></span>
-<span id="cb7-26"><a href="basic-concepts.html#cb7-26"></a>} <span class="co">#4</span></span>
-<span id="cb7-27"><a href="basic-concepts.html#cb7-27"></a></span>
-<span id="cb7-28"><a href="basic-concepts.html#cb7-28"></a>map_example<span class="ot">=</span>[ <span class="st">&quot;Yue&quot;</span> <span class="sc">:</span> <span class="st">&quot;Wu&quot;</span>, <span class="st">&quot;Mark&quot;</span> <span class="sc">:</span> <span class="st">&quot;Williams&quot;</span>, <span class="st">&quot;Sudha&quot;</span> <span class="sc">:</span> <span class="st">&quot;Kumari&quot;</span> ] <span class="co">#5</span></span>
-<span id="cb7-29"><a href="basic-concepts.html#cb7-29"></a></span>
-<span id="cb7-30"><a href="basic-concepts.html#cb7-30"></a></span>
-<span id="cb7-31"><a href="basic-concepts.html#cb7-31"></a>[ <span class="st">&quot;Yue&quot;</span> <span class="sc">:</span> <span class="st">&quot;Wu&quot;</span>, <span class="st">&quot;Mark&quot;</span> <span class="sc">:</span> <span class="st">&quot;Williams&quot;</span>, <span class="st">&quot;Sudha&quot;</span> <span class="sc">:</span> <span class="st">&quot;Kumari&quot;</span> ]<span class="fu">.each</span>(printMapClosure) <span class="co">#6</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r nohide numberLines"><code class="sourceCode r"><span id="cb8-1"><a href="basic-concepts.html#cb8-1"></a>println <span class="st">&quot;Hello, World!&quot;</span> <span class="co">#1</span></span>
+<span id="cb8-2"><a href="basic-concepts.html#cb8-2"></a> </span>
+<span id="cb8-3"><a href="basic-concepts.html#cb8-3"></a>x <span class="ot">=</span> <span class="dv">1</span> <span class="co">#2</span></span>
+<span id="cb8-4"><a href="basic-concepts.html#cb8-4"></a>println x</span>
+<span id="cb8-5"><a href="basic-concepts.html#cb8-5"></a> </span>
+<span id="cb8-6"><a href="basic-concepts.html#cb8-6"></a>x <span class="ot">=</span> new <span class="fu">java.util.Date</span>() <span class="co">#2</span></span>
+<span id="cb8-7"><a href="basic-concepts.html#cb8-7"></a>println x</span>
+<span id="cb8-8"><a href="basic-concepts.html#cb8-8"></a> </span>
+<span id="cb8-9"><a href="basic-concepts.html#cb8-9"></a>x <span class="ot">=</span> <span class="sc">-</span><span class="fl">3.1499392</span> <span class="co">#2</span></span>
+<span id="cb8-10"><a href="basic-concepts.html#cb8-10"></a>println x</span>
+<span id="cb8-11"><a href="basic-concepts.html#cb8-11"></a> </span>
+<span id="cb8-12"><a href="basic-concepts.html#cb8-12"></a>x <span class="ot">=</span> false <span class="co">#2</span></span>
+<span id="cb8-13"><a href="basic-concepts.html#cb8-13"></a>println x</span>
+<span id="cb8-14"><a href="basic-concepts.html#cb8-14"></a> </span>
+<span id="cb8-15"><a href="basic-concepts.html#cb8-15"></a>x <span class="ot">=</span> <span class="st">&quot;Hi&quot;</span> <span class="co">#2</span></span>
+<span id="cb8-16"><a href="basic-concepts.html#cb8-16"></a>println x</span>
+<span id="cb8-17"><a href="basic-concepts.html#cb8-17"></a></span>
+<span id="cb8-18"><a href="basic-concepts.html#cb8-18"></a>myList <span class="ot">=</span> [<span class="dv">1776</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">33</span>, <span class="dv">99</span>, <span class="dv">0</span>, <span class="dv">928734928763</span>] <span class="co">#3</span></span>
+<span id="cb8-19"><a href="basic-concepts.html#cb8-19"></a>println myList</span>
+<span id="cb8-20"><a href="basic-concepts.html#cb8-20"></a></span>
+<span id="cb8-21"><a href="basic-concepts.html#cb8-21"></a>square <span class="ot">=</span> { it <span class="sc">*</span> it } <span class="co">#4</span></span>
+<span id="cb8-22"><a href="basic-concepts.html#cb8-22"></a>println <span class="fu">square</span>(<span class="dv">9</span>)</span>
+<span id="cb8-23"><a href="basic-concepts.html#cb8-23"></a> </span>
+<span id="cb8-24"><a href="basic-concepts.html#cb8-24"></a>printMapClosure <span class="ot">=</span> { key, value <span class="ot">-&gt;</span></span>
+<span id="cb8-25"><a href="basic-concepts.html#cb8-25"></a>   println <span class="st">&quot;$key = $value&quot;</span></span>
+<span id="cb8-26"><a href="basic-concepts.html#cb8-26"></a>} <span class="co">#4</span></span>
+<span id="cb8-27"><a href="basic-concepts.html#cb8-27"></a></span>
+<span id="cb8-28"><a href="basic-concepts.html#cb8-28"></a>map_example<span class="ot">=</span>[ <span class="st">&quot;Yue&quot;</span> <span class="sc">:</span> <span class="st">&quot;Wu&quot;</span>, <span class="st">&quot;Mark&quot;</span> <span class="sc">:</span> <span class="st">&quot;Williams&quot;</span>, <span class="st">&quot;Sudha&quot;</span> <span class="sc">:</span> <span class="st">&quot;Kumari&quot;</span> ] <span class="co">#5</span></span>
+<span id="cb8-29"><a href="basic-concepts.html#cb8-29"></a></span>
+<span id="cb8-30"><a href="basic-concepts.html#cb8-30"></a></span>
+<span id="cb8-31"><a href="basic-concepts.html#cb8-31"></a>[ <span class="st">&quot;Yue&quot;</span> <span class="sc">:</span> <span class="st">&quot;Wu&quot;</span>, <span class="st">&quot;Mark&quot;</span> <span class="sc">:</span> <span class="st">&quot;Williams&quot;</span>, <span class="st">&quot;Sudha&quot;</span> <span class="sc">:</span> <span class="st">&quot;Kumari&quot;</span> ]<span class="fu">.each</span>(printMapClosure) <span class="co">#6</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>To print something is as easy as using one of the print or println methods</li>
 <li>To define a variable, simply assign a value to it</li>
@@ -621,10 +621,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>the method Map.each() can take a closure with two arguments, to which it binds the key and the associated value for each key-value pair in the Map</li>
 </ol>
 <p>To test this, Create a file called <code>main_1.nf</code> using your favorite editor (i use nano)</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb8-1"><a href="basic-concepts.html#cb8-1"></a><span class="fu">nano</span> main_1.nf</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb9-1"><a href="basic-concepts.html#cb9-1"></a><span class="fu">nano</span> main_1.nf</span></code></pre></div>
 <p>Copy and paste the script above. Save the file <code>(Ctrl+o enter)</code> and exit <code>(Ctrl+x)</code>
 Run the following command:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb9-1"><a href="basic-concepts.html#cb9-1"></a><span class="ex">nextflow</span> main_1.nf</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb10-1"><a href="basic-concepts.html#cb10-1"></a><span class="ex">nextflow</span> main_1.nf</span></code></pre></div>
 <p>There are many other things that can be done with Groovy scripts. Please have a look at <a href="https://www.nextflow.io/docs/latest/script.html#">Nextflow scripting</a></p>
 </div>
 <div id="processes-and-channels" class="section level2 hasAnchor" number="2.2">

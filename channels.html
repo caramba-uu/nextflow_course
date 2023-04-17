@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2023-04-16" />
+<meta name="date" content="2023-04-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -443,7 +443,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -456,7 +456,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -583,45 +583,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="of" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> of<a href="channels.html#of" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The <code>of</code> method allows you to create a channel emitting any sequence of values that are specified as the method argument</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb10-1"><a href="channels.html#cb10-1"></a><span class="ex">println</span> <span class="st">&quot;Channel.of( 1, 3, 5, 7 ):&quot;</span></span>
-<span id="cb10-2"><a href="channels.html#cb10-2"></a><span class="ex">ch</span> = Channel.of<span class="er">(</span> <span class="ex">1,</span> 3, 5, 7 <span class="kw">)</span> <span class="co">#1 </span></span>
-<span id="cb10-3"><a href="channels.html#cb10-3"></a><span class="fu">ch.view()</span></span>
-<span id="cb10-4"><a href="channels.html#cb10-4"></a></span>
-<span id="cb10-5"><a href="channels.html#cb10-5"></a><span class="ex">println</span> <span class="st">&quot;Channel.of( [1, 3, 5, 7, 9]):&quot;</span></span>
-<span id="cb10-6"><a href="channels.html#cb10-6"></a><span class="ex">ch</span> = Channel.of<span class="er">(</span> <span class="ex">[1,</span> 3, 5, 7, 9]<span class="kw">)</span> <span class="co">#2</span></span>
-<span id="cb10-7"><a href="channels.html#cb10-7"></a><span class="fu">ch.view()</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb11-1"><a href="channels.html#cb11-1"></a><span class="ex">println</span> <span class="st">&quot;Channel.of( 1, 3, 5, 7 ):&quot;</span></span>
+<span id="cb11-2"><a href="channels.html#cb11-2"></a><span class="ex">ch</span> = Channel.of<span class="er">(</span> <span class="ex">1,</span> 3, 5, 7 <span class="kw">)</span> <span class="co">#1 </span></span>
+<span id="cb11-3"><a href="channels.html#cb11-3"></a><span class="fu">ch.view()</span></span>
+<span id="cb11-4"><a href="channels.html#cb11-4"></a></span>
+<span id="cb11-5"><a href="channels.html#cb11-5"></a><span class="ex">println</span> <span class="st">&quot;Channel.of( [1, 3, 5, 7, 9]):&quot;</span></span>
+<span id="cb11-6"><a href="channels.html#cb11-6"></a><span class="ex">ch</span> = Channel.of<span class="er">(</span> <span class="ex">[1,</span> 3, 5, 7, 9]<span class="kw">)</span> <span class="co">#2</span></span>
+<span id="cb11-7"><a href="channels.html#cb11-7"></a><span class="fu">ch.view()</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Creates a channel from a sequence of values and set the name to ch</li>
 <li>Creates a channel from a list of values</li>
 </ol>
 <p>Create a file called <code>main_2.nf</code></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb11-1"><a href="channels.html#cb11-1"></a><span class="fu">nano</span> main_2.nf</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb12-1"><a href="channels.html#cb12-1"></a><span class="fu">nano</span> main_2.nf</span></code></pre></div>
 <p>Copy the above code to it. Save the file <code>(Ctrl+o enter)</code> and exit <code>(Ctrl+x)</code>
 Now run</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb12-1"><a href="channels.html#cb12-1"></a><span class="ex">nextflow</span> main_2.nf</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb13-1"><a href="channels.html#cb13-1"></a><span class="ex">nextflow</span> main_2.nf</span></code></pre></div>
 </div>
 <div id="frompath" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> fromPath<a href="channels.html#frompath" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>You can create a channel emitting one or more file paths by using the fromPath method and specifying a path string as an argument.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb13-1"><a href="channels.html#cb13-1"></a><span class="ex">//</span> single file</span>
-<span id="cb13-2"><a href="channels.html#cb13-2"></a><span class="ex">myFileChannel</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2023-2-3/metabolomics/mzMLData/Blank10.mzML&#39;</span> <span class="kw">)</span> <span class="co">#1</span></span>
-<span id="cb13-3"><a href="channels.html#cb13-3"></a><span class="fu">myFileChannel.view()</span></span>
-<span id="cb13-4"><a href="channels.html#cb13-4"></a><span class="ex">//</span> multiple files</span>
-<span id="cb13-5"><a href="channels.html#cb13-5"></a><span class="ex">myFileChannel</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2023-2-3/metabolomics/mzMLData/*.*&#39;</span> <span class="kw">)</span> <span class="co">#2</span></span>
-<span id="cb13-6"><a href="channels.html#cb13-6"></a><span class="fu">myFileChannel.view()</span></span>
-<span id="cb13-7"><a href="channels.html#cb13-7"></a><span class="ex">//</span> recursive multiple files</span>
-<span id="cb13-8"><a href="channels.html#cb13-8"></a><span class="ex">myFileChannel</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2023-2-3/metabolomics/**.*&#39;</span> <span class="kw">)</span> <span class="co">#3</span></span>
-<span id="cb13-9"><a href="channels.html#cb13-9"></a><span class="fu">myFileChannel.view()</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb14-1"><a href="channels.html#cb14-1"></a><span class="ex">//</span> single file</span>
+<span id="cb14-2"><a href="channels.html#cb14-2"></a><span class="ex">myFileChannel</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2023-2-3/metabolomics/mzMLData/Blank10.mzML&#39;</span> <span class="kw">)</span> <span class="co">#1</span></span>
+<span id="cb14-3"><a href="channels.html#cb14-3"></a><span class="fu">myFileChannel.view()</span></span>
+<span id="cb14-4"><a href="channels.html#cb14-4"></a><span class="ex">//</span> multiple files</span>
+<span id="cb14-5"><a href="channels.html#cb14-5"></a><span class="ex">myFileChannel</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2023-2-3/metabolomics/mzMLData/*.*&#39;</span> <span class="kw">)</span> <span class="co">#2</span></span>
+<span id="cb14-6"><a href="channels.html#cb14-6"></a><span class="fu">myFileChannel.view()</span></span>
+<span id="cb14-7"><a href="channels.html#cb14-7"></a><span class="ex">//</span> recursive multiple files</span>
+<span id="cb14-8"><a href="channels.html#cb14-8"></a><span class="ex">myFileChannel</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2023-2-3/metabolomics/**.*&#39;</span> <span class="kw">)</span> <span class="co">#3</span></span>
+<span id="cb14-9"><a href="channels.html#cb14-9"></a><span class="fu">myFileChannel.view()</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Creates a channel and binds to it a Path item referring the specified file.</li>
 <li>Whenever the <code>fromPath</code> argument contains a <code>*</code> or <code>?</code> wildcard character it is interpreted as a <code>glob</code> path matcher.</li>
 <li>Two asterisks, i.e. <code>**</code>, works like <code>*</code> but crosses directory boundaries.</li>
 </ol>
 <p>Create a file called <code>main_3.nf</code></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb14-1"><a href="channels.html#cb14-1"></a><span class="fu">nano</span> main_3.nf</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb15-1"><a href="channels.html#cb15-1"></a><span class="fu">nano</span> main_3.nf</span></code></pre></div>
 <p>Copy the above code to it. Save the file <code>(Ctrl+o enter)</code> and exit <code>(Ctrl+x)</code>
 Now run</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb15-1"><a href="channels.html#cb15-1"></a><span class="ex">nextflow</span> main_3.nf</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb16-1"><a href="channels.html#cb16-1"></a><span class="ex">nextflow</span> main_3.nf</span></code></pre></div>
 <p>There are many parameters as well as channel types that can be used for different purposes. Please check the (documentation)[<a href="https://www.nextflow.io/docs/latest/channel.html" class="uri">https://www.nextflow.io/docs/latest/channel.html</a>].</p>
 </div>
 </div>
