@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2023-04-17" />
+<meta name="date" content="2023-04-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -443,7 +443,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
+code span.bu { } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -456,7 +456,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -546,8 +546,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2" data-path="nextflow-assigments.html"><a href="nextflow-assigments.html#part-1"><i class="fa fa-check"></i><b>9.2</b> Part 1</a></li>
 <li class="chapter" data-level="9.3" data-path="nextflow-assigments.html"><a href="nextflow-assigments.html#part-2"><i class="fa fa-check"></i><b>9.3</b> Part 2</a>
 <ul>
-<li class="chapter" data-level="9.3.1" data-path="nextflow-assigments.html"><a href="nextflow-assigments.html#assignment-1-build-an-openms-pipeline"><i class="fa fa-check"></i><b>9.3.1</b> Assignment 1 (Build an OpenMS pipeline)</a></li>
-<li class="chapter" data-level="9.3.2" data-path="nextflow-assigments.html"><a href="nextflow-assigments.html#assignment-2-optional-gives-extra-points"><i class="fa fa-check"></i><b>9.3.2</b> Assignment 2 (optional, gives extra points)</a></li>
+<li class="chapter" data-level="9.3.1" data-path="nextflow-assigments.html"><a href="nextflow-assigments.html#part-2.1-build-an-openms-pipeline"><i class="fa fa-check"></i><b>9.3.1</b> Part 2.1 (Build an OpenMS pipeline)</a></li>
+<li class="chapter" data-level="9.3.2" data-path="nextflow-assigments.html"><a href="nextflow-assigments.html#part-2.2-optional-gives-extra-points"><i class="fa fa-check"></i><b>9.3.2</b> Part 2.2 (optional, gives extra points)</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -822,6 +822,8 @@ Now run</p>
 <p>Copy the above code to it. Save the file <code>(Ctrl+o enter)</code> and exit <code>(Ctrl+x)</code>
 Now run</p>
 <div class="sourceCode" id="cb34"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb34-1"><a href="processes.html#cb34-1"></a><span class="ex">nextflow</span> main_8.nf</span></code></pre></div>
+<p>Let’s clean up the nextflow work directory now to free up some space</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb35-1"><a href="processes.html#cb35-1"></a><span class="ex">nextflow</span> clean <span class="at">-f</span></span></code></pre></div>
 </div>
 <div id="directives" class="section level2 hasAnchor" number="4.4">
 <h2><span class="header-section-number">4.4</span> Directives<a href="processes.html#directives" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -831,55 +833,60 @@ Now run</p>
 <div id="publishdir" class="section level3 hasAnchor" number="4.4.1">
 <h3><span class="header-section-number">4.4.1</span> publishDir<a href="processes.html#publishdir" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The <code>publishDir</code> directive allows you to publish the process output files to a specified folder.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb35-1"><a href="processes.html#cb35-1"></a><span class="ex">process</span> foo {</span>
-<span id="cb35-2"><a href="processes.html#cb35-2"></a></span>
-<span id="cb35-3"><a href="processes.html#cb35-3"></a>    <span class="ex">publishDir</span> <span class="st">&#39;/data/chunks&#39;</span> <span class="co">#1</span></span>
-<span id="cb35-4"><a href="processes.html#cb35-4"></a></span>
-<span id="cb35-5"><a href="processes.html#cb35-5"></a>    <span class="ex">output:</span></span>
-<span id="cb35-6"><a href="processes.html#cb35-6"></a>    <span class="fu">file</span> <span class="st">&#39;chunk_*&#39;</span> into letters</span>
-<span id="cb35-7"><a href="processes.html#cb35-7"></a></span>
-<span id="cb35-8"><a href="processes.html#cb35-8"></a>    <span class="st">&#39;&#39;&#39;</span></span>
-<span id="cb35-9"><a href="processes.html#cb35-9"></a><span class="st">    printf &#39;</span><span class="ex">Hola</span><span class="st">&#39; | split -b 1 - chunk_</span></span>
-<span id="cb35-10"><a href="processes.html#cb35-10"></a><span class="st">    &#39;&#39;&#39;</span></span>
-<span id="cb35-11"><a href="processes.html#cb35-11"></a><span class="er">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb36-1"><a href="processes.html#cb36-1"></a><span class="ex">process</span> foo {</span>
+<span id="cb36-2"><a href="processes.html#cb36-2"></a></span>
+<span id="cb36-3"><a href="processes.html#cb36-3"></a>    <span class="ex">publishDir</span> <span class="st">&#39;data/chunks&#39;</span> <span class="co">#1</span></span>
+<span id="cb36-4"><a href="processes.html#cb36-4"></a></span>
+<span id="cb36-5"><a href="processes.html#cb36-5"></a>    <span class="ex">output:</span></span>
+<span id="cb36-6"><a href="processes.html#cb36-6"></a>    <span class="fu">file</span> <span class="st">&#39;chunk_*&#39;</span> into letters</span>
+<span id="cb36-7"><a href="processes.html#cb36-7"></a></span>
+<span id="cb36-8"><a href="processes.html#cb36-8"></a>    <span class="st">&#39;&#39;&#39;</span></span>
+<span id="cb36-9"><a href="processes.html#cb36-9"></a><span class="st">    printf &#39;</span><span class="ex">Hola</span><span class="st">&#39; | split -b 1 - chunk_</span></span>
+<span id="cb36-10"><a href="processes.html#cb36-10"></a><span class="st">    &#39;&#39;&#39;</span></span>
+<span id="cb36-11"><a href="processes.html#cb36-11"></a><span class="er">}</span></span></code></pre></div>
 <p>The above example splits the string Hola into file chunks of a single byte.</p>
 <ol style="list-style-type: decimal">
 <li>When complete the chunk_* output files are published into the /data/chunks folder.</li>
 </ol>
 <p><em>Can you create a workflow having a single process that just creates a text file (with whatever content) as an output and also publish its output to a directory?</em></p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb36-1"><a href="processes.html#cb36-1"></a><span class="ex">process</span> simpleOutput {</span>
-<span id="cb36-2"><a href="processes.html#cb36-2"></a><span class="ex">publishDir</span> <span class="st">&#39;testOutput&#39;</span></span>
-<span id="cb36-3"><a href="processes.html#cb36-3"></a><span class="ex">output:</span></span>
-<span id="cb36-4"><a href="processes.html#cb36-4"></a><span class="fu">file</span> <span class="st">&quot;test.txt&quot;</span> into outputChannel</span>
-<span id="cb36-5"><a href="processes.html#cb36-5"></a><span class="st">&quot;echo test &gt;&gt; test.txt&quot;</span></span>
-<span id="cb36-6"><a href="processes.html#cb36-6"></a></span>
-<span id="cb36-7"><a href="processes.html#cb36-7"></a><span class="er">}</span></span></code></pre></div>
-</div>
-<div id="tag" class="section level3 hasAnchor" number="4.4.2">
-<h3><span class="header-section-number">4.4.2</span> tag<a href="processes.html#tag" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The <code>tag</code> directive allows you to associate each process execution with a custom label, so that it will be easier to identify them in the log file or in the trace execution report.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb37-1"><a href="processes.html#cb37-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2023-2-3/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
-<span id="cb37-2"><a href="processes.html#cb37-2"></a><span class="ex">num</span> = Channel.from<span class="er">(</span> <span class="ex">1,</span> 2, 3 <span class="kw">)</span></span>
-<span id="cb37-3"><a href="processes.html#cb37-3"></a><span class="ex">process</span> featureFinder {</span>
-<span id="cb37-4"><a href="processes.html#cb37-4"></a><span class="ex">tag</span> <span class="st">&quot;</span><span class="va">$y</span><span class="st">&quot;</span> <span class="co">#1</span></span>
-<span id="cb37-5"><a href="processes.html#cb37-5"></a><span class="ex">input:</span></span>
-<span id="cb37-6"><a href="processes.html#cb37-6"></a><span class="ex">each</span> x from num</span>
-<span id="cb37-7"><a href="processes.html#cb37-7"></a><span class="fu">file</span> y from mzMLFiles</span>
-<span id="cb37-8"><a href="processes.html#cb37-8"></a></span>
-<span id="cb37-9"><a href="processes.html#cb37-9"></a><span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb37-10"><a href="processes.html#cb37-10"></a><span class="st">echo value </span><span class="va">$x</span><span class="st"> file </span><span class="va">$y</span></span>
-<span id="cb37-11"><a href="processes.html#cb37-11"></a><span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb37-12"><a href="processes.html#cb37-12"></a></span>
-<span id="cb37-13"><a href="processes.html#cb37-13"></a><span class="er">}</span></span></code></pre></div>
-<p>In the above example, when a file is received by the process, it will show its name when running the process.</p>
-<ol style="list-style-type: decimal">
-<li><code>$y</code> in the tag, indicates that name of file from <code>mzMLFiles</code> should be used as tag.</li>
-</ol>
+<div class="sourceCode" id="cb37"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb37-1"><a href="processes.html#cb37-1"></a><span class="ex">process</span> simpleOutput {</span>
+<span id="cb37-2"><a href="processes.html#cb37-2"></a><span class="ex">publishDir</span> <span class="st">&#39;testOutput&#39;</span></span>
+<span id="cb37-3"><a href="processes.html#cb37-3"></a><span class="ex">output:</span></span>
+<span id="cb37-4"><a href="processes.html#cb37-4"></a><span class="fu">file</span> <span class="st">&quot;test.txt&quot;</span> into outputChannel</span>
+<span id="cb37-5"><a href="processes.html#cb37-5"></a><span class="st">&quot;echo test &gt;&gt; test.txt&quot;</span></span>
+<span id="cb37-6"><a href="processes.html#cb37-6"></a></span>
+<span id="cb37-7"><a href="processes.html#cb37-7"></a><span class="er">}</span></span></code></pre></div>
 <p>Create a file called <code>main_9.nf</code></p>
 <div class="sourceCode" id="cb38"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb38-1"><a href="processes.html#cb38-1"></a><span class="fu">nano</span> main_9.nf</span></code></pre></div>
 <p>Copy the above code to it. Save the file <code>(Ctrl+o enter)</code> and exit <code>(Ctrl+x)</code>
 Now run</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb39-1"><a href="processes.html#cb39-1"></a><span class="ex">nextflow</span> main_9.nf</span></code></pre></div>
+</div>
+<div id="tag" class="section level3 hasAnchor" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> tag<a href="processes.html#tag" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <code>tag</code> directive allows you to associate each process execution with a custom label, so that it will be easier to identify them in the log file or in the trace execution report.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb40-1"><a href="processes.html#cb40-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2023-2-3/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
+<span id="cb40-2"><a href="processes.html#cb40-2"></a><span class="ex">num</span> = Channel.from<span class="er">(</span> <span class="ex">1,</span> 2, 3 <span class="kw">)</span></span>
+<span id="cb40-3"><a href="processes.html#cb40-3"></a><span class="ex">process</span> featureFinder {</span>
+<span id="cb40-4"><a href="processes.html#cb40-4"></a><span class="ex">tag</span> <span class="st">&quot;</span><span class="va">$y</span><span class="st">&quot;</span> <span class="co">#1</span></span>
+<span id="cb40-5"><a href="processes.html#cb40-5"></a><span class="ex">input:</span></span>
+<span id="cb40-6"><a href="processes.html#cb40-6"></a><span class="ex">each</span> x from num</span>
+<span id="cb40-7"><a href="processes.html#cb40-7"></a><span class="fu">file</span> y from mzMLFiles</span>
+<span id="cb40-8"><a href="processes.html#cb40-8"></a></span>
+<span id="cb40-9"><a href="processes.html#cb40-9"></a><span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb40-10"><a href="processes.html#cb40-10"></a><span class="st">echo value </span><span class="va">$x</span><span class="st"> file </span><span class="va">$y</span></span>
+<span id="cb40-11"><a href="processes.html#cb40-11"></a><span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb40-12"><a href="processes.html#cb40-12"></a></span>
+<span id="cb40-13"><a href="processes.html#cb40-13"></a><span class="er">}</span></span></code></pre></div>
+<p>In the above example, when a file is received by the process, it will show its name when running the process.</p>
+<ol style="list-style-type: decimal">
+<li><code>$y</code> in the tag, indicates that name of file from <code>mzMLFiles</code> should be used as tag.</li>
+</ol>
+<p>Create a file called <code>main_10.nf</code></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb41-1"><a href="processes.html#cb41-1"></a><span class="fu">nano</span> main_10.nf</span></code></pre></div>
+<p>Copy the above code to it. Save the file <code>(Ctrl+o enter)</code> and exit <code>(Ctrl+x)</code>
+Now run</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb42-1"><a href="processes.html#cb42-1"></a><span class="ex">nextflow</span> main_10.nf</span></code></pre></div>
 <p>What do you see? What is the difference to a process without a tag?</p>
 </div>
 </div>

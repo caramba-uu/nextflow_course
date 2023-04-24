@@ -1495,3 +1495,6 @@ Can you add your script (PCA) as an extra node part of the pipeline? You don’t
 If you don’t know what PCA is or how to do it, please let us know!
 
 **If you encounter issues with Uppmax being way too slow or does not do anything, please let up know!**
+
+<!--chapter:end:index.Rmd-->
+
