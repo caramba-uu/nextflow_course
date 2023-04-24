@@ -960,9 +960,9 @@ Now we can run it using?
 nextflow main_14.nf -c nextflow_14.config 
 ```
 
-#### configuration singularity on Uppmax
+#### Configuration singularity on Uppmax
 
-Can you combine the Singularity and Slurm together to run containers using slurm? What config file would you create?! How would you run the Nextflow pipeline? Remember to kill Nextflow! Then cancel all of your jobs after you are done!
+Can you combine the Singularity and Slurm together to run containers using slurm? What config file would you create?! How would you run the Nextflow pipeline? Remember to kill Nextflow! 'Then cancel all of your jobs after you are done!'
 
 ```{bash, attr.source='.numberLines',eval=FALSE}
 singularity.enabled = true
@@ -990,6 +990,13 @@ file x from mzMLFiles
 nextflow main_15.nf -c nextflow_15.config --project "uppmax2023-2-3" --clusterOptions "-M snowy" 
 ```
 
+Now let us cancel all the jobs
+
+```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
+scancel -u $USER --state=pending
+scancel -u $USER -t running
+```
+
 ### Config profiles
 
 Configuration files can contain the definition of one or more `profiles`. A profile is a set of configuration attributes that can be activated/chosen when launching a pipeline execution by using the `-profile` command line option.
@@ -1012,7 +1019,7 @@ singularity.enabled = true #5
 
 ```
 
-Save the above in a file called `nextflow.config`  in the current directory 
+Save the above in a file as `nextflow.config` in the directory where the `main.nf` is kept.
 
 In this example, we have created two profiles.
 
