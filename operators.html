@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2023-04-17" />
+<meta name="date" content="2023-04-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -546,8 +546,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2" data-path="nextflow-assigments.html"><a href="nextflow-assigments.html#part-1"><i class="fa fa-check"></i><b>9.2</b> Part 1</a></li>
 <li class="chapter" data-level="9.3" data-path="nextflow-assigments.html"><a href="nextflow-assigments.html#part-2"><i class="fa fa-check"></i><b>9.3</b> Part 2</a>
 <ul>
-<li class="chapter" data-level="9.3.1" data-path="nextflow-assigments.html"><a href="nextflow-assigments.html#assignment-1-build-an-openms-pipeline"><i class="fa fa-check"></i><b>9.3.1</b> Assignment 1 (Build an OpenMS pipeline)</a></li>
-<li class="chapter" data-level="9.3.2" data-path="nextflow-assigments.html"><a href="nextflow-assigments.html#assignment-2-optional-gives-extra-points"><i class="fa fa-check"></i><b>9.3.2</b> Assignment 2 (optional, gives extra points)</a></li>
+<li class="chapter" data-level="9.3.1" data-path="nextflow-assigments.html"><a href="nextflow-assigments.html#part-2.1-build-an-openms-pipeline"><i class="fa fa-check"></i><b>9.3.1</b> Part 2.1 (Build an OpenMS pipeline)</a></li>
+<li class="chapter" data-level="9.3.2" data-path="nextflow-assigments.html"><a href="nextflow-assigments.html#part-2.2-optional-gives-extra-points"><i class="fa fa-check"></i><b>9.3.2</b> Part 2.2 (optional, gives extra points)</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -578,24 +578,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">5.1</span> Collect<a href="operators.html#collect" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The <code>collect</code> operator collects all the items emitted by a channel to a List and return the resulting object as a <em>sole</em> emission.</p>
 <p>For example,</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb40-1"><a href="operators.html#cb40-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2023-2-3/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
-<span id="cb40-2"><a href="operators.html#cb40-2"></a><span class="fu">mzMLFiles.collect().view()</span></span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb44-1"><a href="operators.html#cb44-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2023-2-3/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
+<span id="cb44-2"><a href="operators.html#cb44-2"></a><span class="fu">mzMLFiles.collect().view()</span></span></code></pre></div>
 <p>The above code, will get the files from the path and emit them all at once. You can try this and compare the results to when you don’t use collect.</p>
-<p>Create a file called <code>main_10.nf</code></p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb41-1"><a href="operators.html#cb41-1"></a><span class="fu">nano</span> main_10.nf</span></code></pre></div>
+<p>Create a file called <code>main_11.nf</code></p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb45-1"><a href="operators.html#cb45-1"></a><span class="fu">nano</span> main_11.nf</span></code></pre></div>
 <p>Copy the above code to it. Save the file <code>(Ctrl+o enter)</code> and exit <code>(Ctrl+x)</code>
 Now run</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb42-1"><a href="operators.html#cb42-1"></a><span class="ex">nextflow</span> main_10.nf</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb46-1"><a href="operators.html#cb46-1"></a><span class="ex">nextflow</span> main_11.nf</span></code></pre></div>
 <p>This operator can also be used inside the process. For example,</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb43-1"><a href="operators.html#cb43-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2023-2-3/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
-<span id="cb43-2"><a href="operators.html#cb43-2"></a><span class="ex">process</span> featureFinder {</span>
-<span id="cb43-3"><a href="operators.html#cb43-3"></a><span class="ex">input:</span></span>
-<span id="cb43-4"><a href="operators.html#cb43-4"></a><span class="fu">file</span> x from mzMLFiles.collect<span class="er">(</span><span class="kw">)</span> <span class="co">#1</span></span>
-<span id="cb43-5"><a href="operators.html#cb43-5"></a></span>
-<span id="cb43-6"><a href="operators.html#cb43-6"></a><span class="st">&quot;&quot;&quot; </span></span>
-<span id="cb43-7"><a href="operators.html#cb43-7"></a><span class="st">echo </span><span class="va">$x</span></span>
-<span id="cb43-8"><a href="operators.html#cb43-8"></a><span class="st">&quot;&quot;&quot;</span>  </span>
-<span id="cb43-9"><a href="operators.html#cb43-9"></a><span class="er">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb47-1"><a href="operators.html#cb47-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2023-2-3/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
+<span id="cb47-2"><a href="operators.html#cb47-2"></a><span class="ex">process</span> featureFinder {</span>
+<span id="cb47-3"><a href="operators.html#cb47-3"></a><span class="ex">input:</span></span>
+<span id="cb47-4"><a href="operators.html#cb47-4"></a><span class="fu">file</span> x from mzMLFiles.collect<span class="er">(</span><span class="kw">)</span> <span class="co">#1</span></span>
+<span id="cb47-5"><a href="operators.html#cb47-5"></a></span>
+<span id="cb47-6"><a href="operators.html#cb47-6"></a><span class="st">&quot;&quot;&quot; </span></span>
+<span id="cb47-7"><a href="operators.html#cb47-7"></a><span class="st">echo </span><span class="va">$x</span></span>
+<span id="cb47-8"><a href="operators.html#cb47-8"></a><span class="st">&quot;&quot;&quot;</span>  </span>
+<span id="cb47-9"><a href="operators.html#cb47-9"></a><span class="er">}</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>By using <code>collect()</code>, the process will gather all the files in <code>mzMLFiles</code> channel and do the operation for this collection of files.</li>
 </ol>
@@ -605,10 +605,10 @@ Now run</p>
 <h2><span class="header-section-number">5.2</span> flatten<a href="operators.html#flatten" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The <code>flatten</code> operator transforms a channel in such a way that every item of type Collection or <code>Array</code> is flattened so that each single entry is emitted separately by the resulting channel.</p>
 <p>for example,</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb44-1"><a href="operators.html#cb44-1"></a><span class="ex">Channel</span></span>
-<span id="cb44-2"><a href="operators.html#cb44-2"></a>    <span class="ex">.from</span><span class="er">(</span> <span class="ex">[1,[2,3]],</span> 4, [5,[6]] <span class="kw">)</span></span>
-<span id="cb44-3"><a href="operators.html#cb44-3"></a>    <span class="fu">.flatten()</span></span>
-<span id="cb44-4"><a href="operators.html#cb44-4"></a>    <span class="fu">.view()</span></span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb48-1"><a href="operators.html#cb48-1"></a><span class="ex">Channel</span></span>
+<span id="cb48-2"><a href="operators.html#cb48-2"></a>    <span class="ex">.from</span><span class="er">(</span> <span class="ex">[1,[2,3]],</span> 4, [5,[6]] <span class="kw">)</span></span>
+<span id="cb48-3"><a href="operators.html#cb48-3"></a>    <span class="fu">.flatten()</span></span>
+<span id="cb48-4"><a href="operators.html#cb48-4"></a>    <span class="fu">.view()</span></span></code></pre></div>
 <p>Try to run this example and compare the results to collect!</p>
 </div>
 </div>
