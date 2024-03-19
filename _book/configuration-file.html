@@ -622,11 +622,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb52-2"><a href="configuration-file.html#cb52-2"></a><span class="ex">process</span> featureFinder {</span>
 <span id="cb52-3"><a href="configuration-file.html#cb52-3"></a><span class="bu">echo</span> true</span>
 <span id="cb52-4"><a href="configuration-file.html#cb52-4"></a><span class="ex">input:</span></span>
-<span id="cb52-5"><a href="configuration-file.html#cb52-5"></a><span class="fu">file</span> x from mzMLFiles</span>
+<span id="cb52-5"><a href="configuration-file.html#cb52-5"></a><span class="fu">file</span> x</span>
 <span id="cb52-6"><a href="configuration-file.html#cb52-6"></a></span>
 <span id="cb52-7"><a href="configuration-file.html#cb52-7"></a><span class="st">&quot;echo processing </span><span class="va">$x</span><span class="st"> with </span><span class="va">$params</span><span class="st">.ppm_input ppm&quot;</span> <span class="co">#2</span></span>
 <span id="cb52-8"><a href="configuration-file.html#cb52-8"></a></span>
-<span id="cb52-9"><a href="configuration-file.html#cb52-9"></a><span class="er">}</span></span></code></pre></div>
+<span id="cb52-9"><a href="configuration-file.html#cb52-9"></a><span class="er">}</span></span>
+<span id="cb52-10"><a href="configuration-file.html#cb52-10"></a></span>
+<span id="cb52-11"><a href="configuration-file.html#cb52-11"></a><span class="ex">workflow</span> {</span>
+<span id="cb52-12"><a href="configuration-file.html#cb52-12"></a>    <span class="ex">featureFinder</span><span class="er">(</span><span class="ex">mzMLFiles</span><span class="kw">)</span></span>
+<span id="cb52-13"><a href="configuration-file.html#cb52-13"></a><span class="er">}</span></span></code></pre></div>
 <p>In this example:
 1. We created a file channel using our parameter <code>params.mzMLFilesInput</code>
 2. We accessed value of <code>ppm_input</code> using <code>$param</code> before the name of the parameter.</p>
@@ -684,11 +688,15 @@ The executor settings can be defined as shown below:</p>
 <span id="cb59-3"><a href="configuration-file.html#cb59-3"></a><span class="ex">process</span> featureFinder {</span>
 <span id="cb59-4"><a href="configuration-file.html#cb59-4"></a><span class="bu">echo</span> true</span>
 <span id="cb59-5"><a href="configuration-file.html#cb59-5"></a><span class="ex">input:</span></span>
-<span id="cb59-6"><a href="configuration-file.html#cb59-6"></a><span class="fu">file</span> x from mzMLFiles</span>
+<span id="cb59-6"><a href="configuration-file.html#cb59-6"></a><span class="fu">file</span> x</span>
 <span id="cb59-7"><a href="configuration-file.html#cb59-7"></a></span>
 <span id="cb59-8"><a href="configuration-file.html#cb59-8"></a><span class="st">&quot;echo processing </span><span class="va">$x</span><span class="st">&quot;</span></span>
 <span id="cb59-9"><a href="configuration-file.html#cb59-9"></a></span>
-<span id="cb59-10"><a href="configuration-file.html#cb59-10"></a><span class="er">}</span></span></code></pre></div>
+<span id="cb59-10"><a href="configuration-file.html#cb59-10"></a><span class="er">}</span></span>
+<span id="cb59-11"><a href="configuration-file.html#cb59-11"></a></span>
+<span id="cb59-12"><a href="configuration-file.html#cb59-12"></a><span class="ex">workflow</span> {</span>
+<span id="cb59-13"><a href="configuration-file.html#cb59-13"></a>    <span class="ex">featureFinder</span><span class="er">(</span><span class="ex">mzMLFiles</span><span class="kw">)</span></span>
+<span id="cb59-14"><a href="configuration-file.html#cb59-14"></a><span class="er">}</span></span></code></pre></div>
 <p>You can now run the pipeline using</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb60-1"><a href="configuration-file.html#cb60-1"></a><span class="ex">nextflow</span> main_13.nf <span class="at">-c</span> nextflow_13.config <span class="at">--project</span> <span class="st">&quot;uppmax2024-2-11&quot;</span> <span class="at">--clusterOptions</span> <span class="st">&quot;-M snowy&quot;</span></span></code></pre></div>
 <p>The process is now running on Uppmax.
@@ -726,11 +734,15 @@ OK! This is probably going to take time. Use <code>Ctrl+c</code> to kill Nextflo
 <span id="cb65-2"><a href="configuration-file.html#cb65-2"></a><span class="ex">process</span> featureFinder {</span>
 <span id="cb65-3"><a href="configuration-file.html#cb65-3"></a><span class="bu">echo</span> true</span>
 <span id="cb65-4"><a href="configuration-file.html#cb65-4"></a><span class="ex">input:</span></span>
-<span id="cb65-5"><a href="configuration-file.html#cb65-5"></a><span class="fu">file</span> x from mzMLFiles</span>
+<span id="cb65-5"><a href="configuration-file.html#cb65-5"></a><span class="fu">file</span> x</span>
 <span id="cb65-6"><a href="configuration-file.html#cb65-6"></a></span>
 <span id="cb65-7"><a href="configuration-file.html#cb65-7"></a><span class="st">&quot;echo processing </span><span class="va">$x</span><span class="st">&quot;</span></span>
 <span id="cb65-8"><a href="configuration-file.html#cb65-8"></a></span>
-<span id="cb65-9"><a href="configuration-file.html#cb65-9"></a><span class="er">}</span></span></code></pre></div>
+<span id="cb65-9"><a href="configuration-file.html#cb65-9"></a><span class="er">}</span></span>
+<span id="cb65-10"><a href="configuration-file.html#cb65-10"></a></span>
+<span id="cb65-11"><a href="configuration-file.html#cb65-11"></a><span class="ex">workflow</span> {</span>
+<span id="cb65-12"><a href="configuration-file.html#cb65-12"></a>    <span class="ex">featureFinder</span><span class="er">(</span><span class="ex">mzMLFiles</span><span class="kw">)</span></span>
+<span id="cb65-13"><a href="configuration-file.html#cb65-13"></a><span class="er">}</span></span></code></pre></div>
 <p>Now we can run it using?</p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb66-1"><a href="configuration-file.html#cb66-1"></a><span class="ex">nextflow</span> main_14.nf <span class="at">-c</span> nextflow_14.config </span></code></pre></div>
 <div id="configuration-singularity-on-uppmax" class="section level4 hasAnchor" number="6.1.5.1">
@@ -744,11 +756,15 @@ OK! This is probably going to take time. Use <code>Ctrl+c</code> to kill Nextflo
 <span id="cb68-2"><a href="configuration-file.html#cb68-2"></a><span class="ex">process</span> featureFinder {</span>
 <span id="cb68-3"><a href="configuration-file.html#cb68-3"></a><span class="bu">echo</span> true</span>
 <span id="cb68-4"><a href="configuration-file.html#cb68-4"></a><span class="ex">input:</span></span>
-<span id="cb68-5"><a href="configuration-file.html#cb68-5"></a><span class="fu">file</span> x from mzMLFiles</span>
+<span id="cb68-5"><a href="configuration-file.html#cb68-5"></a><span class="fu">file</span> x</span>
 <span id="cb68-6"><a href="configuration-file.html#cb68-6"></a></span>
 <span id="cb68-7"><a href="configuration-file.html#cb68-7"></a><span class="st">&quot;echo processing </span><span class="va">$x</span><span class="st">&quot;</span></span>
 <span id="cb68-8"><a href="configuration-file.html#cb68-8"></a></span>
-<span id="cb68-9"><a href="configuration-file.html#cb68-9"></a><span class="er">}</span></span></code></pre></div>
+<span id="cb68-9"><a href="configuration-file.html#cb68-9"></a><span class="er">}</span></span>
+<span id="cb68-10"><a href="configuration-file.html#cb68-10"></a></span>
+<span id="cb68-11"><a href="configuration-file.html#cb68-11"></a><span class="ex">workflow</span> {</span>
+<span id="cb68-12"><a href="configuration-file.html#cb68-12"></a>    <span class="ex">featureFinder</span><span class="er">(</span><span class="ex">mzMLFiles</span><span class="kw">)</span></span>
+<span id="cb68-13"><a href="configuration-file.html#cb68-13"></a><span class="er">}</span></span></code></pre></div>
 <div class="sourceCode" id="cb69"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb69-1"><a href="configuration-file.html#cb69-1"></a><span class="ex">nextflow</span> main_15.nf <span class="at">-c</span> nextflow_15.config <span class="at">--project</span> <span class="st">&quot;uppmax2024-2-11&quot;</span> <span class="at">--clusterOptions</span> <span class="st">&quot;-M snowy&quot;</span></span></code></pre></div>
 <p>Now let us cancel all the jobs</p>
 <div class="sourceCode" id="cb70"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb70-1"><a href="configuration-file.html#cb70-1"></a><span class="ex">scancel</span> <span class="at">-u</span> <span class="va">$USER</span> <span class="at">--state</span><span class="op">=</span>pending</span>
