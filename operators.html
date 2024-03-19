@@ -593,13 +593,19 @@ Now run</p>
 <p>This operator can also be used inside the process. For example,</p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb47-1"><a href="operators.html#cb47-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
 <span id="cb47-2"><a href="operators.html#cb47-2"></a><span class="ex">process</span> featureFinder {</span>
-<span id="cb47-3"><a href="operators.html#cb47-3"></a><span class="ex">input:</span></span>
-<span id="cb47-4"><a href="operators.html#cb47-4"></a><span class="fu">file</span> x from mzMLFiles.collect<span class="er">(</span><span class="kw">)</span> <span class="co">#1</span></span>
-<span id="cb47-5"><a href="operators.html#cb47-5"></a></span>
-<span id="cb47-6"><a href="operators.html#cb47-6"></a><span class="st">&quot;&quot;&quot; </span></span>
-<span id="cb47-7"><a href="operators.html#cb47-7"></a><span class="st">echo </span><span class="va">$x</span></span>
-<span id="cb47-8"><a href="operators.html#cb47-8"></a><span class="st">&quot;&quot;&quot;</span>  </span>
-<span id="cb47-9"><a href="operators.html#cb47-9"></a><span class="er">}</span></span></code></pre></div>
+<span id="cb47-3"><a href="operators.html#cb47-3"></a><span class="bu">echo</span> true</span>
+<span id="cb47-4"><a href="operators.html#cb47-4"></a></span>
+<span id="cb47-5"><a href="operators.html#cb47-5"></a><span class="ex">input:</span></span>
+<span id="cb47-6"><a href="operators.html#cb47-6"></a><span class="fu">file</span> x</span>
+<span id="cb47-7"><a href="operators.html#cb47-7"></a></span>
+<span id="cb47-8"><a href="operators.html#cb47-8"></a><span class="st">&quot;&quot;&quot; </span></span>
+<span id="cb47-9"><a href="operators.html#cb47-9"></a><span class="st">echo </span><span class="va">$x</span></span>
+<span id="cb47-10"><a href="operators.html#cb47-10"></a><span class="st">&quot;&quot;&quot;</span>  </span>
+<span id="cb47-11"><a href="operators.html#cb47-11"></a><span class="er">}</span></span>
+<span id="cb47-12"><a href="operators.html#cb47-12"></a></span>
+<span id="cb47-13"><a href="operators.html#cb47-13"></a><span class="ex">workflow</span> {</span>
+<span id="cb47-14"><a href="operators.html#cb47-14"></a>    <span class="ex">featureFinder</span><span class="er">(</span><span class="fu">mzMLFiles.collect()</span><span class="kw">)</span> <span class="co">#1</span></span>
+<span id="cb47-15"><a href="operators.html#cb47-15"></a><span class="er">}</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>By using <code>collect()</code>, the process will gather all the files in <code>mzMLFiles</code> channel and do the operation for this collection of files.</li>
 </ol>
