@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 Nextflow assigments | Introduction to Nextflow</title>
   <meta name="description" content="This is a short tutorial about Nextflow." />
-  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 9 Nextflow assigments | Introduction to Nextflow" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2023-04-24" />
+<meta name="date" content="2024-03-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -470,6 +470,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -580,17 +584,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>First ssh to Uppmax</p>
 <div class="sourceCode" id="cb90"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb90-1"><a href="nextflow-assigments.html#cb90-1"></a><span class="fu">ssh</span> <span class="at">-AX</span> youusername@rackham.uppmax.uu.se</span></code></pre></div>
 <p>Make a directory in your userspace</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb91-1"><a href="nextflow-assigments.html#cb91-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> /crex/proj/uppmax2023-2-3/nobackup/<span class="va">$USER</span>/nextflow_lab</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb91-1"><a href="nextflow-assigments.html#cb91-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> /crex/proj/uppmax2024-2-11/nobackup/<span class="va">$USER</span>/nextflow_lab</span></code></pre></div>
 <p>Navigate to the folder you have created</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb92-1"><a href="nextflow-assigments.html#cb92-1"></a><span class="bu">cd</span> /crex/proj/uppmax2023-2-3/nobackup/<span class="va">$USER</span>/nextflow_lab</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb92-1"><a href="nextflow-assigments.html#cb92-1"></a><span class="bu">cd</span> /crex/proj/uppmax2024-2-11/nobackup/<span class="va">$USER</span>/nextflow_lab</span></code></pre></div>
 <p>Load Nexflow</p>
 <div class="sourceCode" id="cb93"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb93-1"><a href="nextflow-assigments.html#cb93-1"></a><span class="ex">module</span> load bioinfo-tools</span></code></pre></div>
 <div class="sourceCode" id="cb94"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb94-1"><a href="nextflow-assigments.html#cb94-1"></a><span class="ex">module</span> load Nextflow/20.10.0</span></code></pre></div>
 <p>Fix some environmental variables:</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb95-1"><a href="nextflow-assigments.html#cb95-1"></a><span class="bu">export</span> <span class="va">NXF_SINGULARITY_CACHEDIR</span><span class="op">=</span>/crex/proj/uppmax2023-2-3/metabolomics/singularity</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb95-1"><a href="nextflow-assigments.html#cb95-1"></a><span class="bu">export</span> <span class="va">NXF_SINGULARITY_CACHEDIR</span><span class="op">=</span>/crex/proj/uppmax2024-2-11/metabolomics/singularity</span></code></pre></div>
 <p>You are now ready to start!</p>
 <p><strong>The container for both of the following parts is “metaboigniter/course_docker:v5” and we want to use SLURM to run the jobs. </strong></p>
-<p><strong>IMPORTANT: DO NOT remove, change, add anything here and in its subfolders: </strong> /crex/proj/uppmax2023-2-3/metabolomics</p>
+<p><strong>IMPORTANT: DO NOT remove, change, add anything here and in its subfolders: </strong> /crex/proj/uppmax2024-2-11/metabolomics</p>
 <p><em>For part 1, you should send us the modified main.nf and nextflow.config. For part 2, you will have to send us a main.nf, nextflow.config and a PCA plot!</em></p>
 <p><strong>IMPORTANT: some time Uppmax file system might cause some of the processes to fail, if this happens, rerun the workflow with -resume option. This might actually pass the step that was previously shown as failed!</strong></p>
 </div>
@@ -598,10 +602,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">9.2</span> Part 1<a href="nextflow-assigments.html#part-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In this part, we will run a small pipeline together. The pipeline is already in a folder that you need to copy to your personal space. We assume that you are now in <code>nextflow_lab</code></p>
 <p>Copy the pipeline and the configuration file</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb96-1"><a href="nextflow-assigments.html#cb96-1"></a><span class="fu">cp</span> <span class="at">-r</span> /crex/proj/uppmax2023-2-3/metabolomics/xcms_pipeline .</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb96-1"><a href="nextflow-assigments.html#cb96-1"></a><span class="fu">cp</span> <span class="at">-r</span> /crex/proj/uppmax2024-2-11/metabolomics/xcms_pipeline .</span></code></pre></div>
 <p>Now you have all the required files in your folder. Try to run the pipeline</p>
 <div class="sourceCode" id="cb97"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb97-1"><a href="nextflow-assigments.html#cb97-1"></a><span class="bu">cd</span> xcms_pipeline </span></code></pre></div>
-<div class="sourceCode" id="cb98"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb98-1"><a href="nextflow-assigments.html#cb98-1"></a><span class="ex">nextflow</span> main.nf <span class="at">-profile</span> uppmax <span class="at">--project</span> <span class="st">&quot;uppmax2023-2-3&quot;</span> <span class="at">--clusterOptions</span> <span class="st">&quot;-M snowy&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb98-1"><a href="nextflow-assigments.html#cb98-1"></a><span class="ex">nextflow</span> main.nf <span class="at">-profile</span> uppmax <span class="at">--project</span> <span class="st">&quot;uppmax2024-2-11&quot;</span> <span class="at">--clusterOptions</span> <span class="st">&quot;-M snowy&quot;</span></span></code></pre></div>
 <p>You can open another terminal window and ssh to Uppmax and use jobinfo to see whether your jobs are running or not! If you realized that won’t run for some steps, it might be because of RAM, CPU, or running time. In the nextflow.config, you can change these parameters!</p>
 <p>Please remember that there is a high chance that Uppmax becomes very slow because the jobs are heavy. So Please consider canceling your jobs if you already know and have a feeling about how Uppmax runs your jobs</p>
 <div class="sourceCode" id="cb99"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb99-1"><a href="nextflow-assigments.html#cb99-1"></a><span class="ex">scancel</span> <span class="at">-u</span> <span class="va">$USER</span> <span class="at">-M</span> snowy</span></code></pre></div>
@@ -629,9 +633,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol start="2" style="list-style-type: decimal">
 <li>Since the process in this specific pipeline need a separate parameter file you will need three additional <strong>file</strong> channels
 <ol style="list-style-type: decimal">
-<li>The first one is used in the FeatureFinder process and is located here: <code>/crex/proj/uppmax2023-2-3/metabolomics/openms_params/FeatureFinder.ini</code></li>
-<li>The second one is for the alignment process and is located here: <code>/crex/proj/uppmax2023-2-3/metabolomics/openms_params/featureAlignment.ini</code></li>
-<li>The third one is for the linker process and is located here: <code>/crex/proj/uppmax2023-2-3/metabolomics/openms_params/featureLinker.ini</code></li>
+<li>The first one is used in the FeatureFinder process and is located here: <code>/crex/proj/uppmax2024-2-11/metabolomics/openms_params/FeatureFinder.ini</code></li>
+<li>The second one is for the alignment process and is located here: <code>/crex/proj/uppmax2024-2-11/metabolomics/openms_params/featureAlignment.ini</code></li>
+<li>The third one is for the linker process and is located here: <code>/crex/proj/uppmax2024-2-11/metabolomics/openms_params/featureLinker.ini</code></li>
 </ol></li>
 </ol>
 <p><em>Help me: <a href="https://www.nextflow.io/docs/latest/process.html#input-of-files">File channels</a>, <a href="https://www.nextflow.io/docs/latest/channel.html#frompath">How to create file channels</a></em></p>

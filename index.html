@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Introduction to Nextflow</title>
   <meta name="description" content="This is a short tutorial about Nextflow." />
-  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Introduction to Nextflow" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2023-04-24" />
+<meta name="date" content="2024-03-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -470,6 +470,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -573,7 +577,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="header">
 <h1 class="title">Introduction to Nextflow</h1>
-<p class="date"><em>2023-04-24</em></p>
+<p class="date"><em>2024-03-19</em></p>
 </div>
 <div id="introduction" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Introduction<a href="index.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
@@ -582,16 +586,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">1.1</span> Setting up the environment<a href="index.html#setting-up-the-environment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We are going to use UPPMAX for doing most of the hands-on work.</p>
 <p>First ssh to UPPMAX</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb4-1"><a href="index.html#cb4-1"></a><span class="fu">ssh</span> <span class="at">-AX</span> youusername@rackham.uppmax.uu.se</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb3-1"><a href="index.html#cb3-1"></a><span class="fu">ssh</span> <span class="at">-AX</span> youusername@rackham.uppmax.uu.se</span></code></pre></div>
 <p>Start an interactive uppmax session</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb5-1"><a href="index.html#cb5-1"></a><span class="ex">interactive</span> <span class="at">-A</span> uppmax2023-2-3 <span class="at">-M</span> snowy <span class="at">-t</span> 02:00:00</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb4-1"><a href="index.html#cb4-1"></a><span class="ex">interactive</span> <span class="at">-A</span> uppmax2024-2-11 <span class="at">-M</span> snowy <span class="at">-t</span> 02:00:00</span></code></pre></div>
 <p>Make a directory in your user space (only if you have not done before)</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb6-1"><a href="index.html#cb6-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> /crex/proj/uppmax2023-2-3/nobackup/<span class="va">$USER</span>/nextflow_lab1</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb5-1"><a href="index.html#cb5-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> /crex/proj/uppmax2024-2-11/nobackup/<span class="va">$USER</span>/nextflow_lab1</span></code></pre></div>
 <p>Navigate to the folder you have created</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb7-1"><a href="index.html#cb7-1"></a><span class="bu">cd</span> /crex/proj/uppmax2023-2-3/nobackup/<span class="va">$USER</span>/nextflow_lab1</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb6-1"><a href="index.html#cb6-1"></a><span class="bu">cd</span> /crex/proj/uppmax2024-2-11/nobackup/<span class="va">$USER</span>/nextflow_lab1</span></code></pre></div>
 <p>Load Nexflow</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb8-1"><a href="index.html#cb8-1"></a><span class="ex">module</span> load bioinfo-tools</span>
-<span id="cb8-2"><a href="index.html#cb8-2"></a><span class="ex">module</span> load Nextflow/20.10.0</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb7-1"><a href="index.html#cb7-1"></a><span class="ex">module</span> load bioinfo-tools</span>
+<span id="cb7-2"><a href="index.html#cb7-2"></a><span class="ex">module</span> load Nextflow/22.10.1</span></code></pre></div>
 <p>If because of any reason, you cannot use UPPMAX, Nextflow can be installed on any POSIX compatible system for example Linux, OS X, Windows Subsystem for Linux. Head to <a href="https://www.nextflow.io/docs/latest/getstarted.html#installation">Nextflow website</a> and follow the installation procedure.</p>
 </div>
 </div>

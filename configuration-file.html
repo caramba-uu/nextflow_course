@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 Configuration file | Introduction to Nextflow</title>
   <meta name="description" content="This is a short tutorial about Nextflow." />
-  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 Configuration file | Introduction to Nextflow" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2023-04-24" />
+<meta name="date" content="2024-03-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -470,6 +470,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -604,7 +608,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The params scope allows you to define parameters that will be accessible in the pipeline script. Simply prefix the parameter names with the params scope or surround them by curly brackets.</p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb51-1"><a href="configuration-file.html#cb51-1"></a><span class="ex">params</span> {</span>
 <span id="cb51-2"><a href="configuration-file.html#cb51-2"></a></span>
-<span id="cb51-3"><a href="configuration-file.html#cb51-3"></a>   <span class="ex">mzMLFilesInput</span> = <span class="st">&#39;/crex/proj/uppmax2023-2-3/metabolomics/mzMLData/*.mzML&#39;</span> <span class="co">#1</span></span>
+<span id="cb51-3"><a href="configuration-file.html#cb51-3"></a>   <span class="ex">mzMLFilesInput</span> = <span class="st">&#39;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&#39;</span> <span class="co">#1</span></span>
 <span id="cb51-4"><a href="configuration-file.html#cb51-4"></a>  <span class="va">ppm_input</span><span class="op">=</span>10 <span class="co">#2</span></span>
 <span id="cb51-5"><a href="configuration-file.html#cb51-5"></a></span>
 <span id="cb51-6"><a href="configuration-file.html#cb51-6"></a><span class="er">}</span></span></code></pre></div>
@@ -676,7 +680,7 @@ The executor settings can be defined as shown below:</p>
 <span id="cb58-2"><a href="configuration-file.html#cb58-2"></a><span class="ex">process.clusterOptions</span> = { <span class="st">&quot;-A </span><span class="va">$params</span><span class="st">.project </span><span class="va">${params</span><span class="er">.clusterOptions ?: &#39;&#39;</span><span class="va">}</span><span class="st">&quot;</span>}</span></code></pre></div>
 <p>Create a file called <code>main_13.nf</code></p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb59-1"><a href="configuration-file.html#cb59-1"></a><span class="ex">//</span> This is main.nf</span>
-<span id="cb59-2"><a href="configuration-file.html#cb59-2"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2023-2-3/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
+<span id="cb59-2"><a href="configuration-file.html#cb59-2"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
 <span id="cb59-3"><a href="configuration-file.html#cb59-3"></a><span class="ex">process</span> featureFinder {</span>
 <span id="cb59-4"><a href="configuration-file.html#cb59-4"></a><span class="bu">echo</span> true</span>
 <span id="cb59-5"><a href="configuration-file.html#cb59-5"></a><span class="ex">input:</span></span>
@@ -686,7 +690,7 @@ The executor settings can be defined as shown below:</p>
 <span id="cb59-9"><a href="configuration-file.html#cb59-9"></a></span>
 <span id="cb59-10"><a href="configuration-file.html#cb59-10"></a><span class="er">}</span></span></code></pre></div>
 <p>You can now run the pipeline using</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb60-1"><a href="configuration-file.html#cb60-1"></a><span class="ex">nextflow</span> main_13.nf <span class="at">-c</span> nextflow_13.config <span class="at">--project</span> <span class="st">&quot;uppmax2023-2-3&quot;</span> <span class="at">--clusterOptions</span> <span class="st">&quot;-M snowy&quot;</span> </span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb60-1"><a href="configuration-file.html#cb60-1"></a><span class="ex">nextflow</span> main_13.nf <span class="at">-c</span> nextflow_13.config <span class="at">--project</span> <span class="st">&quot;uppmax2024-2-11&quot;</span> <span class="at">--clusterOptions</span> <span class="st">&quot;-M snowy&quot;</span></span></code></pre></div>
 <p>The process is now running on Uppmax.
 OK! This is probably going to take time. Use <code>Ctrl+c</code> to kill Nextflow! Then cancel all of your jobs!</p>
 <div class="sourceCode" id="cb61"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb61-1"><a href="configuration-file.html#cb61-1"></a><span class="ex">scancel</span> <span class="at">-u</span> <span class="va">$USER</span> <span class="at">-M</span> snowy</span></code></pre></div>
@@ -708,7 +712,7 @@ OK! This is probably going to take time. Use <code>Ctrl+c</code> to kill Nextflo
 <p>All the processes will then use Docker container.</p>
 <p>Similarly we can use singularity.</p>
 <p>Please be aware that if you Nextflow to use a Docker image and convert to singularity image. This process will take time. In order to save you time we have already done the conversion. To use what we have built, first run the following command:</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb63-1"><a href="configuration-file.html#cb63-1"></a><span class="bu">export</span> <span class="va">NXF_SINGULARITY_CACHEDIR</span><span class="op">=</span>/crex/proj/uppmax2023-2-3/metabolomics/singularity</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb63-1"><a href="configuration-file.html#cb63-1"></a><span class="bu">export</span> <span class="va">NXF_SINGULARITY_CACHEDIR</span><span class="op">=</span>/crex/proj/uppmax2024-2-11/metabolomics/singularity</span></code></pre></div>
 <p>The above command will set the location of the image for Nextflow.</p>
 <p>We can later create a file named <code>nextflow_14.config</code> with the following content</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb64-1"><a href="configuration-file.html#cb64-1"></a><span class="ex">singularity.enabled</span> = true <span class="co">#1</span></span>
@@ -718,7 +722,7 @@ OK! This is probably going to take time. Use <code>Ctrl+c</code> to kill Nextflo
 <li>Sets the name of the image</li>
 </ol>
 <p>We can now create another file <code>main_14.nf</code> with the following content:</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb65-1"><a href="configuration-file.html#cb65-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2023-2-3/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
+<div class="sourceCode" id="cb65"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb65-1"><a href="configuration-file.html#cb65-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
 <span id="cb65-2"><a href="configuration-file.html#cb65-2"></a><span class="ex">process</span> featureFinder {</span>
 <span id="cb65-3"><a href="configuration-file.html#cb65-3"></a><span class="bu">echo</span> true</span>
 <span id="cb65-4"><a href="configuration-file.html#cb65-4"></a><span class="ex">input:</span></span>
@@ -736,7 +740,7 @@ OK! This is probably going to take time. Use <code>Ctrl+c</code> to kill Nextflo
 <span id="cb67-2"><a href="configuration-file.html#cb67-2"></a><span class="ex">process.container=</span><span class="st">&quot;metaboigniter/course_docker:v5&quot;</span></span>
 <span id="cb67-3"><a href="configuration-file.html#cb67-3"></a><span class="ex">process.executor</span> = <span class="st">&#39;slurm&#39;</span></span>
 <span id="cb67-4"><a href="configuration-file.html#cb67-4"></a><span class="ex">process.clusterOptions</span> = { <span class="st">&quot;-A </span><span class="va">$params</span><span class="st">.project </span><span class="va">${params</span><span class="er">.clusterOptions ?: &#39;&#39;</span><span class="va">}</span><span class="st">&quot;</span>}</span></code></pre></div>
-<div class="sourceCode" id="cb68"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb68-1"><a href="configuration-file.html#cb68-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span><span class="st">&#39;/crex/proj/uppmax2023-2-3/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
+<div class="sourceCode" id="cb68"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb68-1"><a href="configuration-file.html#cb68-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span><span class="st">&#39;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
 <span id="cb68-2"><a href="configuration-file.html#cb68-2"></a><span class="ex">process</span> featureFinder {</span>
 <span id="cb68-3"><a href="configuration-file.html#cb68-3"></a><span class="bu">echo</span> true</span>
 <span id="cb68-4"><a href="configuration-file.html#cb68-4"></a><span class="ex">input:</span></span>
@@ -745,7 +749,7 @@ OK! This is probably going to take time. Use <code>Ctrl+c</code> to kill Nextflo
 <span id="cb68-7"><a href="configuration-file.html#cb68-7"></a><span class="st">&quot;echo processing </span><span class="va">$x</span><span class="st">&quot;</span></span>
 <span id="cb68-8"><a href="configuration-file.html#cb68-8"></a></span>
 <span id="cb68-9"><a href="configuration-file.html#cb68-9"></a><span class="er">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb69"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb69-1"><a href="configuration-file.html#cb69-1"></a><span class="ex">nextflow</span> main_15.nf <span class="at">-c</span> nextflow_15.config <span class="at">--project</span> <span class="st">&quot;uppmax2023-2-3&quot;</span> <span class="at">--clusterOptions</span> <span class="st">&quot;-M snowy&quot;</span> </span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb69-1"><a href="configuration-file.html#cb69-1"></a><span class="ex">nextflow</span> main_15.nf <span class="at">-c</span> nextflow_15.config <span class="at">--project</span> <span class="st">&quot;uppmax2024-2-11&quot;</span> <span class="at">--clusterOptions</span> <span class="st">&quot;-M snowy&quot;</span></span></code></pre></div>
 <p>Now let us cancel all the jobs</p>
 <div class="sourceCode" id="cb70"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb70-1"><a href="configuration-file.html#cb70-1"></a><span class="ex">scancel</span> <span class="at">-u</span> <span class="va">$USER</span> <span class="at">--state</span><span class="op">=</span>pending</span>
 <span id="cb70-2"><a href="configuration-file.html#cb70-2"></a><span class="ex">scancel</span> <span class="at">-u</span> <span class="va">$USER</span> <span class="at">-t</span> running</span></code></pre></div>
@@ -776,7 +780,7 @@ OK! This is probably going to take time. Use <code>Ctrl+c</code> to kill Nextflo
 <p>Now if we want to run the pipeline on the local environment we use:</p>
 <div class="sourceCode" id="cb72"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb72-1"><a href="configuration-file.html#cb72-1"></a><span class="ex">nextflow</span> main.nf <span class="at">-profile</span> standard</span></code></pre></div>
 <p>How would you run it if you wanted to run on UPPMAX?</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb73-1"><a href="configuration-file.html#cb73-1"></a><span class="ex">nextflow</span> main.nf <span class="at">-profile</span> uppmax_singularity <span class="at">--project</span> <span class="st">&quot;uppmax2023-2-3&quot;</span> <span class="at">--clusterOptions</span> <span class="st">&quot;-M snowy&quot;</span> </span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb73-1"><a href="configuration-file.html#cb73-1"></a><span class="ex">nextflow</span> main.nf <span class="at">-profile</span> uppmax_singularity <span class="at">--project</span> <span class="st">&quot;uppmax2024-2-11&quot;</span> <span class="at">--clusterOptions</span> <span class="st">&quot;-M snowy&quot;</span></span></code></pre></div>
 </div>
 </div>
 </div>
