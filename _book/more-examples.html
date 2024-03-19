@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 More examples: | Introduction to Nextflow</title>
   <meta name="description" content="This is a short tutorial about Nextflow." />
-  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 More examples: | Introduction to Nextflow" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2023-04-24" />
+<meta name="date" content="2024-03-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -470,6 +470,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -577,7 +581,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="two-processes" class="section level2 hasAnchor" number="7.1">
 <h2><span class="header-section-number">7.1</span> Two processes<a href="more-examples.html#two-processes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>As said before, you can connect two processes using channels.</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb74-1"><a href="more-examples.html#cb74-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2023-2-3/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
+<div class="sourceCode" id="cb74"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb74-1"><a href="more-examples.html#cb74-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
 <span id="cb74-2"><a href="more-examples.html#cb74-2"></a><span class="ex">process</span> featureFinder {</span>
 <span id="cb74-3"><a href="more-examples.html#cb74-3"></a><span class="ex">input:</span></span>
 <span id="cb74-4"><a href="more-examples.html#cb74-4"></a><span class="fu">file</span> x from mzMLFiles</span>
@@ -607,7 +611,7 @@ Now run</p>
 <div id="two-processes-including-collect" class="section level2 hasAnchor" number="7.2">
 <h2><span class="header-section-number">7.2</span> Two processes including collect<a href="more-examples.html#two-processes-including-collect" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>As mentioned above we can instruct Nextflow to emit all the content of a channel in a single emittion so that the downstream process will receive all the content at once using the <code>collect</code> operator. For example</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb77-1"><a href="more-examples.html#cb77-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2023-2-3/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
+<div class="sourceCode" id="cb77"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb77-1"><a href="more-examples.html#cb77-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
 <span id="cb77-2"><a href="more-examples.html#cb77-2"></a><span class="ex">process</span> featureFinder {</span>
 <span id="cb77-3"><a href="more-examples.html#cb77-3"></a><span class="ex">input:</span></span>
 <span id="cb77-4"><a href="more-examples.html#cb77-4"></a><span class="fu">file</span> x from mzMLFiles</span>
@@ -661,7 +665,7 @@ Now run</p>
 <div class="sourceCode" id="cb81"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb81-1"><a href="more-examples.html#cb81-1"></a><span class="fu">nano</span> main_18.nf</span></code></pre></div>
 <p>Copy the above code to it. Save the file <code>(Ctrl+o enter)</code> and exit <code>(Ctrl+x)</code>
 Now run:</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb82-1"><a href="more-examples.html#cb82-1"></a><span class="ex">nextflow</span> main_18.nf <span class="at">--inputmzml</span> <span class="st">&quot;/crex/proj/uppmax2023-2-3/metabolomics/mzMLData/*.mzML&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb82-1"><a href="more-examples.html#cb82-1"></a><span class="ex">nextflow</span> main_18.nf <span class="at">--inputmzml</span> <span class="st">&quot;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&quot;</span></span></code></pre></div>
 <p>Notice how we are sending parameters to the workflow!</p>
 </div>
 <div id="three-processes" class="section level2 hasAnchor" number="7.4">
@@ -700,7 +704,7 @@ Now run:</p>
 <div class="sourceCode" id="cb84"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb84-1"><a href="more-examples.html#cb84-1"></a><span class="fu">nano</span> main_19.nf</span></code></pre></div>
 <p>Copy the above code to it. Save the file <code>(Ctrl+o enter)</code> and exit <code>(Ctrl+x)</code>
 Now run:</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb85-1"><a href="more-examples.html#cb85-1"></a><span class="ex">nextflow</span> main_18.nf <span class="at">--inputmzml</span> <span class="st">&quot;/crex/proj/uppmax2023-2-3/metabolomics/mzMLData/*.mzML&quot;</span> <span class="at">--qc</span> 100</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb85-1"><a href="more-examples.html#cb85-1"></a><span class="ex">nextflow</span> main_18.nf <span class="at">--inputmzml</span> <span class="st">&quot;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&quot;</span> <span class="at">--qc</span> 100</span></code></pre></div>
 </div>
 </div>
             </section>

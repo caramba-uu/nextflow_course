@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 8 Resuming the pipeline (Command line interface) | Introduction to Nextflow</title>
   <meta name="description" content="This is a short tutorial about Nextflow." />
-  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 8 Resuming the pipeline (Command line interface) | Introduction to Nextflow" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2023-04-24" />
+<meta name="date" content="2024-03-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -470,6 +470,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -575,15 +579,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 8</span> Resuming the pipeline (Command line interface)<a href="resuming-the-pipeline-command-line-interface.html#resuming-the-pipeline-command-line-interface" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Nextflow provides a powerful command line interface for the execution pipelines.</p>
 <p>As we have seen before a general way of running Nextflow looks like:</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb86-1"><a href="resuming-the-pipeline-command-line-interface.html#cb86-1"></a><span class="ex">nextflow</span> [options] COMMAND [arg...]</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb86-1"><a href="resuming-the-pipeline-command-line-interface.html#cb86-1"></a><span class="ex">nextflow</span> <span class="pp">[</span><span class="ss">options</span><span class="pp">]</span> COMMAND <span class="pp">[</span><span class="ss">arg...</span><span class="pp">]</span></span></code></pre></div>
 <p>We often run the workflow using</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb87-1"><a href="resuming-the-pipeline-command-line-interface.html#cb87-1"></a><span class="ex">nextflow</span> main_19.nf <span class="at">--inputmzml</span> <span class="st">&quot;/crex/proj/uppmax2023-2-3/metabolomics/mzMLData/*.mzML&quot;</span> <span class="at">--qc</span> 100</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb87-1"><a href="resuming-the-pipeline-command-line-interface.html#cb87-1"></a><span class="ex">nextflow</span> main_19.nf <span class="at">--inputmzml</span> <span class="st">&quot;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&quot;</span> <span class="at">--qc</span> 100</span></code></pre></div>
 <p>However, when Nextflow is run it will automatically use its powerful <code>run</code> command. So the above code can actually be run using:</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb88-1"><a href="resuming-the-pipeline-command-line-interface.html#cb88-1"></a><span class="ex">nextflow</span> run main_19.nf <span class="at">--inputmzml</span> <span class="st">&quot;/crex/proj/uppmax2023-2-3/metabolomics/mzMLData/*.mzML&quot;</span> <span class="at">--qc</span> 100</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb88-1"><a href="resuming-the-pipeline-command-line-interface.html#cb88-1"></a><span class="ex">nextflow</span> run main_19.nf <span class="at">--inputmzml</span> <span class="st">&quot;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&quot;</span> <span class="at">--qc</span> 100</span></code></pre></div>
 <p>The <code>run</code> command has several options that can be seen <a href="https://www.nextflow.io/docs/latest/cli.html#run">here</a></p>
 <p>One the most important option is <code>resume</code>. This option executes the script using the cached results, useful to continue executions that was stopped by an error.</p>
 <p>So if we imagine the above pipeline fails for example because of an error in one of the processes, after resolving the error, we can run the workflow using:</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb89-1"><a href="resuming-the-pipeline-command-line-interface.html#cb89-1"></a><span class="ex">nextflow</span> run main_19.nf <span class="at">-resume</span> <span class="at">--inputmzml</span> <span class="st">&quot;/crex/proj/uppmax2023-2-3/metabolomics/mzMLData/*.mzML&quot;</span> <span class="at">--qc</span> 100</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb89-1"><a href="resuming-the-pipeline-command-line-interface.html#cb89-1"></a><span class="ex">nextflow</span> run main_19.nf <span class="at">-resume</span> <span class="at">--inputmzml</span> <span class="st">&quot;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&quot;</span> <span class="at">--qc</span> 100</span></code></pre></div>
 <p>Using this command, the already successfully executed processes will not be rerun. So the pipeline will continue from where it failed last time.</p>
 <p>You can see the full description of Nextflow CLI <a href="https://www.nextflow.io/docs/latest/cli.html">here</a></p>
 </div>
