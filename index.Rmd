@@ -727,12 +727,18 @@ This operator can also be used inside the process. For example,
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
 mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' )
 process featureFinder {
+echo true
+
 input:
-file x from mzMLFiles.collect() #1
+file x
 
 """ 
 echo $x
 """  
+}
+
+workflow {
+    featureFinder(mzMLFiles.collect()) #1
 }
 
 ```
@@ -829,10 +835,14 @@ mzMLFiles = Channel.fromPath( params.mzMLFilesInput ) #1
 process featureFinder {
 echo true
 input:
-file x from mzMLFiles
+file x
 
 "echo processing $x with $params.ppm_input ppm" #2
 
+}
+
+workflow {
+    featureFinder(mzMLFiles)
 }
 ```
 
@@ -924,10 +934,14 @@ mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/
 process featureFinder {
 echo true
 input:
-file x from mzMLFiles
+file x
 
 "echo processing $x"
 
+}
+
+workflow {
+    featureFinder(mzMLFiles)
 }
 ```
 
@@ -993,10 +1007,14 @@ mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/
 process featureFinder {
 echo true
 input:
-file x from mzMLFiles
+file x
 
 "echo processing $x"
 
+}
+
+workflow {
+    featureFinder(mzMLFiles)
 }
 ```
 
@@ -1023,10 +1041,14 @@ mzMLFiles = Channel.fromPath('/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*
 process featureFinder {
 echo true
 input:
-file x from mzMLFiles
+file x
 
 "echo processing $x"
 
+}
+
+workflow {
+    featureFinder(mzMLFiles)
 }
 ```
 
@@ -1098,9 +1120,9 @@ As said before, you can connect two processes using channels.
 mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' )
 process featureFinder {
 input:
-file x from mzMLFiles
+file x
 output:
-file "${x.baseName}.featureXML" into outputChannel #1
+file "${x.baseName}.featureXML" #1
 
 "cp $x ${x.baseName}.featureXML"
 
@@ -1110,10 +1132,15 @@ file "${x.baseName}.featureXML" into outputChannel #1
 process someotherprocess {
 echo true
 input:
-file x from outputChannel #2
+file x #2
 
 "echo I got $x from featureFinder"
 
+}
+
+workflow {
+    featureFinder_out = featureFinder(mzMLFiles)
+    someotherprocess(featureFinder_out)
 }
 
 ```
@@ -1142,9 +1169,9 @@ As mentioned above we can instruct Nextflow to emit all the content of a channel
 mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' )
 process featureFinder {
 input:
-file x from mzMLFiles
+file x
 output:
-file "${x.baseName}.featureXML" into outputChannel
+file "${x.baseName}.featureXML"
 "cp $x ${x.baseName}.featureXML"
 
 }
@@ -1153,10 +1180,15 @@ file "${x.baseName}.featureXML" into outputChannel
 process someotherprocess {
 echo true
 input:
-file x from outputChannel.collect() #1
+file x  #1
 
 "echo I got $x from featureFinder"
 
+}
+
+workflow {
+    featureFinder_out = featureFinder(mzMLFiles).collect()
+    someotherprocess(featureFinder_out)
 }
 ```
 
@@ -1186,9 +1218,9 @@ We can now try to even accept some parameters from the user.
 mzMLFiles = Channel.fromPath(params.inputmzml) #1
 process featureFinder {
 input:
-file x from mzMLFiles
+file x
 output:
-file "${x.baseName}.featureXML" into outputChannel
+file "${x.baseName}.featureXML"
 "cp $x ${x.baseName}.featureXML"
 
 }
@@ -1197,10 +1229,15 @@ file "${x.baseName}.featureXML" into outputChannel
 process someotherprocess {
 echo true
 input:
-file x from outputChannel.collect()
+file x
 
 "echo I got $x from featureFinder"
 
+}
+
+workflow {
+    featureFinder_out = featureFinder(mzMLFiles).collect()
+    someotherprocess(featureFinder_out)
 }
 
 ```
@@ -1230,18 +1267,18 @@ Similarly we can create as many as processes we would like to. For example three
 mzMLFiles = Channel.fromPath(params.inputmzml) #1
 process justcopy {
 input:
-file x from mzMLFiles
+file x
 output:
-file "${x.baseName}.featureXML" into outputChannel
+file "${x.baseName}.featureXML"
 "cp $x ${x.baseName}.featureXML"
 }
 // This process gets input from justcopy
 process someotherprocess {
 echo true
 input:
-file x from outputChannel.collect()
+file x
 output:
-file "QC.txt" into finalchannel
+file "QC.txt"
 """
 echo "${params.qc} percent!">> QC.txt 
 """
@@ -1250,10 +1287,16 @@ echo "${params.qc} percent!">> QC.txt
 process lastone {
 echo true
 input:
-file x from finalchannel
+file x
 """
 (echo "Quality was:" ;cat $x)
 """
+}
+
+workflow {
+    justcopy_out = justcopy(mzMLFiles)
+    someotherprocess_out = someotherprocess(justcopy_out.collect())
+    lastone(someotherprocess_out)
 }
 
 ```
@@ -1343,7 +1386,7 @@ module load bioinfo-tools
 ```
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-module load Nextflow/20.10.0
+module load Nextflow/22.10.1
 ```
 
 Fix some environmental variables:
