@@ -6,7 +6,7 @@ bookdown::gitbook:
         <li><a href="./">Introduction to Nextflow</a></li>
       after: |
         <li>Payam Emami ( <li><a href="https://www.nbis.se/">National Bioinformatics Infrastructure Sweden</a></li>)</li>
-        <li>Akshai Parakkal Sreenivasan ( <li><a href="https://www.katalog.uu.se/profile/?id=N21-1352">Caramba lab</a></li>)</li>
+        <li>Akshai Parakkal Sreenivasan ( <li><a href="https://caramba.clinic/">Caramba lab</a></li>)</li>
     download: ["pdf", "epub"]
 bookdown::pdf_book:
   latex_engine: xelatex
