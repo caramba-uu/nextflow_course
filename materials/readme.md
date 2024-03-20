@@ -7,3 +7,7 @@ Create singularity sif using, [go to singularity folder](singularity) and run
 sudo singularity build bigdatacourse.sif bigdatacourse.def
 ```
 
+To create during the production stage, helps to install packages and access files
+```bash
+sudo singularity build --sandbox bigdatacourse bigdatacourse.def
+```
