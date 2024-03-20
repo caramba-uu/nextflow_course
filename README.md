@@ -10,7 +10,7 @@ Contains RMD file to generate [course website](https://caramba-uu.github.io/next
 ### mzML data are missing (big data, cannot upload)
 
 
-Create singularity sif using
+Create singularity sif using, (go here)[materials/singularity] and run
 ```bash
 sudo singularity build bigdatacourse.sif bigdatacourse.def
 ```
