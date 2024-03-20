@@ -6,7 +6,7 @@ Contains RMD file to generate [course website](https://caramba-uu.github.io/next
 [Creates manual for bigdata course](index.Rmd)
 
 
-## (Required files for course)[materials]
+## [Required files for course](materials)
 ### mzML data are missing (big data, cannot upload)
 
 
