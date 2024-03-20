@@ -17,14 +17,13 @@ From: ubuntu:22.04
     # Updating repo
     apt-get update -y
 
-    # useless commands
-    # dpkg --add-architecture i386 && apt-get update -y && apt-get install dialog
+    # Trial and error commands
     # echo "LC_ALL=en_US.UTF-8" >> /etc/environment
     # echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
     # echo "LANG=en_US.UTF-8" > /etc/locale.conf
     # apt-get install locales
     # locale-gen en_US.UTF-8
-    # export DEBIAN_FRONTEND=noninteractive
+    # export DEBIAN_FRONTEND=noninteractive # keeps the env to noninterative, hence removing any input needed during the build
 
 
     # Setting timezome, necessary for some codes
@@ -33,6 +32,7 @@ From: ubuntu:22.04
 
     # Downloading and installing OpenMS
     apt install wget -y
+    dpkg --add-architecture i386 && apt-get update -y && apt-get install dialog
     wget -O /media/OpenMS-2.4.0-Debian-Linux-x86_64.deb https://abibuilder.cs.uni-tuebingen.de/archive/openms/OpenMSInstaller/release/2.4.0/OpenMS-2.4.0-Debian-Linux-x86_64.deb
     apt-get install build-essential  libgl1-mesa-dev -y && apt-get install qtbase5-dev:i386 -y && apt-get install qtbase5-dev -y && dpkg -i /media/OpenMS-2.4.0-Debian-Linux-x86_64.deb
 
