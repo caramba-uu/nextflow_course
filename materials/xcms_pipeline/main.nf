@@ -43,7 +43,7 @@ process  process_collect_rdata_pos_xcms{
   publishDir "$projectDir/process_collect_rdata_pos_xcms"
 
   // A "normal" file channel emmits each file at the time but here we need all the files in one place (not one by one).
-  // So we use .collect so all the files are emitted as list (not in parallel)
+  // The collect input is received here
   input:
   file rdata_files
   // We only output only one file that is called "collection_pos"
@@ -95,8 +95,14 @@ process  process_group_peaks_pos_N1_xcms{
 }
 
 workflow{
- (collect_rdata_pos_xcms,rt_rdata_pos_xcms) = process_masstrace_detection_pos_xcms(mzMLFiles)
- align_rdata_pos_xcms = process_collect_rdata_pos_xcms(collect_rdata_pos_xcms.collect())
+  // The input channels are sent to the necessary process
+  // The output channels are then collected and sent to the next process
+
+ (collect_rdata_pos_xcms,rt_rdata_pos_xcms) = process_masstrace_detection_pos_xcms(mzMLFiles) 
+
+ align_rdata_pos_xcms = process_collect_rdata_pos_xcms(collect_rdata_pos_xcms.collect()) // So we use .collect so all the files are emitted as list (not in parallel)
+
  group_peaks_pos_N1_xcms = process_align_peaks_pos_xcms(align_rdata_pos_xcms,rt_rdata_pos_xcms.collect())
+
  finished = process_group_peaks_pos_N1_xcms(group_peaks_pos_N1_xcms)
 }
