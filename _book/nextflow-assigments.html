@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 9 Nextflow assigments | Introduction to Nextflow</title>
+  <meta name="description" content="This is a short tutorial about Nextflow." />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 9 Nextflow assigments | Introduction to Nextflow" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is a short tutorial about Nextflow." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 9 Nextflow assigments | Introduction to Nextflow" />
+  
+  <meta name="twitter:description" content="This is a short tutorial about Nextflow." />
+  
+
+
+
+<meta name="date" content="2024-03-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="resuming-the-pipeline-command-line-interface.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+<script>
+/* ========================================================================
+ * Bootstrap: transition.js v3.3.7
+ * http://getbootstrap.com/javascript/#transitions
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
+  // ============================================================
+
+  function transitionEnd() {
+    var el = document.createElement('bootstrap')
+
+    var transEndEventNames = {
+      WebkitTransition : 'webkitTransitionEnd',
+      MozTransition    : 'transitionend',
+      OTransition      : 'oTransitionEnd otransitionend',
+      transition       : 'transitionend'
+    }
+
+    for (var name in transEndEventNames) {
+      if (el.style[name] !== undefined) {
+        return { end: transEndEventNames[name] }
+      }
+    }
+
+    return false // explicit for ie8 (  ._.)
+  }
+
+  // http://blog.alexmaccaw.com/css-transitions
+  $.fn.emulateTransitionEnd = function (duration) {
+    var called = false
+    var $el = this
+    $(this).one('bsTransitionEnd', function () { called = true })
+    var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
+    setTimeout(callback, duration)
+    return this
+  }
+
+  $(function () {
+    $.support.transition = transitionEnd()
+
+    if (!$.support.transition) return
+
+    $.event.special.bsTransitionEnd = {
+      bindType: $.support.transition.end,
+      delegateType: $.support.transition.end,
+      handle: function (e) {
+        if ($(e.target).is(this)) return e.handleObj.handler.apply(this, arguments)
+      }
+    }
+  })
+
+}(jQuery);
+</script>
+<script>
+/* ========================================================================
+ * Bootstrap: collapse.js v3.3.7
+ * http://getbootstrap.com/javascript/#collapse
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+/* jshint latedef: false */
+
++function ($) {
+  'use strict';
+
+  // COLLAPSE PUBLIC CLASS DEFINITION
+  // ================================
+
+  var Collapse = function (element, options) {
+    this.$element      = $(element)
+    this.options       = $.extend({}, Collapse.DEFAULTS, options)
+    this.$trigger      = $('[data-toggle="collapse"][href="#' + element.id + '"],' +
+                           '[data-toggle="collapse"][data-target="#' + element.id + '"]')
+    this.transitioning = null
+
+    if (this.options.parent) {
+      this.$parent = this.getParent()
+    } else {
+      this.addAriaAndCollapsedClass(this.$element, this.$trigger)
+    }
+
+    if (this.options.toggle) this.toggle()
+  }
+
+  Collapse.VERSION  = '3.3.7'
+
+  Collapse.TRANSITION_DURATION = 350
+
+  Collapse.DEFAULTS = {
+    toggle: true
+  }
+
+  Collapse.prototype.dimension = function () {
+    var hasWidth = this.$element.hasClass('width')
+    return hasWidth ? 'width' : 'height'
+  }
+
+  Collapse.prototype.show = function () {
+    if (this.transitioning || this.$element.hasClass('in')) return
+
+    var activesData
+    var actives = this.$parent && this.$parent.children('.panel').children('.in, .collapsing')
+
+    if (actives && actives.length) {
+      activesData = actives.data('bs.collapse')
+      if (activesData && activesData.transitioning) return
+    }
+
+    var startEvent = $.Event('show.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    if (actives && actives.length) {
+      Plugin.call(actives, 'hide')
+      activesData || actives.data('bs.collapse', null)
+    }
+
+    var dimension = this.dimension()
+
+    this.$element
+      .removeClass('collapse')
+      .addClass('collapsing')[dimension](0)
+      .attr('aria-expanded', true)
+
+    this.$trigger
+      .removeClass('collapsed')
+      .attr('aria-expanded', true)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse in')[dimension]('')
+      this.transitioning = 0
+      this.$element
+        .trigger('shown.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    var scrollSize = $.camelCase(['scroll', dimension].join('-'))
+
+    this.$element
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize])
+  }
+
+  Collapse.prototype.hide = function () {
+    if (this.transitioning || !this.$element.hasClass('in')) return
+
+    var startEvent = $.Event('hide.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    var dimension = this.dimension()
+
+    this.$element[dimension](this.$element[dimension]())[0].offsetHeight
+
+    this.$element
+      .addClass('collapsing')
+      .removeClass('collapse in')
+      .attr('aria-expanded', false)
+
+    this.$trigger
+      .addClass('collapsed')
+      .attr('aria-expanded', false)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.transitioning = 0
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse')
+        .trigger('hidden.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    this.$element
+      [dimension](0)
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
+  }
+
+  Collapse.prototype.toggle = function () {
+    this[this.$element.hasClass('in') ? 'hide' : 'show']()
+  }
+
+  Collapse.prototype.getParent = function () {
+    return $(this.options.parent)
+      .find('[data-toggle="collapse"][data-parent="' + this.options.parent + '"]')
+      .each($.proxy(function (i, element) {
+        var $element = $(element)
+        this.addAriaAndCollapsedClass(getTargetFromTrigger($element), $element)
+      }, this))
+      .end()
+  }
+
+  Collapse.prototype.addAriaAndCollapsedClass = function ($element, $trigger) {
+    var isOpen = $element.hasClass('in')
+
+    $element.attr('aria-expanded', isOpen)
+    $trigger
+      .toggleClass('collapsed', !isOpen)
+      .attr('aria-expanded', isOpen)
+  }
+
+  function getTargetFromTrigger($trigger) {
+    var href
+    var target = $trigger.attr('data-target')
+      || (href = $trigger.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
+
+    return $(target)
+  }
+
+
+  // COLLAPSE PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.collapse')
+      var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == 'object' && option)
+
+      if (!data && options.toggle && /show|hide/.test(option)) options.toggle = false
+      if (!data) $this.data('bs.collapse', (data = new Collapse(this, options)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.collapse
+
+  $.fn.collapse             = Plugin
+  $.fn.collapse.Constructor = Collapse
+
+
+  // COLLAPSE NO CONFLICT
+  // ====================
+
+  $.fn.collapse.noConflict = function () {
+    $.fn.collapse = old
+    return this
+  }
+
+
+  // COLLAPSE DATA-API
+  // =================
+
+  $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]', function (e) {
+    var $this   = $(this)
+
+    if (!$this.attr('data-target')) e.preventDefault()
+
+    var $target = getTargetFromTrigger($this)
+    var data    = $target.data('bs.collapse')
+    var option  = data ? 'toggle' : $this.data()
+
+    Plugin.call($target, option)
+  })
+
+}(jQuery);
+</script>
+<script>
+window.initializeCodeFolding = function(show) {
+
+  // handlers for show-all and hide all
+  $("#rmd-show-all-code").click(function() {
+    $('div.r-code-collapse').each(function() {
+      $(this).collapse('show');
+    });
+  });
+  $("#rmd-hide-all-code").click(function() {
+    $('div.r-code-collapse').each(function() {
+      $(this).collapse('hide');
+    });
+  });
+
+  // index for unique code element ids
+  var currentIndex = 1;
+
+  // select all R code blocks
+  var rCodeBlocks = $('pre.sourceCode, pre.r, pre.python, pre.bash, pre.sql, pre.cpp, pre.stan');
+  rCodeBlocks.each(function() {
+
+   if(!this.className.includes("nohide"))
+   {
+       // create a collapsable div to wrap the code in
+    var div = $('<div class="collapse r-code-collapse"></div>');
+    if (show)
+      div.addClass('in');
+    var id = 'rcode-643E0F36' + currentIndex++;
+    div.attr('id', id);
+    $(this).before(div);
+    $(this).detach().appendTo(div);
+    console.log(this.className)
+    // add a show code button right above
+    var showCodeText = $('<span>' + (show ? 'Hide the code! I am good to go!' : 'Show me the code! Need help!') + '</span>');
+    var showCodeButton = $('<button type="button" class="btn btn-default btn-xs code-folding-btn pull-right"></button>');
+    showCodeButton.append(showCodeText);
+    showCodeButton
+        .attr('data-toggle', 'collapse')
+        .attr('data-target', '#' + id)
+        .attr('aria-expanded', show)
+        .attr('aria-controls', id);
+
+    var buttonRow = $('<div class="row"></div>');
+    var buttonCol = $('<div class="col-md-12"></div>');
+
+    buttonCol.append(showCodeButton);
+    buttonRow.append(buttonCol);
+
+    div.before(buttonRow);
+
+    // update state of button on show/hide
+    div.on('hidden.bs.collapse', function () {
+      showCodeText.text('Show me the code! Need help!');
+    });
+    div.on('show.bs.collapse', function () {
+      showCodeText.text('Hide the code! I am good to go!');
+    });
+   }
+  
+  });
+
+}
+</script>
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+.row { display: flex; }
+.collapse { display: none; }
+.in { display:block }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "hide");
+});
+</script>
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to Nextflow</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#setting-up-the-environment"><i class="fa fa-check"></i><b>1.1</b> Setting up the environment</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="basic-concepts.html"><a href="basic-concepts.html"><i class="fa fa-check"></i><b>2</b> Basic concepts</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="basic-concepts.html"><a href="basic-concepts.html#nextflow-scripting"><i class="fa fa-check"></i><b>2.1</b> Nextflow scripting</a></li>
+<li class="chapter" data-level="2.2" data-path="basic-concepts.html"><a href="basic-concepts.html#processes-and-channels"><i class="fa fa-check"></i><b>2.2</b> Processes and channels</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="channels.html"><a href="channels.html"><i class="fa fa-check"></i><b>3</b> Channels</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="channels.html"><a href="channels.html#of"><i class="fa fa-check"></i><b>3.1</b> of</a></li>
+<li class="chapter" data-level="3.2" data-path="channels.html"><a href="channels.html#frompath"><i class="fa fa-check"></i><b>3.2</b> fromPath</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="processes.html"><a href="processes.html"><i class="fa fa-check"></i><b>4</b> Processes</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="processes.html"><a href="processes.html#scriptshellexec"><i class="fa fa-check"></i><b>4.1</b> script|shell|exec</a></li>
+<li class="chapter" data-level="4.2" data-path="processes.html"><a href="processes.html#input"><i class="fa fa-check"></i><b>4.2</b> input</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="processes.html"><a href="processes.html#input-each"><i class="fa fa-check"></i><b>4.2.1</b> input each</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="processes.html"><a href="processes.html#output"><i class="fa fa-check"></i><b>4.3</b> Output</a></li>
+<li class="chapter" data-level="4.4" data-path="processes.html"><a href="processes.html#directives"><i class="fa fa-check"></i><b>4.4</b> Directives</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="processes.html"><a href="processes.html#publishdir"><i class="fa fa-check"></i><b>4.4.1</b> publishDir</a></li>
+<li class="chapter" data-level="4.4.2" data-path="processes.html"><a href="processes.html#tag"><i class="fa fa-check"></i><b>4.4.2</b> tag</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="operators.html"><a href="operators.html"><i class="fa fa-check"></i><b>5</b> Operators</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="operators.html"><a href="operators.html#collect"><i class="fa fa-check"></i><b>5.1</b> Collect</a></li>
+<li class="chapter" data-level="5.2" data-path="operators.html"><a href="operators.html#flatten"><i class="fa fa-check"></i><b>5.2</b> flatten</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="configuration-file.html"><a href="configuration-file.html"><i class="fa fa-check"></i><b>6</b> Configuration file</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="configuration-file.html"><a href="configuration-file.html#config-scopes"><i class="fa fa-check"></i><b>6.1</b> Config scopes</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="configuration-file.html"><a href="configuration-file.html#scope-params"><i class="fa fa-check"></i><b>6.1.1</b> Scope params</a></li>
+<li class="chapter" data-level="6.1.2" data-path="configuration-file.html"><a href="configuration-file.html#scope-process"><i class="fa fa-check"></i><b>6.1.2</b> Scope process</a></li>
+<li class="chapter" data-level="6.1.3" data-path="configuration-file.html"><a href="configuration-file.html#scope-executor"><i class="fa fa-check"></i><b>6.1.3</b> Scope executor</a></li>
+<li class="chapter" data-level="6.1.4" data-path="configuration-file.html"><a href="configuration-file.html#configuration-on-uppmax"><i class="fa fa-check"></i><b>6.1.4</b> Configuration on UPPMAX</a></li>
+<li class="chapter" data-level="6.1.5" data-path="configuration-file.html"><a href="configuration-file.html#containers"><i class="fa fa-check"></i><b>6.1.5</b> Containers</a></li>
+<li class="chapter" data-level="6.1.6" data-path="configuration-file.html"><a href="configuration-file.html#config-profiles"><i class="fa fa-check"></i><b>6.1.6</b> Config profiles</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="more-examples.html"><a href="more-examples.html"><i class="fa fa-check"></i><b>7</b> More examples:</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="more-examples.html"><a href="more-examples.html#two-processes"><i class="fa fa-check"></i><b>7.1</b> Two processes</a></li>
+<li class="chapter" data-level="7.2" data-path="more-examples.html"><a href="more-examples.html#two-processes-including-collect"><i class="fa fa-check"></i><b>7.2</b> Two processes including collect</a></li>
+<li class="chapter" data-level="7.3" data-path="more-examples.html"><a href="more-examples.html#two-processes-collect-accept-parameters-from-the-user"><i class="fa fa-check"></i><b>7.3</b> Two processes, collect, accept parameters from the user</a></li>
+<li class="chapter" data-level="7.4" data-path="more-examples.html"><a href="more-examples.html#three-processes"><i class="fa fa-check"></i><b>7.4</b> Three processes</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="resuming-the-pipeline-command-line-interface.html"><a href="resuming-the-pipeline-command-line-interface.html"><i class="fa fa-check"></i><b>8</b> Resuming the pipeline (Command line interface)</a></li>
+<li class="chapter" data-level="9" data-path="nextflow-assigments.html"><a href="nextflow-assigments.html"><i class="fa fa-check"></i><b>9</b> Nextflow assigments</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="nextflow-assigments.html"><a href="nextflow-assigments.html#set-up-the-environment"><i class="fa fa-check"></i><b>9.1</b> Set up the environment</a></li>
+<li class="chapter" data-level="9.2" data-path="nextflow-assigments.html"><a href="nextflow-assigments.html#part-1"><i class="fa fa-check"></i><b>9.2</b> Part 1</a></li>
+<li class="chapter" data-level="9.3" data-path="nextflow-assigments.html"><a href="nextflow-assigments.html#part-2"><i class="fa fa-check"></i><b>9.3</b> Part 2</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="nextflow-assigments.html"><a href="nextflow-assigments.html#part-2.1-build-an-openms-pipeline"><i class="fa fa-check"></i><b>9.3.1</b> Part 2.1 (Build an OpenMS pipeline)</a></li>
+<li class="chapter" data-level="9.3.2" data-path="nextflow-assigments.html"><a href="nextflow-assigments.html#part-2.2-optional-gives-extra-points"><i class="fa fa-check"></i><b>9.3.2</b> Part 2.2 (optional, gives extra points)</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li>Payam Emami ( <li><a href="https://www.nbis.se/">National Bioinformatics Infrastructure Sweden</a></li>)</li>
+<li>Akshai Parakkal Sreenivasan ( <li><a href="https://www.katalog.uu.se/profile/?id=N21-1352">Caramba lab</a></li>)</li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Nextflow</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="nextflow-assigments" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">Chapter 9</span> Nextflow assigments<a href="nextflow-assigments.html#nextflow-assigments" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Here are two assignments for finish the Nextflow part of the course.</p>
+<div id="set-up-the-environment" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Set up the environment<a href="nextflow-assigments.html#set-up-the-environment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>You need to do this every time you start the lap…</p>
+<p>First ssh to Uppmax</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb90-1"><a href="nextflow-assigments.html#cb90-1"></a><span class="fu">ssh</span> <span class="at">-AX</span> youusername@rackham.uppmax.uu.se</span></code></pre></div>
+<p>Make a directory in your userspace</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb91-1"><a href="nextflow-assigments.html#cb91-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> /crex/proj/uppmax2024-2-11/nobackup/<span class="va">$USER</span>/nextflow_lab</span></code></pre></div>
+<p>Navigate to the folder you have created</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb92-1"><a href="nextflow-assigments.html#cb92-1"></a><span class="bu">cd</span> /crex/proj/uppmax2024-2-11/nobackup/<span class="va">$USER</span>/nextflow_lab</span></code></pre></div>
+<p>Load Nexflow</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb93-1"><a href="nextflow-assigments.html#cb93-1"></a><span class="ex">module</span> load bioinfo-tools</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb94-1"><a href="nextflow-assigments.html#cb94-1"></a><span class="ex">module</span> load Nextflow/22.10.1</span></code></pre></div>
+<p>Fix some environmental variables:</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb95-1"><a href="nextflow-assigments.html#cb95-1"></a><span class="bu">export</span> <span class="va">NXF_SINGULARITY_CACHEDIR</span><span class="op">=</span>/crex/proj/uppmax2024-2-11/metabolomics/singularity</span></code></pre></div>
+<p>You are now ready to start!</p>
+<p><strong>The container for both of the following parts is “metaboigniter/course_docker:v5” and we want to use SLURM to run the jobs. </strong></p>
+<p><strong>IMPORTANT: DO NOT remove, change, add anything here and in its subfolders: </strong> /crex/proj/uppmax2024-2-11/metabolomics</p>
+<p><em>For part 1, you should send us the modified main.nf and nextflow.config. For part 2, you will have to send us a main.nf, nextflow.config and a PCA plot!</em></p>
+<p><strong>IMPORTANT: some time Uppmax file system might cause some of the processes to fail, if this happens, rerun the workflow with -resume option. This might actually pass the step that was previously shown as failed!</strong></p>
+</div>
+<div id="part-1" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Part 1<a href="nextflow-assigments.html#part-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this part, we will run a small pipeline together. The pipeline is already in a folder that you need to copy to your personal space. We assume that you are now in <code>nextflow_lab</code></p>
+<p>Copy the pipeline and the configuration file</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb96-1"><a href="nextflow-assigments.html#cb96-1"></a><span class="fu">cp</span> <span class="at">-r</span> /crex/proj/uppmax2024-2-11/metabolomics/xcms_pipeline .</span></code></pre></div>
+<p>Now you have all the required files in your folder. Try to run the pipeline</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb97-1"><a href="nextflow-assigments.html#cb97-1"></a><span class="bu">cd</span> xcms_pipeline </span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb98-1"><a href="nextflow-assigments.html#cb98-1"></a><span class="ex">nextflow</span> main.nf <span class="at">-profile</span> uppmax <span class="at">--project</span> <span class="st">&quot;uppmax2024-2-11&quot;</span> <span class="at">--clusterOptions</span> <span class="st">&quot;-M snowy&quot;</span></span></code></pre></div>
+<p>You can open another terminal window and ssh to Uppmax and use jobinfo to see whether your jobs are running or not! If you realized that won’t run for some steps, it might be because of RAM, CPU, or running time. In the nextflow.config, you can change these parameters!</p>
+<p>Please remember that there is a high chance that Uppmax becomes very slow because the jobs are heavy. So Please consider canceling your jobs if you already know and have a feeling about how Uppmax runs your jobs</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb99-1"><a href="nextflow-assigments.html#cb99-1"></a><span class="ex">scancel</span> <span class="at">-u</span> <span class="va">$USER</span> <span class="at">-M</span> snowy</span></code></pre></div>
+<ul>
+<li>Exercise one: There are some hardcoded parameters part of the pipeline:
+<ul>
+<li><p>If process process_masstrace_detection_pos_xcms we have the following parameters:</p>
+<p><code>peakwidthLow=5</code></p>
+<p><code>peakwidthHigh=10</code></p>
+<p><code>noise=1000</code></p>
+<p><code>polarity=positive</code></p></li>
+</ul></li>
+</ul>
+<p><strong>Can you change the config file so the value of these parameters is set there and fetched here? How can the user pass these parameters to the pipeline? Show the command!</strong></p>
+<p>Tip: Your task is to modify the config file (nextflow.config) so that for example <strong>peakwidthLow=5</strong> can be replaced by <strong>peakwidthLow=$params.peakwidthLow </strong>and** <strong>the value of </strong>peakwidthLow** is set in the config file!</p>
+<p>Help me: <a href="https://www.nextflow.io/docs/latest/config.html#scope-params">params scope</a></p>
+</div>
+<div id="part-2" class="section level2 hasAnchor" number="9.3">
+<h2><span class="header-section-number">9.3</span> Part 2<a href="nextflow-assigments.html#part-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>As talked before the pipeline in the part 1 does mass spectrometry data pre-processing using XCMS software suite. In this part of the exercise, you will need to build a pipeline from scratch that does the same thing using OpenMS. You can of course use the pipeline in part 1 as a template and try to modify it to do that.</p>
+<p><strong>Tip: Use echo to print the shell command executed by the nextflow, to verify the input and output are of desired format. You can pass “-echo true” to the nextflow command or have a directive “echo true” under a process to print for the respective process.</strong></p>
+<div id="part-2.1-build-an-openms-pipeline" class="section level3 hasAnchor" number="9.3.1">
+<h3><span class="header-section-number">9.3.1</span> Part 2.1 (Build an OpenMS pipeline)<a href="nextflow-assigments.html#part-2.1-build-an-openms-pipeline" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This is what you need to do</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Since the process in this specific pipeline need a separate parameter file you will need three additional <strong>file</strong> channels
+<ol style="list-style-type: decimal">
+<li>The first one is used in the FeatureFinder process and is located here: <code>/crex/proj/uppmax2024-2-11/metabolomics/openms_params/FeatureFinder.ini</code></li>
+<li>The second one is for the alignment process and is located here: <code>/crex/proj/uppmax2024-2-11/metabolomics/openms_params/featureAlignment.ini</code></li>
+<li>The third one is for the linker process and is located here: <code>/crex/proj/uppmax2024-2-11/metabolomics/openms_params/featureLinker.ini</code></li>
+</ol></li>
+</ol>
+<p><em>Help me: <a href="https://www.nextflow.io/docs/latest/process.html#input-of-files">File channels</a>, <a href="https://www.nextflow.io/docs/latest/channel.html#frompath">How to create file channels</a></em></p>
+<p>Now that we have our channels up and running, time to create four processes:</p>
+<ol style="list-style-type: decimal">
+<li>Let’s name the first process <code>process_masstrace_detection_pos_OpenMS</code>
+<ol style="list-style-type: decimal">
+<li>This process has two inputs:
+<ol style="list-style-type: decimal">
+<li>The first input is from the mzML files</li>
+<li>The second one is from** <strong>the</strong> feature detection** parameter file. Please remember that The second input should be a type of input that repeats for <strong>each</strong> of the mzML file emitted by the first channel</li>
+</ol></li>
+<li>The output for this process has the same <strong>baseName </strong>as input but it has “.featureXML” extension. The name of the output channel must be alignmentProcess</li>
+<li>And finally, the command needed to run is</li>
+</ol></li>
+</ol>
+<div class="sourceCode" id="cb100"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb100-1"><a href="nextflow-assigments.html#cb100-1"></a><span class="ex">FeatureFinderMetabo</span> <span class="at">-in</span> inputVariable <span class="at">-out</span> inputBaseName.featureXML <span class="at">-ini</span> settingFIleVariable</span></code></pre></div>
+<p>Please note that you need to change <code>inputVariable</code>, <code>inputBaseName</code> and <code>settingFIleVariable</code>! Please also note that the inputs to this tool are given by <code>-in</code>, the outputs by -out and settings by <code>-ini</code>.</p>
+<p>Help me: <a href="https://www.nextflow.io/docs/latest/process.html">processes</a>, <a href="https://www.nextflow.io/docs/latest/process.html#input-repeaters">input each (file)</a>, <a href="https://www.nextflow.io/docs/latest/process.html#script">bash command</a></p>
+<ol start="2" style="list-style-type: decimal">
+<li>The second process is called <code>process_masstrace_alignment_pos_OpenMS</code>
+<ol start="4" style="list-style-type: decimal">
+<li>Similar to the previous process it will get two inputs:
+<ol start="3" style="list-style-type: decimal">
+<li>The first one is the output of <code>process_masstrace_detection_pos_OpenMS</code></li>
+<li>The second one is from the alignment parameter file. Similar to the previous one this input is also repeating!</li>
+</ol></li>
+<li>The output for this process has the same <code>baseName</code> as input but it has <code>.featureXML</code> extension. However, these files are in a different folder (let’s call it <code>out</code>). The output channel must be named <code>LinkerProcess</code></li>
+<li>The command needed is a bit different from the previous one:</li>
+</ol></li>
+</ol>
+<p>This command accepts ALL the featureXML files at <strong>the same time</strong> (look at collect!) and outputs the same number of files. The inputs must be separated by space (remember the join operation in the XCMS pipeline?). The output is the same as input however you need to put the output in a different folder within the process! Think about a simple bash script. You create a folder and join the files in a way that they are written in a separate folder!</p>
+<p>Given three samples, x.featureXML, y.featureXML and z.featureXML, an example of the command is like</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb101-1"><a href="nextflow-assigments.html#cb101-1"></a><span class="fu">mkdir</span> out</span>
+<span id="cb101-2"><a href="nextflow-assigments.html#cb101-2"></a><span class="ex">MapAlignerPoseClustering</span> <span class="at">-in</span> x.featureXML y.featureXML z.featureXMLL <span class="at">-out</span> out/x.featureXMLL out/y.featureXML out/z.featureXML <span class="at">-ini</span> setting.ini</span></code></pre></div>
+<p><strong>Please remember the code above is just an example of a command you run in bash You will have to implement this using Nextflow!</strong></p>
+<p>Please also note that the inputs to this tool are given by <code>-in</code>, the outputs by <code>-out</code> and settings by <code>-ini</code>.</p>
+<p>Finally, this process needs quite a bit of RAM to go forward. Set the memory for this to probably around 10 GB or even more!</p>
+<p>Help me: <a href="https://www.nextflow.io/docs/latest/operator.html#collect">collect</a>, <a href="https://groups.google.com/g/nextflow/c/V7kKJzyZs98">joining in the process!</a>, <a href="https://www.nextflow.io/docs/latest/process.html#memory">memory</a></p>
+<p>Need help!</p>
+<p>Use the pseudo code given below for getting the desired input and output format.<br />
+Use println function from groovy to check the format.</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode numberSource bash hide numberLines"><code class="sourceCode bash"><span id="cb102-1"><a href="nextflow-assigments.html#cb102-1"></a><span class="ex">process</span> dummy_process{</span>
+<span id="cb102-2"><a href="nextflow-assigments.html#cb102-2"></a><span class="ex">input:</span></span>
+<span id="cb102-3"><a href="nextflow-assigments.html#cb102-3"></a><span class="fu">file</span> filefromchannel from input_ch</span>
+<span id="cb102-4"><a href="nextflow-assigments.html#cb102-4"></a></span>
+<span id="cb102-5"><a href="nextflow-assigments.html#cb102-5"></a><span class="ex">script:</span></span>
+<span id="cb102-6"><a href="nextflow-assigments.html#cb102-6"></a><span class="ex">def</span> space_separated = filefromchannel.join<span class="er">(</span><span class="st">&quot; &quot;</span><span class="kw">)</span></span>
+<span id="cb102-7"><a href="nextflow-assigments.html#cb102-7"></a><span class="ex">def</span> string_separated = filefromchannel.join<span class="er">(</span><span class="st">&quot; my_path/&quot;</span><span class="kw">)</span></span>
+<span id="cb102-8"><a href="nextflow-assigments.html#cb102-8"></a></span>
+<span id="cb102-9"><a href="nextflow-assigments.html#cb102-9"></a><span class="ex">println</span> <span class="er">(</span><span class="ex">space_separated</span><span class="kw">)</span> </span>
+<span id="cb102-10"><a href="nextflow-assigments.html#cb102-10"></a><span class="ex">println</span> <span class="er">(</span><span class="ex">string_separated</span><span class="kw">)</span></span>
+<span id="cb102-11"><a href="nextflow-assigments.html#cb102-11"></a><span class="er">}</span></span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>The third process is called <code>process_masstrace_linker_pos_OpenMS</code> and is used to link (merge) multiple files into a single file
+<ol start="7" style="list-style-type: decimal">
+<li>It will get two inputs:
+<ol start="5" style="list-style-type: decimal">
+<li>The output from the alignment</li>
+<li>The parameter file</li>
+</ol></li>
+<li>The output of this process is a single file and must be named “Aggregated.consensusXML” it will be sent over to a channel called “textExport”</li>
+<li>And the command:</li>
+</ol>
+This is similar to the previous step. You need to gather all the inputs separated by space (collect and join!). However, it will only output one file. Given the same three files above an example of the command would be:</li>
+</ol>
+<div class="sourceCode" id="cb103"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb103-1"><a href="nextflow-assigments.html#cb103-1"></a><span class="ex">FeatureLinkerUnlabeledQT</span> <span class="at">-in</span> x.featureXML y.featureXML z.featureXML <span class="at">-out</span> Aggregated.consensusXML <span class="at">-ini</span> setting.ini</span></code></pre></div>
+<p>Please also note that the inputs to this tool are given by <code>-in</code>, the outputs by -out and settings by <code>-ini</code>.</p>
+<p>Finally, this process needs quite a bit of RAM to go forward. Set the memory for this to probably around <code>10 GB</code> or even more!</p>
+<ol start="4" style="list-style-type: decimal">
+<li>Finally the last step which takes the xml formatted output from the previous step and convert it into a csv file. Let’s call this process <code>process_masstrace_exporter_pos_OpenMS</code>
+<ol start="10" style="list-style-type: decimal">
+<li>The input to the process is the output from the previous step</li>
+<li>The output is a single file and must be called <code>Aggregated_clean.csv</code> and sent over to a channel called <code>out</code></li>
+<li>To run the command: This process will run two commands the first one does the conversion and the second one the cleaning. We will only need the last output (<code>Aggregated_clean.csv</code>)</li>
+</ol></li>
+</ol>
+<div class="sourceCode" id="cb104"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb104-1"><a href="nextflow-assigments.html#cb104-1"></a><span class="ex">TextExporter</span> <span class="at">-in</span> input <span class="at">-out</span> Aggregated.csv</span>
+<span id="cb104-2"><a href="nextflow-assigments.html#cb104-2"></a><span class="ex">/usr/bin/readOpenMS.r</span> input=Aggregated.csv output=Aggregated_table.csv</span></code></pre></div>
+<p>Please also note that the inputs to this tool are given by <code>-in</code>, the outputs by <code>-out</code>.</p>
+<p>Remember that this process should publish its result to a specific directory (your choice). It does that by symlink! Change the mode to copy if you want!</p>
+<p>Help me: <a href="https://www.nextflow.io/docs/latest/process.html#publishdir">publish the results</a></p>
+</div>
+<div id="part-2.2-optional-gives-extra-points" class="section level3 hasAnchor" number="9.3.2">
+<h3><span class="header-section-number">9.3.2</span> Part 2.2 (optional, gives extra points)<a href="nextflow-assigments.html#part-2.2-optional-gives-extra-points" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Given the output from the last step of the pipeline, do a PCA on the data. The output of the last step is a csv file (comma separated) and the first column is the header. The missing values are designated by NA.</p>
+<p>Can you add your script (PCA) as an extra node part of the pipeline? You don’t have to use containers, you can use conda or whatever you like! There are R and Python already available in the container, you can also use <a href="https://www.nextflow.io/docs/latest/process.html#conda">conda</a> or <a href="https://www.nextflow.io/docs/latest/process.html#module">modules</a></p>
+<p>If you don’t know what PCA is or how to do it, please let us know!</p>
+<p><strong>If you encounter issues with Uppmax being way too slow or does not do anything, please let up know!</strong></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="resuming-the-pipeline-command-line-interface.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
