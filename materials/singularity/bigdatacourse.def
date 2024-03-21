@@ -1,10 +1,5 @@
 BootStrap: docker
-From: ubuntu:22.04
-
-%runscript
-    echo "This is what happens when you run the container..."
-
-
+From: ubuntu:18.04
 
 %files
     findPeaks.r usr/bin/
@@ -12,6 +7,7 @@ From: ubuntu:22.04
     readOpenMS.r usr/bin/
     xcmsCollect.r usr/bin/
     retCor.r usr/bin/
+    #OpenMS-2.4.0-Debian-Linux-x86_64.deb media/
 
 %post
     # Updating repo
@@ -28,6 +24,8 @@ From: ubuntu:22.04
 
     # Setting timezome, necessary for some codes
     ln -snf /usr/share/zoneinfo/$CONTAINER_TIMEZONE /etc/localtime && echo $CONTAINER_TIMEZONE > /etc/timezone
+
+    #export TZ=Europe/Stockholm && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 
     # Downloading and installing OpenMS
