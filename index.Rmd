@@ -180,7 +180,7 @@ In practice a Nextflow pipeline script is made by joining together different `pr
 
 Processes are executed independently and are isolated from each other, i.e. they do not share a common (writable) state. The only way they can communicate is via asynchronous FIFO queues, called `channels` in Nextflow.
 
-Any process can define one or more channels as input and output. The interaction between these processes, and ultimately the pipeline execution flow itself, is implicitly defined by these input and output declarations.
+Any process can define one or more channels as input and output. The interaction between these processes, and ultimately the pipeline execution flow itself, is defined by workflow declaration.
 
 
 # Channels
@@ -295,7 +295,7 @@ process < name > {
 
 1. Using the directive declarations block you can provide optional settings that will affect the execution of the current process
 2. The input block defines from which channels the process expects to receive data.
-3. The output declaration block allows you to define the channels used by the process to send out the results produced. 
+3. The output declaration block allows you send out the results produced to the channels. 
 4. The `when` declaration allows you to define a condition that must be verified in order to execute the process. 
 5. The script block is a string statement that defines the command that is executed by the process to carry out its task.
 
@@ -308,8 +308,8 @@ For example,
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
 db='database' #1
 
-process justEchoBash {
-echo true #2
+process justdebugBash {
+debug true #2
  script:
  """
  echo $db #3
@@ -318,7 +318,7 @@ echo true #2
 }
 
 process justEchoShell {
-echo true
+debug true
    shell:
    '''
    echo !{db} #4
@@ -362,10 +362,10 @@ The input block follows the syntax shown below:
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
 input:
-  <input qualifier> <input name> [from <source channel>] [attributes]
+  <input qualifier> <input name> 
 ```
 
-An input definition starts with an input qualifier and the input name, followed by the keyword from and the actual channel over which inputs are received. Finally some input optional attributes can be specified. 
+An input definition starts with an input qualifier and then the input name.
 
 The input qualifier declares the type of data to be received. 
 
@@ -381,13 +381,13 @@ The qualifiers available are the ones listed in the following table:
 | tuple     | Lets you handle a group of input values having one of the above qualifiers.                       |
 | each      | Lets you execute the process for each entry in the input collection.                              |
 
-For example, here we are a channel and a process that gets an input the channel and prints the values.
+For example, here we have a channel and a process that gets an input from the channel and prints the values.
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
 num = Channel.from( 1, 2, 3 ) #1
 
 process basicExample {
-echo true
+debug true
  input:
  val x #2
  "echo process job $x" #3
@@ -398,6 +398,7 @@ workflow {           #4
 }
 
 ```
+
 Another way of writing the workflow when there is only one input. Here `num` is the only input channel.
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
@@ -409,10 +410,10 @@ workflow {           #5
 ```
 
 1. Creates a channel of 1,2,3
-2. Set the input of the process to the channel `num`. The type of the channel is `val`.
+2. Set the input of the process from the channel `num`. The type of the channel is `val`.
 3. Runs a simple echo command that writes the value to std out! Remember that to access the input we need to use `$x`.
 4. Executes the workflow containing the process basicExample with `num` as the input channel
-5. When the process declares exactly one input, the pipe | operator can be used to provide inputs to the process, instead of passing it as a parameter.
+5. When the process declares exactly one input, the pipe | operator can be used to provide inputs to the process, instead of passing it as a parameter. (similar to what you learned in Bash piping)
 
 In the above example the process is executed three times, each time a value is received from the channel num and used to process the script. 
 
@@ -435,7 +436,7 @@ Can you create a workflow that reads all the files with `*.mzML` extension in a 
 mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' )
 
 process featureFinder {
-echo true
+debug true
  input:
  file mzML
 
@@ -470,7 +471,7 @@ The each qualifier allows you to repeat the execution of a process for each item
 mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' ) #1
 num = Channel.from( 1, 2, 3 ) #2
 process featureFinder {
-  echo true
+  debug true
 input:
 each x  #3
 file y  #4
@@ -486,8 +487,8 @@ workflow {
 ```
 
 1. Creates a file channel from all `mzML` files in `/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML'`.
-2. Create a value type channel
-3. Define input repeater for the value channel
+2. Create a channel containing numbers
+3. Define input repeater for the values in the channel
 4. Define another input channel from the file channel 
 5. Script that is executed
 6. Workflow with the process featureFinder receving channels `num` and `mzMLFiles`. The order of the input has to be maintained to the order in which the `input` is written in the process. Here `x` receives value from `num` and `y` receives value from `mzMLFiles`.
@@ -513,7 +514,7 @@ The output declaration block allows you to define the channels used by the proce
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
 output:
-<output qualifier> <output name> [into <target channel>[,channel,..]] [attribute [,..]]
+<output qualifier> <output name> [, <option>: <option value>]
 
 ```
 
@@ -552,13 +553,13 @@ workflow {
 
 ```
 
-In the above example the process, when executed, it will create a file channel from `/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML`. The process will then get this channel as an input and creates an output channel `outputChannel` where each file extension has been changed to `featureXML`.
+In the above example the process, when executed, it will create a file channel from `/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML`. The process will then get this channel as an input and creates an output channel `outputChannel` (named in the workflow) where each file extension has been changed to `featureXML`.
 
 1. Creates a channel emitting files.
-2. Use the created channel as an input to the process
-3. create output channel and put the output file in it. The output file is located under `output` directory. `${x.baseName}` gives the name of the file without extension.
+2. Receive value from the input channel.
+3. Send data to output channel. The output file is located under `output` directory. `${x.baseName}` gives the name of the file without extension.
 4. In the bash script, we first create an output folder We then copy the input to the output folder but change its extension. This is obviously a pretty useless command! But you can change this to a more meaningful one!
-5. Receives the output channel from the process.
+5. Sends the input channel to the process and receives the output from the process to a channel.
 
 Create a file called `main_8.nf`
 
@@ -727,7 +728,7 @@ This operator can also be used inside the process. For example,
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
 mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' )
 process featureFinder {
-echo true
+debug true
 
 input:
 file x
@@ -833,7 +834,7 @@ We can then use these two parameters anywhere inside our pipeline. For example:
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
 mzMLFiles = Channel.fromPath( params.mzMLFilesInput ) #1
 process featureFinder {
-echo true
+debug true
 input:
 file x
 
@@ -932,7 +933,7 @@ Create a file called `main_13.nf`
 // This is main.nf
 mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' )
 process featureFinder {
-echo true
+debug true
 input:
 file x
 
@@ -994,7 +995,7 @@ We can later create a file named `nextflow_14.config` with the following content
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
 singularity.enabled = true #1
-process.container="metaboigniter/course_docker:v5" #2
+process.container="bigdatacourse.sif" #2
 ```
 
 1. Instruct Nextflow to use Singularity
@@ -1005,7 +1006,7 @@ We can now create another file ` main_14.nf` with the following content:
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
 mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' )
 process featureFinder {
-echo true
+debug true
 input:
 file x
 
@@ -1030,7 +1031,7 @@ Can you combine the Singularity and Slurm together to run containers using slurm
 
 ```{bash, attr.source='.numberLines',eval=FALSE}
 singularity.enabled = true
-process.container="metaboigniter/course_docker:v5"
+process.container="bigdatacourse.sif"
 process.executor = 'slurm'
 process.clusterOptions = { "-A $params.project ${params.clusterOptions ?: ''}"}
 ```
@@ -1039,7 +1040,7 @@ process.clusterOptions = { "-A $params.project ${params.clusterOptions ?: ''}"}
 ```{bash, attr.source='.numberLines',eval=FALSE}
 mzMLFiles = Channel.fromPath('/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' )
 process featureFinder {
-echo true
+debug true
 input:
 file x
 
@@ -1113,7 +1114,7 @@ Here they are more examples of a bit more complex pipelines
 
 ## Two processes
 
-As said before, you can connect two processes using channels. 
+The pipelines are connected by channels and the order is defined in the workflow
 
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
@@ -1130,7 +1131,7 @@ file "${x.baseName}.featureXML" #1
 
 // This process gets input from featureFinder
 process someotherprocess {
-echo true
+debug true
 input:
 file x #2
 
@@ -1139,13 +1140,13 @@ file x #2
 }
 
 workflow {
-    featureFinder_out = featureFinder(mzMLFiles)
-    someotherprocess(featureFinder_out)
+    featureFinder_out = featureFinder(mzMLFiles) #1
+    someotherprocess(featureFinder_out) #2
 }
 
 ```
 
-In this example, the process `featureFinder` defines an output channel (#1) which is then read by `someotherprocess` to do further processing.
+In this example, the process `featureFinder` sends the output and received by an output channel (#1) which is then sent to `someotherprocess` to do further processing.
 
 
 Create a file called `main_16.nf`
@@ -1169,30 +1170,30 @@ As mentioned above we can instruct Nextflow to emit all the content of a channel
 mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' )
 process featureFinder {
 input:
-file x
+file x 
 output:
-file "${x.baseName}.featureXML"
-"cp $x ${x.baseName}.featureXML"
+file "${x.baseName}.featureXML" #1
 
+"cp $x ${x.baseName}.featureXML"
 }
 
 // This process gets input from featureFinder
 process someotherprocess {
-echo true
+debug true
 input:
-file x  #1
+file x
 
 "echo I got $x from featureFinder"
 
 }
 
 workflow {
-    featureFinder_out = featureFinder(mzMLFiles).collect()
-    someotherprocess(featureFinder_out)
+    featureFinder_out = featureFinder(mzMLFiles).collect() #1
+    someotherprocess(featureFinder_out) #2
 }
 ```
 
-In this example, the process `featureFinder` defines an output channel (#1) which is then read by `someotherprocess` to do further processing. However, `someotherprocess` now has all the data at once because.
+In this example, the process `featureFinder` sends output to an output channel (featureFinder_out) (#1) which is then sent to `someotherprocess` (#2) to do further processing. However, `someotherprocess` now has all the data at once because.
 
 
 Create a file called `main_17.nf`
@@ -1227,7 +1228,7 @@ file "${x.baseName}.featureXML"
 
 // This process gets input from featureFinder
 process someotherprocess {
-echo true
+debug true
 input:
 file x
 
@@ -1274,7 +1275,7 @@ file "${x.baseName}.featureXML"
 }
 // This process gets input from justcopy
 process someotherprocess {
-echo true
+debug true
 input:
 file x
 output:
@@ -1285,7 +1286,7 @@ echo "${params.qc} percent!">> QC.txt
 }
 // This process gets input from someotherprocess
 process lastone {
-echo true
+debug true
 input:
 file x
 """
@@ -1399,14 +1400,19 @@ You are now ready to start!
 
 **The container for both of the following parts is “metaboigniter/course_docker:v5” and we want to use SLURM to run the jobs. **
 
-**IMPORTANT: DO NOT remove, change, add anything here and in its subfolders: ** /crex/proj/uppmax2024-2-11/metabolomics
+**IMPORTANT: DO NOT remove, change or add anything here and in its subfolders: ** /crex/proj/uppmax2024-2-11/metabolomics
 
 
-*For part 1, you should send us the modified main.nf and nextflow.config. For part 2, you will have to send us a main.nf, nextflow.config and a PCA plot!*
+*For part 1, you should send us the modified main.nf, nextflow.config and command used to run*
+*For part 2, you will have to send us a main.nf, nextflow.config and a PCA plot!*
 
-**IMPORTANT: some time Uppmax file system might cause some of the processes to fail, if this happens, rerun the workflow with -resume option. This might actually pass the step that was previously shown as failed!**
+**IMPORTANT: Some time Uppmax file system might cause some of the processes to fail, if this happens, rerun the workflow with -resume option. This might actually pass the step that was previously shown as failed!**
+
+**Use -resume whenever you run the workflow to skip the steps and (save both computational and your time ) which were completed before**
 
 ## Part 1
+
+**For part 1, you should send us the modified main.nf, nextflow.config and the modified command used to run**
 
 In this part, we will run a small pipeline together. The pipeline is already in a folder that you need to copy to your personal space. We assume that you are now in `nextflow_lab`
 
@@ -1428,7 +1434,7 @@ nextflow main.nf -profile uppmax --project "uppmax2024-2-11" --clusterOptions "-
 
 You can open another terminal window and ssh to Uppmax and use jobinfo to see whether your jobs are running or not! If you realized that won’t run for some steps, it might be because of RAM, CPU, or running time. In the nextflow.config, you can change these parameters!
 
-Please remember that there is a high chance that Uppmax becomes very slow because the jobs are heavy. So Please consider canceling your jobs if you already know and have a feeling about how Uppmax runs your jobs
+Please remember that there is a high chance that Uppmax becomes very slow because the jobs are heavy. So please consider canceling your jobs if you already know and have a feeling about how Uppmax runs your jobs
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
 scancel -u $USER -M snowy
@@ -1450,19 +1456,21 @@ scancel -u $USER -M snowy
         `polarity=positive`
 
 
-**Can you change the config file so the value of these parameters is set there and fetched here? How can the user pass these parameters to the pipeline? Show the command!**
+**Can you change the config file so the value of these parameters is set there and fetched here?**
+**Show us how the user can pass these parameters while running nextflow command? Show the command**
 
-Tip: Your task is to modify the config file (nextflow.config) so that for example **peakwidthLow=5** can be replaced by **peakwidthLow=$params.peakwidthLow **and** **the value of **peakwidthLow** is set in the config file!
+Tip: Your task is to modify the config file (nextflow.config) so that for example **peakwidthLow=5** can be replaced by **peakwidthLow=$params.peakwidthLow **and the value of **peakwidthLow** is set in the config file!
 
 Help me: [params scope](https://www.nextflow.io/docs/latest/config.html#scope-params)
 
 
 ## Part 2
+**For part 2, you will have to send us a main.nf, nextflow.config and a PCA plot!**
 
 As talked before the pipeline in the part 1 does mass spectrometry data pre-processing using XCMS software suite. In this part of the exercise, you will need to build a pipeline from scratch that does the same thing using OpenMS. You can of course use the pipeline in part 1 as a template and try to modify it to do that. 
 
 
-**Tip: Use echo to print the shell command executed by the nextflow, to verify the input and output are of desired format. You can pass "-echo true" to the nextflow command or have a directive "echo true" under a process to print for the respective process.**
+**Tip: Use echo to print the shell command executed by the nextflow, to verify the input and output are of desired format. You can pass "-debug true" to the nextflow command or have a directive "debug true" under a process to print for the respective process.**
 
 ### Part 2.1 (Build an OpenMS pipeline)
 
@@ -1470,10 +1478,12 @@ This is what you need to do
 
 
 
-2. Since the process in this specific pipeline need a separate parameter file you will need three additional **file** channels
+* Since the process in this specific pipeline need a separate parameter file you will need three additional **file** channels
     1. The first one is used in the FeatureFinder process and is located here: `/crex/proj/uppmax2024-2-11/metabolomics/openms_params/FeatureFinder.ini`
     2. The second one is for the alignment process and is located here: `/crex/proj/uppmax2024-2-11/metabolomics/openms_params/featureAlignment.ini`
     3. The third one is for the linker process and is located here: `/crex/proj/uppmax2024-2-11/metabolomics/openms_params/featureLinker.ini`
+    
+* You would also needall the  mzML files from this folder "/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/" to a channel.
 
 _Help me: [File channels](https://www.nextflow.io/docs/latest/process.html#input-of-files), [How to create file channels](https://www.nextflow.io/docs/latest/channel.html#frompath)_
 
@@ -1482,7 +1492,7 @@ Now that we have our channels up and running, time to create four processes:
 1. Let’s name the first process `process_masstrace_detection_pos_OpenMS`
     1. This process has two inputs:
         1. The first input is from the mzML files
-        2. The second one is from** **the** feature detection** parameter file. Please remember that The second input should be a type of input that repeats for **each** of the mzML file emitted by the first channel
+        2. The second one is from the **feature detection** parameter file. Please remember that The second input should be a type of input that repeats for **each** of the mzML file emitted by the first channel
     2. The output for this process has the same **baseName **as input but it has “.featureXML” extension. The name of the output channel must be alignmentProcess
     3. And finally, the command needed to run is 
 
@@ -1531,7 +1541,7 @@ Use println function from groovy to check the format.
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="hide"}
 process dummy_process{
 input:
-file filefromchannel from input_ch
+file filefromchannel
 
 script:
 def space_separated = filefromchannel.join(" ")

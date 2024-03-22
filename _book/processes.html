@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2024-03-19" />
+<meta name="date" content="2024-03-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -555,8 +555,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="divider"></li>
+<li>Akshai Parakkal Sreenivasan ( <li><a href="https://caramba.clinic/">Caramba lab</a></li>)</li>
 <li>Payam Emami ( <li><a href="https://www.nbis.se/">National Bioinformatics Infrastructure Sweden</a></li>)</li>
-<li>Akshai Parakkal Sreenivasan ( <li><a href="https://www.katalog.uu.se/profile/?id=N21-1352">Caramba lab</a></li>)</li>
 
 </ul>
 
@@ -600,7 +600,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li>Using the directive declarations block you can provide optional settings that will affect the execution of the current process</li>
 <li>The input block defines from which channels the process expects to receive data.</li>
-<li>The output declaration block allows you to define the channels used by the process to send out the results produced.</li>
+<li>The output declaration block allows you send out the results produced to the channels.</li>
 <li>The <code>when</code> declaration allows you to define a condition that must be verified in order to execute the process.</li>
 <li>The script block is a string statement that defines the command that is executed by the process to carry out its task.</li>
 </ol>
@@ -610,8 +610,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>For example,</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb18-1"><a href="processes.html#cb18-1"></a><span class="va">db</span><span class="op">=</span><span class="st">&#39;database&#39;</span> <span class="co">#1</span></span>
 <span id="cb18-2"><a href="processes.html#cb18-2"></a></span>
-<span id="cb18-3"><a href="processes.html#cb18-3"></a><span class="ex">process</span> justEchoBash {</span>
-<span id="cb18-4"><a href="processes.html#cb18-4"></a><span class="bu">echo</span> true <span class="co">#2</span></span>
+<span id="cb18-3"><a href="processes.html#cb18-3"></a><span class="ex">process</span> justdebugBash {</span>
+<span id="cb18-4"><a href="processes.html#cb18-4"></a><span class="ex">debug</span> true <span class="co">#2</span></span>
 <span id="cb18-5"><a href="processes.html#cb18-5"></a> <span class="ex">script:</span></span>
 <span id="cb18-6"><a href="processes.html#cb18-6"></a> <span class="st">&quot;&quot;&quot;</span></span>
 <span id="cb18-7"><a href="processes.html#cb18-7"></a><span class="st"> echo </span><span class="va">$db</span><span class="st"> #3</span></span>
@@ -620,7 +620,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb18-10"><a href="processes.html#cb18-10"></a><span class="er">}</span></span>
 <span id="cb18-11"><a href="processes.html#cb18-11"></a></span>
 <span id="cb18-12"><a href="processes.html#cb18-12"></a><span class="ex">process</span> justEchoShell {</span>
-<span id="cb18-13"><a href="processes.html#cb18-13"></a><span class="bu">echo</span> true</span>
+<span id="cb18-13"><a href="processes.html#cb18-13"></a><span class="ex">debug</span> true</span>
 <span id="cb18-14"><a href="processes.html#cb18-14"></a>   <span class="ex">shell:</span></span>
 <span id="cb18-15"><a href="processes.html#cb18-15"></a>   <span class="st">&#39;&#39;&#39;</span></span>
 <span id="cb18-16"><a href="processes.html#cb18-16"></a><span class="st">   echo !{db} #4</span></span>
@@ -649,8 +649,8 @@ Now run</p>
 <p>The input block defines from which channels the process expects to receive data. You can only define one input block at a time and it must contain one or more input declarations.</p>
 <p>The input block follows the syntax shown below:</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb21-1"><a href="processes.html#cb21-1"></a><span class="ex">input:</span></span>
-<span id="cb21-2"><a href="processes.html#cb21-2"></a>  <span class="op">&lt;</span>input <span class="ex">qualifier</span><span class="op">&gt;</span> <span class="op">&lt;</span>input name<span class="op">&gt;</span> [from <span class="op">&lt;</span>source channel<span class="op">&gt;</span>] <span class="pp">[</span><span class="ss">attributes</span><span class="pp">]</span></span></code></pre></div>
-<p>An input definition starts with an input qualifier and the input name, followed by the keyword from and the actual channel over which inputs are received. Finally some input optional attributes can be specified.</p>
+<span id="cb21-2"><a href="processes.html#cb21-2"></a>  <span class="op">&lt;</span>input <span class="ex">qualifier</span><span class="op">&gt;</span> <span class="op">&lt;</span>input name<span class="op">&gt;</span> </span></code></pre></div>
+<p>An input definition starts with an input qualifier and then the input name.</p>
 <p>The input qualifier declares the type of data to be received.</p>
 <p>The qualifiers available are the ones listed in the following table:</p>
 <table>
@@ -695,11 +695,11 @@ Now run</p>
 </tr>
 </tbody>
 </table>
-<p>For example, here we are a channel and a process that gets an input the channel and prints the values.</p>
+<p>For example, here we have a channel and a process that gets an input from the channel and prints the values.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb22-1"><a href="processes.html#cb22-1"></a><span class="ex">num</span> = Channel.from<span class="er">(</span> <span class="ex">1,</span> 2, 3 <span class="kw">)</span> <span class="co">#1</span></span>
 <span id="cb22-2"><a href="processes.html#cb22-2"></a></span>
 <span id="cb22-3"><a href="processes.html#cb22-3"></a><span class="ex">process</span> basicExample {</span>
-<span id="cb22-4"><a href="processes.html#cb22-4"></a><span class="bu">echo</span> true</span>
+<span id="cb22-4"><a href="processes.html#cb22-4"></a><span class="ex">debug</span> true</span>
 <span id="cb22-5"><a href="processes.html#cb22-5"></a> <span class="ex">input:</span></span>
 <span id="cb22-6"><a href="processes.html#cb22-6"></a> <span class="ex">val</span> x <span class="co">#2</span></span>
 <span id="cb22-7"><a href="processes.html#cb22-7"></a> <span class="st">&quot;echo process job </span><span class="va">$x</span><span class="st">&quot;</span> <span class="co">#3</span></span>
@@ -715,10 +715,10 @@ Now run</p>
 <span id="cb23-4"><a href="processes.html#cb23-4"></a><span class="er">}</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Creates a channel of 1,2,3</li>
-<li>Set the input of the process to the channel <code>num</code>. The type of the channel is <code>val</code>.</li>
+<li>Set the input of the process from the channel <code>num</code>. The type of the channel is <code>val</code>.</li>
 <li>Runs a simple echo command that writes the value to std out! Remember that to access the input we need to use <code>$x</code>.</li>
 <li>Executes the workflow containing the process basicExample with <code>num</code> as the input channel</li>
-<li>When the process declares exactly one input, the pipe | operator can be used to provide inputs to the process, instead of passing it as a parameter.</li>
+<li>When the process declares exactly one input, the pipe | operator can be used to provide inputs to the process, instead of passing it as a parameter. (similar to what you learned in Bash piping)</li>
 </ol>
 <p>In the above example the process is executed three times, each time a value is received from the channel num and used to process the script.</p>
 <p>Create a file called <code>main_5.nf</code></p>
@@ -730,7 +730,7 @@ Now run</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb26-1"><a href="processes.html#cb26-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
 <span id="cb26-2"><a href="processes.html#cb26-2"></a></span>
 <span id="cb26-3"><a href="processes.html#cb26-3"></a><span class="ex">process</span> featureFinder {</span>
-<span id="cb26-4"><a href="processes.html#cb26-4"></a><span class="bu">echo</span> true</span>
+<span id="cb26-4"><a href="processes.html#cb26-4"></a><span class="ex">debug</span> true</span>
 <span id="cb26-5"><a href="processes.html#cb26-5"></a> <span class="ex">input:</span></span>
 <span id="cb26-6"><a href="processes.html#cb26-6"></a> <span class="fu">file</span> mzML</span>
 <span id="cb26-7"><a href="processes.html#cb26-7"></a></span>
@@ -752,7 +752,7 @@ Now run</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb29-1"><a href="processes.html#cb29-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span> <span class="co">#1</span></span>
 <span id="cb29-2"><a href="processes.html#cb29-2"></a><span class="ex">num</span> = Channel.from<span class="er">(</span> <span class="ex">1,</span> 2, 3 <span class="kw">)</span> <span class="co">#2</span></span>
 <span id="cb29-3"><a href="processes.html#cb29-3"></a><span class="ex">process</span> featureFinder {</span>
-<span id="cb29-4"><a href="processes.html#cb29-4"></a>  <span class="bu">echo</span> true</span>
+<span id="cb29-4"><a href="processes.html#cb29-4"></a>  <span class="ex">debug</span> true</span>
 <span id="cb29-5"><a href="processes.html#cb29-5"></a><span class="ex">input:</span></span>
 <span id="cb29-6"><a href="processes.html#cb29-6"></a><span class="ex">each</span> x  <span class="co">#3</span></span>
 <span id="cb29-7"><a href="processes.html#cb29-7"></a><span class="fu">file</span> y  <span class="co">#4</span></span>
@@ -766,8 +766,8 @@ Now run</p>
 <span id="cb29-15"><a href="processes.html#cb29-15"></a><span class="er">}</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Creates a file channel from all <code>mzML</code> files in <code>/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML'</code>.</li>
-<li>Create a value type channel</li>
-<li>Define input repeater for the value channel</li>
+<li>Create a channel containing numbers</li>
+<li>Define input repeater for the values in the channel</li>
 <li>Define another input channel from the file channel</li>
 <li>Script that is executed</li>
 <li>Workflow with the process featureFinder receving channels <code>num</code> and <code>mzMLFiles</code>. The order of the input has to be maintained to the order in which the <code>input</code> is written in the process. Here <code>x</code> receives value from <code>num</code> and <code>y</code> receives value from <code>mzMLFiles</code>.</li>
@@ -784,7 +784,7 @@ Now run</p>
 <h2><span class="header-section-number">4.3</span> Output<a href="processes.html#output" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The output declaration block allows you to define the channels used by the process to send out the results produced. You can only define one output block at a time and it must contain one or more output declarations.</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb32-1"><a href="processes.html#cb32-1"></a><span class="ex">output:</span></span>
-<span id="cb32-2"><a href="processes.html#cb32-2"></a><span class="op">&lt;</span>output <span class="ex">qualifier</span><span class="op">&gt;</span> <span class="op">&lt;</span>output name<span class="op">&gt;</span> [into <span class="op">&lt;</span>target channel<span class="op">&gt;</span><span class="pp">[</span><span class="ss">,channel,..</span><span class="pp">]</span>] [attribute <span class="pp">[</span><span class="ss">,..</span><span class="pp">]</span>]</span></code></pre></div>
+<span id="cb32-2"><a href="processes.html#cb32-2"></a><span class="op">&lt;</span>output <span class="ex">qualifier</span><span class="op">&gt;</span> <span class="op">&lt;</span>output name<span class="op">&gt;</span> [, <span class="op">&lt;</span>option<span class="op">&gt;</span>: <span class="op">&lt;</span>option value<span class="op">&gt;</span>]</span></code></pre></div>
 <p>The qualifiers that can be used in the output declaration block are the ones listed in the following table:</p>
 <table>
 <colgroup>
@@ -842,13 +842,13 @@ Now run</p>
 <span id="cb33-15"><a href="processes.html#cb33-15"></a>    <span class="ex">output_channel</span> = featureFinder<span class="er">(</span><span class="ex">mzMLFiles</span><span class="kw">)</span> <span class="co">#5</span></span>
 <span id="cb33-16"><a href="processes.html#cb33-16"></a>    <span class="fu">output_channel.view()</span></span>
 <span id="cb33-17"><a href="processes.html#cb33-17"></a><span class="er">}</span></span></code></pre></div>
-<p>In the above example the process, when executed, it will create a file channel from <code>/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML</code>. The process will then get this channel as an input and creates an output channel <code>outputChannel</code> where each file extension has been changed to <code>featureXML</code>.</p>
+<p>In the above example the process, when executed, it will create a file channel from <code>/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML</code>. The process will then get this channel as an input and creates an output channel <code>outputChannel</code> (named in the workflow) where each file extension has been changed to <code>featureXML</code>.</p>
 <ol style="list-style-type: decimal">
 <li>Creates a channel emitting files.</li>
-<li>Use the created channel as an input to the process</li>
-<li>create output channel and put the output file in it. The output file is located under <code>output</code> directory. <code>${x.baseName}</code> gives the name of the file without extension.</li>
+<li>Receive value from the input channel.</li>
+<li>Send data to output channel. The output file is located under <code>output</code> directory. <code>${x.baseName}</code> gives the name of the file without extension.</li>
 <li>In the bash script, we first create an output folder We then copy the input to the output folder but change its extension. This is obviously a pretty useless command! But you can change this to a more meaningful one!</li>
-<li>Receives the output channel from the process.</li>
+<li>Sends the input channel to the process and receives the output from the process to a channel.</li>
 </ol>
 <p>Create a file called <code>main_8.nf</code></p>
 <div class="sourceCode" id="cb34"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb34-1"><a href="processes.html#cb34-1"></a><span class="fu">nano</span> main_8.nf</span></code></pre></div>

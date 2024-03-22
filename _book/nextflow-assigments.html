@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2024-03-19" />
+<meta name="date" content="2024-03-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -555,8 +555,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="divider"></li>
+<li>Akshai Parakkal Sreenivasan ( <li><a href="https://caramba.clinic/">Caramba lab</a></li>)</li>
 <li>Payam Emami ( <li><a href="https://www.nbis.se/">National Bioinformatics Infrastructure Sweden</a></li>)</li>
-<li>Akshai Parakkal Sreenivasan ( <li><a href="https://www.katalog.uu.se/profile/?id=N21-1352">Caramba lab</a></li>)</li>
 
 </ul>
 
@@ -594,12 +594,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb95"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb95-1"><a href="nextflow-assigments.html#cb95-1"></a><span class="bu">export</span> <span class="va">NXF_SINGULARITY_CACHEDIR</span><span class="op">=</span>/crex/proj/uppmax2024-2-11/metabolomics/singularity</span></code></pre></div>
 <p>You are now ready to start!</p>
 <p><strong>The container for both of the following parts is “metaboigniter/course_docker:v5” and we want to use SLURM to run the jobs. </strong></p>
-<p><strong>IMPORTANT: DO NOT remove, change, add anything here and in its subfolders: </strong> /crex/proj/uppmax2024-2-11/metabolomics</p>
-<p><em>For part 1, you should send us the modified main.nf and nextflow.config. For part 2, you will have to send us a main.nf, nextflow.config and a PCA plot!</em></p>
-<p><strong>IMPORTANT: some time Uppmax file system might cause some of the processes to fail, if this happens, rerun the workflow with -resume option. This might actually pass the step that was previously shown as failed!</strong></p>
+<p><strong>IMPORTANT: DO NOT remove, change or add anything here and in its subfolders: </strong> /crex/proj/uppmax2024-2-11/metabolomics</p>
+<p><em>For part 1, you should send us the modified main.nf, nextflow.config and command used to run</em>
+<em>For part 2, you will have to send us a main.nf, nextflow.config and a PCA plot!</em></p>
+<p><strong>IMPORTANT: Some time Uppmax file system might cause some of the processes to fail, if this happens, rerun the workflow with -resume option. This might actually pass the step that was previously shown as failed!</strong></p>
+<p><strong>Use -resume whenever you run the workflow to skip the steps and (save both computational and your time ) which were completed before</strong></p>
 </div>
 <div id="part-1" class="section level2 hasAnchor" number="9.2">
 <h2><span class="header-section-number">9.2</span> Part 1<a href="nextflow-assigments.html#part-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>For part 1, you should send us the modified main.nf, nextflow.config and the modified command used to run</strong></p>
 <p>In this part, we will run a small pipeline together. The pipeline is already in a folder that you need to copy to your personal space. We assume that you are now in <code>nextflow_lab</code></p>
 <p>Copy the pipeline and the configuration file</p>
 <div class="sourceCode" id="cb96"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb96-1"><a href="nextflow-assigments.html#cb96-1"></a><span class="fu">cp</span> <span class="at">-r</span> /crex/proj/uppmax2024-2-11/metabolomics/xcms_pipeline .</span></code></pre></div>
@@ -607,7 +610,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb97"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb97-1"><a href="nextflow-assigments.html#cb97-1"></a><span class="bu">cd</span> xcms_pipeline </span></code></pre></div>
 <div class="sourceCode" id="cb98"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb98-1"><a href="nextflow-assigments.html#cb98-1"></a><span class="ex">nextflow</span> main.nf <span class="at">-profile</span> uppmax <span class="at">--project</span> <span class="st">&quot;uppmax2024-2-11&quot;</span> <span class="at">--clusterOptions</span> <span class="st">&quot;-M snowy&quot;</span></span></code></pre></div>
 <p>You can open another terminal window and ssh to Uppmax and use jobinfo to see whether your jobs are running or not! If you realized that won’t run for some steps, it might be because of RAM, CPU, or running time. In the nextflow.config, you can change these parameters!</p>
-<p>Please remember that there is a high chance that Uppmax becomes very slow because the jobs are heavy. So Please consider canceling your jobs if you already know and have a feeling about how Uppmax runs your jobs</p>
+<p>Please remember that there is a high chance that Uppmax becomes very slow because the jobs are heavy. So please consider canceling your jobs if you already know and have a feeling about how Uppmax runs your jobs</p>
 <div class="sourceCode" id="cb99"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb99-1"><a href="nextflow-assigments.html#cb99-1"></a><span class="ex">scancel</span> <span class="at">-u</span> <span class="va">$USER</span> <span class="at">-M</span> snowy</span></code></pre></div>
 <ul>
 <li>Exercise one: There are some hardcoded parameters part of the pipeline:
@@ -619,25 +622,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>polarity=positive</code></p></li>
 </ul></li>
 </ul>
-<p><strong>Can you change the config file so the value of these parameters is set there and fetched here? How can the user pass these parameters to the pipeline? Show the command!</strong></p>
-<p>Tip: Your task is to modify the config file (nextflow.config) so that for example <strong>peakwidthLow=5</strong> can be replaced by <strong>peakwidthLow=$params.peakwidthLow </strong>and** <strong>the value of </strong>peakwidthLow** is set in the config file!</p>
+<p><strong>Can you change the config file so the value of these parameters is set there and fetched here?</strong>
+<strong>Show us how the user can pass these parameters while running nextflow command? Show the command</strong></p>
+<p>Tip: Your task is to modify the config file (nextflow.config) so that for example <strong>peakwidthLow=5</strong> can be replaced by <strong>peakwidthLow=$params.peakwidthLow </strong>and the value of <strong>peakwidthLow</strong> is set in the config file!</p>
 <p>Help me: <a href="https://www.nextflow.io/docs/latest/config.html#scope-params">params scope</a></p>
 </div>
 <div id="part-2" class="section level2 hasAnchor" number="9.3">
 <h2><span class="header-section-number">9.3</span> Part 2<a href="nextflow-assigments.html#part-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>For part 2, you will have to send us a main.nf, nextflow.config and a PCA plot!</strong></p>
 <p>As talked before the pipeline in the part 1 does mass spectrometry data pre-processing using XCMS software suite. In this part of the exercise, you will need to build a pipeline from scratch that does the same thing using OpenMS. You can of course use the pipeline in part 1 as a template and try to modify it to do that.</p>
-<p><strong>Tip: Use echo to print the shell command executed by the nextflow, to verify the input and output are of desired format. You can pass “-echo true” to the nextflow command or have a directive “echo true” under a process to print for the respective process.</strong></p>
+<p><strong>Tip: Use echo to print the shell command executed by the nextflow, to verify the input and output are of desired format. You can pass “-debug true” to the nextflow command or have a directive “debug true” under a process to print for the respective process.</strong></p>
 <div id="part-2.1-build-an-openms-pipeline" class="section level3 hasAnchor" number="9.3.1">
 <h3><span class="header-section-number">9.3.1</span> Part 2.1 (Build an OpenMS pipeline)<a href="nextflow-assigments.html#part-2.1-build-an-openms-pipeline" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This is what you need to do</p>
-<ol start="2" style="list-style-type: decimal">
+<ul>
 <li>Since the process in this specific pipeline need a separate parameter file you will need three additional <strong>file</strong> channels
 <ol style="list-style-type: decimal">
 <li>The first one is used in the FeatureFinder process and is located here: <code>/crex/proj/uppmax2024-2-11/metabolomics/openms_params/FeatureFinder.ini</code></li>
 <li>The second one is for the alignment process and is located here: <code>/crex/proj/uppmax2024-2-11/metabolomics/openms_params/featureAlignment.ini</code></li>
 <li>The third one is for the linker process and is located here: <code>/crex/proj/uppmax2024-2-11/metabolomics/openms_params/featureLinker.ini</code></li>
 </ol></li>
-</ol>
+<li>You would also needall the mzML files from this folder “/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/” to a channel.</li>
+</ul>
 <p><em>Help me: <a href="https://www.nextflow.io/docs/latest/process.html#input-of-files">File channels</a>, <a href="https://www.nextflow.io/docs/latest/channel.html#frompath">How to create file channels</a></em></p>
 <p>Now that we have our channels up and running, time to create four processes:</p>
 <ol style="list-style-type: decimal">
@@ -646,7 +652,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>This process has two inputs:
 <ol style="list-style-type: decimal">
 <li>The first input is from the mzML files</li>
-<li>The second one is from** <strong>the</strong> feature detection** parameter file. Please remember that The second input should be a type of input that repeats for <strong>each</strong> of the mzML file emitted by the first channel</li>
+<li>The second one is from the <strong>feature detection</strong> parameter file. Please remember that The second input should be a type of input that repeats for <strong>each</strong> of the mzML file emitted by the first channel</li>
 </ol></li>
 <li>The output for this process has the same <strong>baseName </strong>as input but it has “.featureXML” extension. The name of the output channel must be alignmentProcess</li>
 <li>And finally, the command needed to run is</li>
@@ -680,7 +686,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Use println function from groovy to check the format.</p>
 <div class="sourceCode" id="cb102"><pre class="sourceCode numberSource bash hide numberLines"><code class="sourceCode bash"><span id="cb102-1"><a href="nextflow-assigments.html#cb102-1"></a><span class="ex">process</span> dummy_process{</span>
 <span id="cb102-2"><a href="nextflow-assigments.html#cb102-2"></a><span class="ex">input:</span></span>
-<span id="cb102-3"><a href="nextflow-assigments.html#cb102-3"></a><span class="fu">file</span> filefromchannel from input_ch</span>
+<span id="cb102-3"><a href="nextflow-assigments.html#cb102-3"></a><span class="fu">file</span> filefromchannel</span>
 <span id="cb102-4"><a href="nextflow-assigments.html#cb102-4"></a></span>
 <span id="cb102-5"><a href="nextflow-assigments.html#cb102-5"></a><span class="ex">script:</span></span>
 <span id="cb102-6"><a href="nextflow-assigments.html#cb102-6"></a><span class="ex">def</span> space_separated = filefromchannel.join<span class="er">(</span><span class="st">&quot; &quot;</span><span class="kw">)</span></span>

@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2024-03-19" />
+<meta name="date" content="2024-03-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -555,8 +555,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="divider"></li>
+<li>Akshai Parakkal Sreenivasan ( <li><a href="https://caramba.clinic/">Caramba lab</a></li>)</li>
 <li>Payam Emami ( <li><a href="https://www.nbis.se/">National Bioinformatics Infrastructure Sweden</a></li>)</li>
-<li>Akshai Parakkal Sreenivasan ( <li><a href="https://www.katalog.uu.se/profile/?id=N21-1352">Caramba lab</a></li>)</li>
 
 </ul>
 
@@ -580,7 +580,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Here they are more examples of a bit more complex pipelines</p>
 <div id="two-processes" class="section level2 hasAnchor" number="7.1">
 <h2><span class="header-section-number">7.1</span> Two processes<a href="more-examples.html#two-processes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>As said before, you can connect two processes using channels.</p>
+<p>The pipelines are connected by channels and the order is defined in the workflow</p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb74-1"><a href="more-examples.html#cb74-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
 <span id="cb74-2"><a href="more-examples.html#cb74-2"></a><span class="ex">process</span> featureFinder {</span>
 <span id="cb74-3"><a href="more-examples.html#cb74-3"></a><span class="ex">input:</span></span>
@@ -594,7 +594,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb74-11"><a href="more-examples.html#cb74-11"></a></span>
 <span id="cb74-12"><a href="more-examples.html#cb74-12"></a><span class="ex">//</span> This process gets input from featureFinder</span>
 <span id="cb74-13"><a href="more-examples.html#cb74-13"></a><span class="ex">process</span> someotherprocess {</span>
-<span id="cb74-14"><a href="more-examples.html#cb74-14"></a><span class="bu">echo</span> true</span>
+<span id="cb74-14"><a href="more-examples.html#cb74-14"></a><span class="ex">debug</span> true</span>
 <span id="cb74-15"><a href="more-examples.html#cb74-15"></a><span class="ex">input:</span></span>
 <span id="cb74-16"><a href="more-examples.html#cb74-16"></a><span class="fu">file</span> x <span class="co">#2</span></span>
 <span id="cb74-17"><a href="more-examples.html#cb74-17"></a></span>
@@ -603,10 +603,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb74-20"><a href="more-examples.html#cb74-20"></a><span class="er">}</span></span>
 <span id="cb74-21"><a href="more-examples.html#cb74-21"></a></span>
 <span id="cb74-22"><a href="more-examples.html#cb74-22"></a><span class="ex">workflow</span> {</span>
-<span id="cb74-23"><a href="more-examples.html#cb74-23"></a>    <span class="ex">featureFinder_out</span> = featureFinder<span class="er">(</span><span class="ex">mzMLFiles</span><span class="kw">)</span></span>
-<span id="cb74-24"><a href="more-examples.html#cb74-24"></a>    <span class="ex">someotherprocess</span><span class="er">(</span><span class="ex">featureFinder_out</span><span class="kw">)</span></span>
+<span id="cb74-23"><a href="more-examples.html#cb74-23"></a>    <span class="ex">featureFinder_out</span> = featureFinder<span class="er">(</span><span class="ex">mzMLFiles</span><span class="kw">)</span> <span class="co">#1</span></span>
+<span id="cb74-24"><a href="more-examples.html#cb74-24"></a>    <span class="ex">someotherprocess</span><span class="er">(</span><span class="ex">featureFinder_out</span><span class="kw">)</span> <span class="co">#2</span></span>
 <span id="cb74-25"><a href="more-examples.html#cb74-25"></a><span class="er">}</span></span></code></pre></div>
-<p>In this example, the process <code>featureFinder</code> defines an output channel (#1) which is then read by <code>someotherprocess</code> to do further processing.</p>
+<p>In this example, the process <code>featureFinder</code> sends the output and received by an output channel (#1) which is then sent to <code>someotherprocess</code> to do further processing.</p>
 <p>Create a file called <code>main_16.nf</code></p>
 <div class="sourceCode" id="cb75"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb75-1"><a href="more-examples.html#cb75-1"></a><span class="fu">nano</span> main_16.nf</span></code></pre></div>
 <p>Copy the above code to it. Save the file <code>(Ctrl+o enter)</code> and exit <code>(Ctrl+x)</code>
@@ -619,28 +619,28 @@ Now run</p>
 <div class="sourceCode" id="cb77"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb77-1"><a href="more-examples.html#cb77-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
 <span id="cb77-2"><a href="more-examples.html#cb77-2"></a><span class="ex">process</span> featureFinder {</span>
 <span id="cb77-3"><a href="more-examples.html#cb77-3"></a><span class="ex">input:</span></span>
-<span id="cb77-4"><a href="more-examples.html#cb77-4"></a><span class="fu">file</span> x</span>
+<span id="cb77-4"><a href="more-examples.html#cb77-4"></a><span class="fu">file</span> x </span>
 <span id="cb77-5"><a href="more-examples.html#cb77-5"></a><span class="ex">output:</span></span>
-<span id="cb77-6"><a href="more-examples.html#cb77-6"></a><span class="fu">file</span> <span class="st">&quot;</span><span class="va">${x</span><span class="er">.baseName</span><span class="va">}</span><span class="st">.featureXML&quot;</span></span>
-<span id="cb77-7"><a href="more-examples.html#cb77-7"></a><span class="st">&quot;cp </span><span class="va">$x</span><span class="st"> </span><span class="va">${x</span><span class="er">.baseName</span><span class="va">}</span><span class="st">.featureXML&quot;</span></span>
-<span id="cb77-8"><a href="more-examples.html#cb77-8"></a></span>
+<span id="cb77-6"><a href="more-examples.html#cb77-6"></a><span class="fu">file</span> <span class="st">&quot;</span><span class="va">${x</span><span class="er">.baseName</span><span class="va">}</span><span class="st">.featureXML&quot;</span> <span class="co">#1</span></span>
+<span id="cb77-7"><a href="more-examples.html#cb77-7"></a></span>
+<span id="cb77-8"><a href="more-examples.html#cb77-8"></a><span class="st">&quot;cp </span><span class="va">$x</span><span class="st"> </span><span class="va">${x</span><span class="er">.baseName</span><span class="va">}</span><span class="st">.featureXML&quot;</span></span>
 <span id="cb77-9"><a href="more-examples.html#cb77-9"></a><span class="er">}</span></span>
 <span id="cb77-10"><a href="more-examples.html#cb77-10"></a></span>
 <span id="cb77-11"><a href="more-examples.html#cb77-11"></a><span class="ex">//</span> This process gets input from featureFinder</span>
 <span id="cb77-12"><a href="more-examples.html#cb77-12"></a><span class="ex">process</span> someotherprocess {</span>
-<span id="cb77-13"><a href="more-examples.html#cb77-13"></a><span class="bu">echo</span> true</span>
+<span id="cb77-13"><a href="more-examples.html#cb77-13"></a><span class="ex">debug</span> true</span>
 <span id="cb77-14"><a href="more-examples.html#cb77-14"></a><span class="ex">input:</span></span>
-<span id="cb77-15"><a href="more-examples.html#cb77-15"></a><span class="fu">file</span> x  <span class="co">#1</span></span>
+<span id="cb77-15"><a href="more-examples.html#cb77-15"></a><span class="fu">file</span> x</span>
 <span id="cb77-16"><a href="more-examples.html#cb77-16"></a></span>
 <span id="cb77-17"><a href="more-examples.html#cb77-17"></a><span class="st">&quot;echo I got </span><span class="va">$x</span><span class="st"> from featureFinder&quot;</span></span>
 <span id="cb77-18"><a href="more-examples.html#cb77-18"></a></span>
 <span id="cb77-19"><a href="more-examples.html#cb77-19"></a><span class="er">}</span></span>
 <span id="cb77-20"><a href="more-examples.html#cb77-20"></a></span>
 <span id="cb77-21"><a href="more-examples.html#cb77-21"></a><span class="ex">workflow</span> {</span>
-<span id="cb77-22"><a href="more-examples.html#cb77-22"></a>    <span class="ex">featureFinder_out</span> = featureFinder<span class="er">(</span><span class="ex">mzMLFiles</span><span class="kw">)</span><span class="fu">.collect()</span></span>
-<span id="cb77-23"><a href="more-examples.html#cb77-23"></a>    <span class="ex">someotherprocess</span><span class="er">(</span><span class="ex">featureFinder_out</span><span class="kw">)</span></span>
+<span id="cb77-22"><a href="more-examples.html#cb77-22"></a>    <span class="ex">featureFinder_out</span> = featureFinder<span class="er">(</span><span class="ex">mzMLFiles</span><span class="kw">)</span><span class="fu">.collect()</span> <span class="co">#1</span></span>
+<span id="cb77-23"><a href="more-examples.html#cb77-23"></a>    <span class="ex">someotherprocess</span><span class="er">(</span><span class="ex">featureFinder_out</span><span class="kw">)</span> <span class="co">#2</span></span>
 <span id="cb77-24"><a href="more-examples.html#cb77-24"></a><span class="er">}</span></span></code></pre></div>
-<p>In this example, the process <code>featureFinder</code> defines an output channel (#1) which is then read by <code>someotherprocess</code> to do further processing. However, <code>someotherprocess</code> now has all the data at once because.</p>
+<p>In this example, the process <code>featureFinder</code> sends output to an output channel (featureFinder_out) (#1) which is then sent to <code>someotherprocess</code> (#2) to do further processing. However, <code>someotherprocess</code> now has all the data at once because.</p>
 <p>Create a file called <code>main_17.nf</code></p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb78-1"><a href="more-examples.html#cb78-1"></a><span class="fu">nano</span> main_17.nf</span></code></pre></div>
 <p>Copy the above code to it. Save the file <code>(Ctrl+o enter)</code> and exit <code>(Ctrl+x)</code>
@@ -663,7 +663,7 @@ Now run</p>
 <span id="cb80-10"><a href="more-examples.html#cb80-10"></a></span>
 <span id="cb80-11"><a href="more-examples.html#cb80-11"></a><span class="ex">//</span> This process gets input from featureFinder</span>
 <span id="cb80-12"><a href="more-examples.html#cb80-12"></a><span class="ex">process</span> someotherprocess {</span>
-<span id="cb80-13"><a href="more-examples.html#cb80-13"></a><span class="bu">echo</span> true</span>
+<span id="cb80-13"><a href="more-examples.html#cb80-13"></a><span class="ex">debug</span> true</span>
 <span id="cb80-14"><a href="more-examples.html#cb80-14"></a><span class="ex">input:</span></span>
 <span id="cb80-15"><a href="more-examples.html#cb80-15"></a><span class="fu">file</span> x</span>
 <span id="cb80-16"><a href="more-examples.html#cb80-16"></a></span>
@@ -696,7 +696,7 @@ Now run:</p>
 <span id="cb83-8"><a href="more-examples.html#cb83-8"></a><span class="er">}</span></span>
 <span id="cb83-9"><a href="more-examples.html#cb83-9"></a><span class="ex">//</span> This process gets input from justcopy</span>
 <span id="cb83-10"><a href="more-examples.html#cb83-10"></a><span class="ex">process</span> someotherprocess {</span>
-<span id="cb83-11"><a href="more-examples.html#cb83-11"></a><span class="bu">echo</span> true</span>
+<span id="cb83-11"><a href="more-examples.html#cb83-11"></a><span class="ex">debug</span> true</span>
 <span id="cb83-12"><a href="more-examples.html#cb83-12"></a><span class="ex">input:</span></span>
 <span id="cb83-13"><a href="more-examples.html#cb83-13"></a><span class="fu">file</span> x</span>
 <span id="cb83-14"><a href="more-examples.html#cb83-14"></a><span class="ex">output:</span></span>
@@ -707,7 +707,7 @@ Now run:</p>
 <span id="cb83-19"><a href="more-examples.html#cb83-19"></a><span class="er">}</span></span>
 <span id="cb83-20"><a href="more-examples.html#cb83-20"></a><span class="ex">//</span> This process gets input from someotherprocess</span>
 <span id="cb83-21"><a href="more-examples.html#cb83-21"></a><span class="ex">process</span> lastone {</span>
-<span id="cb83-22"><a href="more-examples.html#cb83-22"></a><span class="bu">echo</span> true</span>
+<span id="cb83-22"><a href="more-examples.html#cb83-22"></a><span class="ex">debug</span> true</span>
 <span id="cb83-23"><a href="more-examples.html#cb83-23"></a><span class="ex">input:</span></span>
 <span id="cb83-24"><a href="more-examples.html#cb83-24"></a><span class="fu">file</span> x</span>
 <span id="cb83-25"><a href="more-examples.html#cb83-25"></a><span class="st">&quot;&quot;&quot;</span></span>

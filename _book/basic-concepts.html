@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2024-03-19" />
+<meta name="date" content="2024-03-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -555,8 +555,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="divider"></li>
+<li>Akshai Parakkal Sreenivasan ( <li><a href="https://caramba.clinic/">Caramba lab</a></li>)</li>
 <li>Payam Emami ( <li><a href="https://www.nbis.se/">National Bioinformatics Infrastructure Sweden</a></li>)</li>
-<li>Akshai Parakkal Sreenivasan ( <li><a href="https://www.katalog.uu.se/profile/?id=N21-1352">Caramba lab</a></li>)</li>
 
 </ul>
 
@@ -635,7 +635,7 @@ Run the following command:</p>
 <h2><span class="header-section-number">2.2</span> Processes and channels<a href="basic-concepts.html#processes-and-channels" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In practice a Nextflow pipeline script is made by joining together different <code>processes</code>. Each process can be written in any scripting language that can be executed by the Linux platform (Bash, Perl, Ruby, Python, etc.).</p>
 <p>Processes are executed independently and are isolated from each other, i.e. they do not share a common (writable) state. The only way they can communicate is via asynchronous FIFO queues, called <code>channels</code> in Nextflow.</p>
-<p>Any process can define one or more channels as input and output. The interaction between these processes, and ultimately the pipeline execution flow itself, is implicitly defined by these input and output declarations.</p>
+<p>Any process can define one or more channels as input and output. The interaction between these processes, and ultimately the pipeline execution flow itself, is defined by workflow declaration.</p>
 </div>
 </div>
             </section>
