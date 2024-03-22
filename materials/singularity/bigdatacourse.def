@@ -1,5 +1,5 @@
 BootStrap: docker
-From: ubuntu:18.04
+From: ubuntu:22.04
 
 %files
     findPeaks.r usr/bin/
@@ -13,19 +13,8 @@ From: ubuntu:18.04
     # Updating repo
     apt-get update -y
 
-    # Trial and error commands
-    # echo "LC_ALL=en_US.UTF-8" >> /etc/environment
-    # echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
-    # echo "LANG=en_US.UTF-8" > /etc/locale.conf
-    # apt-get install locales
-    # locale-gen en_US.UTF-8
-    # export DEBIAN_FRONTEND=noninteractive # keeps the env to noninterative, hence removing any input needed during the build
-
-
     # Setting timezome, necessary for some codes
     ln -snf /usr/share/zoneinfo/$CONTAINER_TIMEZONE /etc/localtime && echo $CONTAINER_TIMEZONE > /etc/timezone
-
-    #export TZ=Europe/Stockholm && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 
     # Downloading and installing OpenMS
@@ -36,15 +25,48 @@ From: ubuntu:18.04
 
 
     # Installing R and necessary packages
-    apt install r-base r-base-dev -y
+    # Install R version 4.0
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+    apt-get install software-properties-common -y
+    DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata
+    wget http://archive.ubuntu.com/ubuntu/pool/main/i/icu/libicu66_66.1-2ubuntu2_amd64.deb
+    dpkg -i libicu66_66.1-2ubuntu2_amd64.deb
+    add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/' -y
+    apt install r-base -y
+
+    # Installing necessary packages
     apt-get install libnetcdf-dev -y
     apt-get install libxml2 -y
     apt-get install libxml2-dev -y
+    apt install cmake -y
 
+    Rscript -e 'install.packages(c("XML", "xml2"),Ncpus=12)'
+    Rscript -e 'install.packages("BiocManager",Ncpus=12)'
+    Rscript -e 'BiocManager::install("MSnbase",dep=T,update=FALSE,ask=FALSE,Ncpus=12)'
+    Rscript -e 'BiocManager::install("xcms",force = TRUE,dep=T,update=FALSE,ask=FALSE,Ncpus=12)'
+    Rscript -e 'install.packages("factoextra", INSTALL_opts = "--no-lock")' #Easy PCA plots and visualization
+    Rscript -e 'install.packages("FactoMineR")' #PCA and factor analysis functions
+    Rscript -e 'install.packages("ggplot2")' #Enhanced data visualization
+    Rscript -e 'install.packages("dplyr")' #Data manipulation
+    Rscript -e 'install.packages("gt")' # For creating beautiful tables
+    Rscript -e 'install.packages("gridExtra", INSTALL_opts = "--no-lock")' #Arranging multiple plot grids
+    Rscript -e 'BiocManager::install("PCAtools")'
 
-    # Installing R packages
-    Rscript -e 'install.packages(c("XML", "xml2"))'
-    Rscript -e 'install.packages("BiocManager")'
-    Rscript -e 'BiocManager::install("MSnbase")'
-    Rscript -e 'BiocManager::install("xcms",force = TRUE)'
+    apt install libfontconfig1-dev -y
+    apt install libharfbuzz-dev libfribidi-dev -y
+    apt install libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev -y
+    Rscript -e 'install.packages("textshaping",Ncpus=12)'
+    Rscript -e 'install.packages("tidyverse", INSTALL_opts = "--no-lock",dep=T)'
 
+    Rscript -e 'install.packages("matrixStats",Ncpus=12,dep=T)'
+    Rscript -e 'install.packages("ggfortify",Ncpus=12)'
+    Rscript -e 'install.packages("cluster",Ncpus=12)'
+
+    # Installing python and necessary packages
+    apt-get install python3-pip -y
+    pip install -U scikit-learn
+    pip install numpy
+    pip3 install pandas
+    pip install -U matplotlib
+    pip install seaborn
+    pip install pca
