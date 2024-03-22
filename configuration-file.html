@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2024-03-19" />
+<meta name="date" content="2024-03-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -555,8 +555,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="divider"></li>
+<li>Akshai Parakkal Sreenivasan ( <li><a href="https://caramba.clinic/">Caramba lab</a></li>)</li>
 <li>Payam Emami ( <li><a href="https://www.nbis.se/">National Bioinformatics Infrastructure Sweden</a></li>)</li>
-<li>Akshai Parakkal Sreenivasan ( <li><a href="https://www.katalog.uu.se/profile/?id=N21-1352">Caramba lab</a></li>)</li>
 
 </ul>
 
@@ -620,7 +620,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We can then use these two parameters anywhere inside our pipeline. For example:</p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb52-1"><a href="configuration-file.html#cb52-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="ex">params.mzMLFilesInput</span> <span class="kw">)</span> <span class="co">#1</span></span>
 <span id="cb52-2"><a href="configuration-file.html#cb52-2"></a><span class="ex">process</span> featureFinder {</span>
-<span id="cb52-3"><a href="configuration-file.html#cb52-3"></a><span class="bu">echo</span> true</span>
+<span id="cb52-3"><a href="configuration-file.html#cb52-3"></a><span class="ex">debug</span> true</span>
 <span id="cb52-4"><a href="configuration-file.html#cb52-4"></a><span class="ex">input:</span></span>
 <span id="cb52-5"><a href="configuration-file.html#cb52-5"></a><span class="fu">file</span> x</span>
 <span id="cb52-6"><a href="configuration-file.html#cb52-6"></a></span>
@@ -686,7 +686,7 @@ The executor settings can be defined as shown below:</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb59-1"><a href="configuration-file.html#cb59-1"></a><span class="ex">//</span> This is main.nf</span>
 <span id="cb59-2"><a href="configuration-file.html#cb59-2"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
 <span id="cb59-3"><a href="configuration-file.html#cb59-3"></a><span class="ex">process</span> featureFinder {</span>
-<span id="cb59-4"><a href="configuration-file.html#cb59-4"></a><span class="bu">echo</span> true</span>
+<span id="cb59-4"><a href="configuration-file.html#cb59-4"></a><span class="ex">debug</span> true</span>
 <span id="cb59-5"><a href="configuration-file.html#cb59-5"></a><span class="ex">input:</span></span>
 <span id="cb59-6"><a href="configuration-file.html#cb59-6"></a><span class="fu">file</span> x</span>
 <span id="cb59-7"><a href="configuration-file.html#cb59-7"></a></span>
@@ -724,7 +724,7 @@ OK! This is probably going to take time. Use <code>Ctrl+c</code> to kill Nextflo
 <p>The above command will set the location of the image for Nextflow.</p>
 <p>We can later create a file named <code>nextflow_14.config</code> with the following content</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb64-1"><a href="configuration-file.html#cb64-1"></a><span class="ex">singularity.enabled</span> = true <span class="co">#1</span></span>
-<span id="cb64-2"><a href="configuration-file.html#cb64-2"></a><span class="ex">process.container=</span><span class="st">&quot;metaboigniter/course_docker:v5&quot;</span> <span class="co">#2</span></span></code></pre></div>
+<span id="cb64-2"><a href="configuration-file.html#cb64-2"></a><span class="ex">process.container=</span><span class="st">&quot;bigdatacourse.sif&quot;</span> <span class="co">#2</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Instruct Nextflow to use Singularity</li>
 <li>Sets the name of the image</li>
@@ -732,7 +732,7 @@ OK! This is probably going to take time. Use <code>Ctrl+c</code> to kill Nextflo
 <p>We can now create another file <code>main_14.nf</code> with the following content:</p>
 <div class="sourceCode" id="cb65"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb65-1"><a href="configuration-file.html#cb65-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
 <span id="cb65-2"><a href="configuration-file.html#cb65-2"></a><span class="ex">process</span> featureFinder {</span>
-<span id="cb65-3"><a href="configuration-file.html#cb65-3"></a><span class="bu">echo</span> true</span>
+<span id="cb65-3"><a href="configuration-file.html#cb65-3"></a><span class="ex">debug</span> true</span>
 <span id="cb65-4"><a href="configuration-file.html#cb65-4"></a><span class="ex">input:</span></span>
 <span id="cb65-5"><a href="configuration-file.html#cb65-5"></a><span class="fu">file</span> x</span>
 <span id="cb65-6"><a href="configuration-file.html#cb65-6"></a></span>
@@ -749,12 +749,12 @@ OK! This is probably going to take time. Use <code>Ctrl+c</code> to kill Nextflo
 <h4><span class="header-section-number">6.1.5.1</span> Configuration singularity on Uppmax<a href="configuration-file.html#configuration-singularity-on-uppmax" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Can you combine the Singularity and Slurm together to run containers using slurm? What config file would you create?! How would you run the Nextflow pipeline? Remember to kill Nextflow! ‘Then cancel all of your jobs after you are done!’</p>
 <div class="sourceCode" id="cb67"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb67-1"><a href="configuration-file.html#cb67-1"></a><span class="ex">singularity.enabled</span> = true</span>
-<span id="cb67-2"><a href="configuration-file.html#cb67-2"></a><span class="ex">process.container=</span><span class="st">&quot;metaboigniter/course_docker:v5&quot;</span></span>
+<span id="cb67-2"><a href="configuration-file.html#cb67-2"></a><span class="ex">process.container=</span><span class="st">&quot;bigdatacourse.sif&quot;</span></span>
 <span id="cb67-3"><a href="configuration-file.html#cb67-3"></a><span class="ex">process.executor</span> = <span class="st">&#39;slurm&#39;</span></span>
 <span id="cb67-4"><a href="configuration-file.html#cb67-4"></a><span class="ex">process.clusterOptions</span> = { <span class="st">&quot;-A </span><span class="va">$params</span><span class="st">.project </span><span class="va">${params</span><span class="er">.clusterOptions ?: &#39;&#39;</span><span class="va">}</span><span class="st">&quot;</span>}</span></code></pre></div>
 <div class="sourceCode" id="cb68"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb68-1"><a href="configuration-file.html#cb68-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span><span class="st">&#39;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
 <span id="cb68-2"><a href="configuration-file.html#cb68-2"></a><span class="ex">process</span> featureFinder {</span>
-<span id="cb68-3"><a href="configuration-file.html#cb68-3"></a><span class="bu">echo</span> true</span>
+<span id="cb68-3"><a href="configuration-file.html#cb68-3"></a><span class="ex">debug</span> true</span>
 <span id="cb68-4"><a href="configuration-file.html#cb68-4"></a><span class="ex">input:</span></span>
 <span id="cb68-5"><a href="configuration-file.html#cb68-5"></a><span class="fu">file</span> x</span>
 <span id="cb68-6"><a href="configuration-file.html#cb68-6"></a></span>
