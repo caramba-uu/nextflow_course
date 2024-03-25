@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Basic concepts | Introduction to Nextflow</title>
+  <title>Chapter 9 Assignment 2: Nextflow | Introduction to Nextflow</title>
   <meta name="description" content="This is a short tutorial about Nextflow." />
   <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Basic concepts | Introduction to Nextflow" />
+  <meta property="og:title" content="Chapter 9 Assignment 2: Nextflow | Introduction to Nextflow" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is a short tutorial about Nextflow." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Basic concepts | Introduction to Nextflow" />
+  <meta name="twitter:title" content="Chapter 9 Assignment 2: Nextflow | Introduction to Nextflow" />
   
   <meta name="twitter:description" content="This is a short tutorial about Nextflow." />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="channels.html"/>
+<link rel="prev" href="resuming-the-pipeline-command-line-interface.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -575,67 +575,164 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="basic-concepts" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Basic concepts<a href="basic-concepts.html#basic-concepts" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Nextflow is a reactive workflow framework and a programming DSL that eases the writing of data-intensive computational pipelines.</p>
-<p>It is designed around the idea that the Linux platform is the lingua franca of data science. Linux provides many simple but powerful command-line and scripting tools that, when chained together, facilitate complex data manipulations.</p>
-<p>Nextflow extends this approach, adding the ability to define complex program interactions and a high-level parallel computational environment based on the dataflow programming model.</p>
-<div id="nextflow-scripting" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> Nextflow scripting<a href="basic-concepts.html#nextflow-scripting" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The Nextflow scripting language is an extension of the Groovy programming language. Groovy is a powerful programming language for the Java virtual machine. The Nextflow syntax has been specialized to ease the writing of computational pipelines in a declarative manner.</p>
-<p>Nextflow can execute any piece of Groovy code or use any library for the JVM platform.</p>
-<p>For example,</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r nohide numberLines"><code class="sourceCode r"><span id="cb8-1"><a href="basic-concepts.html#cb8-1"></a>println <span class="st">&quot;Hello, World!&quot;</span> <span class="co">#1</span></span>
-<span id="cb8-2"><a href="basic-concepts.html#cb8-2"></a> </span>
-<span id="cb8-3"><a href="basic-concepts.html#cb8-3"></a>x <span class="ot">=</span> <span class="dv">1</span> <span class="co">#2</span></span>
-<span id="cb8-4"><a href="basic-concepts.html#cb8-4"></a>println x</span>
-<span id="cb8-5"><a href="basic-concepts.html#cb8-5"></a> </span>
-<span id="cb8-6"><a href="basic-concepts.html#cb8-6"></a>x <span class="ot">=</span> new <span class="fu">java.util.Date</span>() <span class="co">#2</span></span>
-<span id="cb8-7"><a href="basic-concepts.html#cb8-7"></a>println x</span>
-<span id="cb8-8"><a href="basic-concepts.html#cb8-8"></a> </span>
-<span id="cb8-9"><a href="basic-concepts.html#cb8-9"></a>x <span class="ot">=</span> <span class="sc">-</span><span class="fl">3.1499392</span> <span class="co">#2</span></span>
-<span id="cb8-10"><a href="basic-concepts.html#cb8-10"></a>println x</span>
-<span id="cb8-11"><a href="basic-concepts.html#cb8-11"></a> </span>
-<span id="cb8-12"><a href="basic-concepts.html#cb8-12"></a>x <span class="ot">=</span> false <span class="co">#2</span></span>
-<span id="cb8-13"><a href="basic-concepts.html#cb8-13"></a>println x</span>
-<span id="cb8-14"><a href="basic-concepts.html#cb8-14"></a> </span>
-<span id="cb8-15"><a href="basic-concepts.html#cb8-15"></a>x <span class="ot">=</span> <span class="st">&quot;Hi&quot;</span> <span class="co">#2</span></span>
-<span id="cb8-16"><a href="basic-concepts.html#cb8-16"></a>println x</span>
-<span id="cb8-17"><a href="basic-concepts.html#cb8-17"></a></span>
-<span id="cb8-18"><a href="basic-concepts.html#cb8-18"></a>myList <span class="ot">=</span> [<span class="dv">1776</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">33</span>, <span class="dv">99</span>, <span class="dv">0</span>, <span class="dv">928734928763</span>] <span class="co">#3</span></span>
-<span id="cb8-19"><a href="basic-concepts.html#cb8-19"></a>println myList</span>
-<span id="cb8-20"><a href="basic-concepts.html#cb8-20"></a></span>
-<span id="cb8-21"><a href="basic-concepts.html#cb8-21"></a>square <span class="ot">=</span> { it <span class="sc">*</span> it } <span class="co">#4</span></span>
-<span id="cb8-22"><a href="basic-concepts.html#cb8-22"></a>println <span class="fu">square</span>(<span class="dv">9</span>)</span>
-<span id="cb8-23"><a href="basic-concepts.html#cb8-23"></a> </span>
-<span id="cb8-24"><a href="basic-concepts.html#cb8-24"></a>printMapClosure <span class="ot">=</span> { key, value <span class="ot">-&gt;</span></span>
-<span id="cb8-25"><a href="basic-concepts.html#cb8-25"></a>   println <span class="st">&quot;$key = $value&quot;</span></span>
-<span id="cb8-26"><a href="basic-concepts.html#cb8-26"></a>} <span class="co">#4</span></span>
-<span id="cb8-27"><a href="basic-concepts.html#cb8-27"></a></span>
-<span id="cb8-28"><a href="basic-concepts.html#cb8-28"></a>map_example<span class="ot">=</span>[ <span class="st">&quot;Yue&quot;</span> <span class="sc">:</span> <span class="st">&quot;Wu&quot;</span>, <span class="st">&quot;Mark&quot;</span> <span class="sc">:</span> <span class="st">&quot;Williams&quot;</span>, <span class="st">&quot;Sudha&quot;</span> <span class="sc">:</span> <span class="st">&quot;Kumari&quot;</span> ] <span class="co">#5</span></span>
-<span id="cb8-29"><a href="basic-concepts.html#cb8-29"></a></span>
-<span id="cb8-30"><a href="basic-concepts.html#cb8-30"></a></span>
-<span id="cb8-31"><a href="basic-concepts.html#cb8-31"></a>[ <span class="st">&quot;Yue&quot;</span> <span class="sc">:</span> <span class="st">&quot;Wu&quot;</span>, <span class="st">&quot;Mark&quot;</span> <span class="sc">:</span> <span class="st">&quot;Williams&quot;</span>, <span class="st">&quot;Sudha&quot;</span> <span class="sc">:</span> <span class="st">&quot;Kumari&quot;</span> ]<span class="fu">.each</span>(printMapClosure) <span class="co">#6</span></span></code></pre></div>
-<ol style="list-style-type: decimal">
-<li>To print something is as easy as using one of the print or println methods</li>
-<li>To define a variable, simply assign a value to it</li>
-<li>A List object can be defined by placing the list items in square brackets</li>
-<li>A closure is a block of code that can be passed as an argument to a function. Thus, you can define a chunk of code and then pass it around as if it were a string or an integer</li>
-<li>Maps are used to store associative arrays or dictionaries. They are unordered collections of heterogeneous, named data</li>
-<li>the method Map.each() can take a closure with two arguments, to which it binds the key and the associated value for each key-value pair in the Map</li>
-</ol>
-<p>To test this, Create a file called <code>main_1.nf</code> using your favorite editor (i use nano)</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb9-1"><a href="basic-concepts.html#cb9-1"></a><span class="fu">nano</span> main_1.nf</span></code></pre></div>
-<p>Copy and paste the script above. Save the file <code>(Ctrl+o enter)</code> and exit <code>(Ctrl+x)</code>
-Run the following command:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb10-1"><a href="basic-concepts.html#cb10-1"></a><span class="ex">nextflow</span> main_1.nf</span></code></pre></div>
-<p>There are many other things that can be done with Groovy scripts. Please have a look at <a href="https://www.nextflow.io/docs/latest/script.html#">Nextflow scripting</a></p>
+<div id="assignment-2-nextflow" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">Chapter 9</span> Assignment 2: Nextflow<a href="assignment-2-nextflow.html#assignment-2-nextflow" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Here are two assignments for finish the Nextflow part of the course.</p>
+<div id="set-up-the-environment" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Set up the environment<a href="assignment-2-nextflow.html#set-up-the-environment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>You need to do this every time you start the lap…</p>
+<p>First ssh to Uppmax</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb92-1"><a href="assignment-2-nextflow.html#cb92-1"></a><span class="fu">ssh</span> <span class="at">-AX</span> youusername@rackham.uppmax.uu.se</span></code></pre></div>
+<p>Make a directory in your userspace</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb93-1"><a href="assignment-2-nextflow.html#cb93-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> /crex/proj/uppmax2024-2-11/nobackup/<span class="va">$USER</span>/nextflow_lab</span></code></pre></div>
+<p>Navigate to the folder you have created</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb94-1"><a href="assignment-2-nextflow.html#cb94-1"></a><span class="bu">cd</span> /crex/proj/uppmax2024-2-11/nobackup/<span class="va">$USER</span>/nextflow_lab</span></code></pre></div>
+<p>Load Nexflow</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb95-1"><a href="assignment-2-nextflow.html#cb95-1"></a><span class="ex">module</span> load bioinfo-tools</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb96-1"><a href="assignment-2-nextflow.html#cb96-1"></a><span class="ex">module</span> load Nextflow/22.10.1</span></code></pre></div>
+<p>Fix some environmental variables:</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb97-1"><a href="assignment-2-nextflow.html#cb97-1"></a><span class="bu">export</span> <span class="va">NXF_SINGULARITY_CACHEDIR</span><span class="op">=</span>/crex/proj/uppmax2024-2-11/metabolomics/singularity</span></code></pre></div>
+<p>You are now ready to start!</p>
+<p><strong>The container for both of the following parts is “metaboigniter/course_docker:v5” and we want to use SLURM to run the jobs. </strong></p>
+<p><strong>IMPORTANT: DO NOT remove, change or add anything here and in its subfolders: </strong> /crex/proj/uppmax2024-2-11/metabolomics</p>
+<p><em>For part 1, you should send us the modified main.nf, nextflow.config and command used to run</em>
+<em>For part 2, you will have to send us a main.nf, nextflow.config and a PCA plot!</em></p>
+<p><strong>IMPORTANT: Some time Uppmax file system might cause some of the processes to fail, if this happens, rerun the workflow with -resume option. This might actually pass the step that was previously shown as failed!</strong></p>
+<p><strong>Use -resume whenever you run the workflow to skip the steps and (save both computational and your time ) which were completed before</strong></p>
 </div>
-<div id="processes-and-channels" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Processes and channels<a href="basic-concepts.html#processes-and-channels" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In practice a Nextflow pipeline script is made by joining together different <code>processes</code>. Each process can be written in any scripting language that can be executed by the Linux platform (Bash, Perl, Ruby, Python, etc.).</p>
-<p>Processes are executed independently and are isolated from each other, i.e. they do not share a common (writable) state. The only way they can communicate is via asynchronous FIFO queues, called <code>channels</code> in Nextflow.</p>
-<p>Any process can define one or more channels as input and output. The interaction between these processes, and ultimately the pipeline execution flow itself, is defined by workflow declaration.</p>
+<div id="part-1" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Part 1<a href="assignment-2-nextflow.html#part-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>For part 1, you should send us the modified main.nf, nextflow.config and the modified command used to run</strong></p>
+<p>In this part, we will run a small pipeline together. The pipeline is already in a folder that you need to copy to your personal space. We assume that you are now in <code>nextflow_lab</code></p>
+<p>Copy the pipeline and the configuration file</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb98-1"><a href="assignment-2-nextflow.html#cb98-1"></a><span class="fu">cp</span> <span class="at">-r</span> /crex/proj/uppmax2024-2-11/metabolomics/xcms_pipeline .</span></code></pre></div>
+<p>Now you have all the required files in your folder. Try to run the pipeline</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb99-1"><a href="assignment-2-nextflow.html#cb99-1"></a><span class="bu">cd</span> xcms_pipeline </span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb100-1"><a href="assignment-2-nextflow.html#cb100-1"></a><span class="ex">nextflow</span> main.nf <span class="at">-profile</span> uppmax <span class="at">--project</span> <span class="st">&quot;uppmax2024-2-11&quot;</span> <span class="at">--clusterOptions</span> <span class="st">&quot;-M snowy&quot;</span></span></code></pre></div>
+<p>You can open another terminal window and ssh to Uppmax and use jobinfo to see whether your jobs are running or not! If you realized that won’t run for some steps, it might be because of RAM, CPU, or running time. In the nextflow.config, you can change these parameters!</p>
+<p>Please remember that there is a high chance that Uppmax becomes very slow because the jobs are heavy. So please consider canceling your jobs if you already know and have a feeling about how Uppmax runs your jobs</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb101-1"><a href="assignment-2-nextflow.html#cb101-1"></a><span class="ex">scancel</span> <span class="at">-u</span> <span class="va">$USER</span> <span class="at">-M</span> snowy</span></code></pre></div>
+<ul>
+<li>Exercise one: There are some hardcoded parameters part of the pipeline:
+<ul>
+<li><p>If process process_masstrace_detection_pos_xcms we have the following parameters:</p>
+<p><code>peakwidthLow=5</code></p>
+<p><code>peakwidthHigh=10</code></p>
+<p><code>noise=1000</code></p>
+<p><code>polarity=positive</code></p></li>
+</ul></li>
+</ul>
+<p><strong>Can you change the config file so the value of these parameters is set there and fetched here?</strong>
+<strong>Show us how the user can pass these parameters while running nextflow command? Show the command</strong></p>
+<p>Tip: Your task is to modify the config file (nextflow.config) so that for example <strong>peakwidthLow=5</strong> can be replaced by <strong>peakwidthLow=$params.peakwidthLow </strong>and the value of <strong>peakwidthLow</strong> is set in the config file!</p>
+<p>Help me: <a href="https://www.nextflow.io/docs/latest/config.html#scope-params">params scope</a></p>
+</div>
+<div id="part-2" class="section level2 hasAnchor" number="9.3">
+<h2><span class="header-section-number">9.3</span> Part 2<a href="assignment-2-nextflow.html#part-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>For part 2, you will have to send us a main.nf, nextflow.config and a PCA plot!</strong></p>
+<p>As talked before the pipeline in the part 1 does mass spectrometry data pre-processing using XCMS software suite. In this part of the exercise, you will need to build a pipeline from scratch that does the same thing using OpenMS. You can of course use the pipeline in part 1 as a template and try to modify it to do that.</p>
+<p><strong>Tip: Use echo to print the shell command executed by the nextflow, to verify the input and output are of desired format. You can pass “-debug true” to the nextflow command or have a directive “debug true” under a process to print for the respective process.</strong></p>
+<div id="part-2.1-build-an-openms-pipeline" class="section level3 hasAnchor" number="9.3.1">
+<h3><span class="header-section-number">9.3.1</span> Part 2.1 (Build an OpenMS pipeline)<a href="assignment-2-nextflow.html#part-2.1-build-an-openms-pipeline" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This is what you need to do</p>
+<ul>
+<li>Since the process in this specific pipeline need a separate parameter file you will need three additional <strong>file</strong> channels
+<ol style="list-style-type: decimal">
+<li>The first one is used in the FeatureFinder process and is located here: <code>/crex/proj/uppmax2024-2-11/metabolomics/openms_params/FeatureFinder.ini</code></li>
+<li>The second one is for the alignment process and is located here: <code>/crex/proj/uppmax2024-2-11/metabolomics/openms_params/featureAlignment.ini</code></li>
+<li>The third one is for the linker process and is located here: <code>/crex/proj/uppmax2024-2-11/metabolomics/openms_params/featureLinker.ini</code></li>
+</ol></li>
+<li>You would also needall the mzML files from this folder “/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/” to a channel.</li>
+</ul>
+<p><em>Help me: <a href="https://www.nextflow.io/docs/latest/process.html#input-of-files">File channels</a>, <a href="https://www.nextflow.io/docs/latest/channel.html#frompath">How to create file channels</a></em></p>
+<p>Now that we have our channels up and running, time to create four processes:</p>
+<ol style="list-style-type: decimal">
+<li>Let’s name the first process <code>process_masstrace_detection_pos_OpenMS</code>
+<ol style="list-style-type: decimal">
+<li>This process has two inputs:
+<ol style="list-style-type: decimal">
+<li>The first input is from the mzML files</li>
+<li>The second one is from the <strong>feature detection</strong> parameter file. Please remember that The second input should be a type of input that repeats for <strong>each</strong> of the mzML file emitted by the first channel</li>
+</ol></li>
+<li>The output for this process has the same <strong>baseName </strong>as input but it has “.featureXML” extension. The name of the output channel must be alignmentProcess</li>
+<li>And finally, the command needed to run is</li>
+</ol></li>
+</ol>
+<div class="sourceCode" id="cb102"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb102-1"><a href="assignment-2-nextflow.html#cb102-1"></a><span class="ex">FeatureFinderMetabo</span> <span class="at">-in</span> inputVariable <span class="at">-out</span> inputBaseName.featureXML <span class="at">-ini</span> settingFIleVariable</span></code></pre></div>
+<p>Please note that you need to change <code>inputVariable</code>, <code>inputBaseName</code> and <code>settingFIleVariable</code>! Please also note that the inputs to this tool are given by <code>-in</code>, the outputs by -out and settings by <code>-ini</code>.</p>
+<p>Help me: <a href="https://www.nextflow.io/docs/latest/process.html">processes</a>, <a href="https://www.nextflow.io/docs/latest/process.html#input-repeaters">input each (file)</a>, <a href="https://www.nextflow.io/docs/latest/process.html#script">bash command</a></p>
+<ol start="2" style="list-style-type: decimal">
+<li>The second process is called <code>process_masstrace_alignment_pos_OpenMS</code>
+<ol start="4" style="list-style-type: decimal">
+<li>Similar to the previous process it will get two inputs:
+<ol start="3" style="list-style-type: decimal">
+<li>The first one is the output of <code>process_masstrace_detection_pos_OpenMS</code></li>
+<li>The second one is from the alignment parameter file. Similar to the previous one this input is also repeating!</li>
+</ol></li>
+<li>The output for this process has the same <code>baseName</code> as input but it has <code>.featureXML</code> extension. However, these files are in a different folder (let’s call it <code>out</code>). The output channel must be named <code>LinkerProcess</code></li>
+<li>The command needed is a bit different from the previous one:</li>
+</ol></li>
+</ol>
+<p>This command accepts ALL the featureXML files at <strong>the same time</strong> (look at collect!) and outputs the same number of files. The inputs must be separated by space (remember the join operation in the XCMS pipeline?). The output is the same as input however you need to put the output in a different folder within the process! Think about a simple bash script. You create a folder and join the files in a way that they are written in a separate folder!</p>
+<p>Given three samples, x.featureXML, y.featureXML and z.featureXML, an example of the command is like</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb103-1"><a href="assignment-2-nextflow.html#cb103-1"></a><span class="fu">mkdir</span> out</span>
+<span id="cb103-2"><a href="assignment-2-nextflow.html#cb103-2"></a><span class="ex">MapAlignerPoseClustering</span> <span class="at">-in</span> x.featureXML y.featureXML z.featureXMLL <span class="at">-out</span> out/x.featureXMLL out/y.featureXML out/z.featureXML <span class="at">-ini</span> setting.ini</span></code></pre></div>
+<p><strong>Please remember the code above is just an example of a command you run in bash You will have to implement this using Nextflow!</strong></p>
+<p>Please also note that the inputs to this tool are given by <code>-in</code>, the outputs by <code>-out</code> and settings by <code>-ini</code>.</p>
+<p>Finally, this process needs quite a bit of RAM to go forward. Set the memory for this to probably around 10 GB or even more!</p>
+<p>Help me: <a href="https://www.nextflow.io/docs/latest/operator.html#collect">collect</a>, <a href="https://groups.google.com/g/nextflow/c/V7kKJzyZs98">joining in the process!</a>, <a href="https://www.nextflow.io/docs/latest/process.html#memory">memory</a></p>
+<p>Need help!</p>
+<p>Use the pseudo code given below for getting the desired input and output format.<br />
+Use println function from groovy to check the format.</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode numberSource bash hide numberLines"><code class="sourceCode bash"><span id="cb104-1"><a href="assignment-2-nextflow.html#cb104-1"></a><span class="ex">process</span> dummy_process{</span>
+<span id="cb104-2"><a href="assignment-2-nextflow.html#cb104-2"></a><span class="ex">input:</span></span>
+<span id="cb104-3"><a href="assignment-2-nextflow.html#cb104-3"></a><span class="fu">file</span> filefromchannel</span>
+<span id="cb104-4"><a href="assignment-2-nextflow.html#cb104-4"></a></span>
+<span id="cb104-5"><a href="assignment-2-nextflow.html#cb104-5"></a><span class="ex">script:</span></span>
+<span id="cb104-6"><a href="assignment-2-nextflow.html#cb104-6"></a><span class="ex">def</span> space_separated = filefromchannel.join<span class="er">(</span><span class="st">&quot; &quot;</span><span class="kw">)</span></span>
+<span id="cb104-7"><a href="assignment-2-nextflow.html#cb104-7"></a><span class="ex">def</span> string_separated = filefromchannel.join<span class="er">(</span><span class="st">&quot; my_path/&quot;</span><span class="kw">)</span></span>
+<span id="cb104-8"><a href="assignment-2-nextflow.html#cb104-8"></a></span>
+<span id="cb104-9"><a href="assignment-2-nextflow.html#cb104-9"></a><span class="ex">println</span> <span class="er">(</span><span class="ex">space_separated</span><span class="kw">)</span> </span>
+<span id="cb104-10"><a href="assignment-2-nextflow.html#cb104-10"></a><span class="ex">println</span> <span class="er">(</span><span class="ex">string_separated</span><span class="kw">)</span></span>
+<span id="cb104-11"><a href="assignment-2-nextflow.html#cb104-11"></a><span class="er">}</span></span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>The third process is called <code>process_masstrace_linker_pos_OpenMS</code> and is used to link (merge) multiple files into a single file
+<ol start="7" style="list-style-type: decimal">
+<li>It will get two inputs:
+<ol start="5" style="list-style-type: decimal">
+<li>The output from the alignment</li>
+<li>The parameter file</li>
+</ol></li>
+<li>The output of this process is a single file and must be named “Aggregated.consensusXML” it will be sent over to a channel called “textExport”</li>
+<li>And the command:</li>
+</ol>
+This is similar to the previous step. You need to gather all the inputs separated by space (collect and join!). However, it will only output one file. Given the same three files above an example of the command would be:</li>
+</ol>
+<div class="sourceCode" id="cb105"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb105-1"><a href="assignment-2-nextflow.html#cb105-1"></a><span class="ex">FeatureLinkerUnlabeledQT</span> <span class="at">-in</span> x.featureXML y.featureXML z.featureXML <span class="at">-out</span> Aggregated.consensusXML <span class="at">-ini</span> setting.ini</span></code></pre></div>
+<p>Please also note that the inputs to this tool are given by <code>-in</code>, the outputs by -out and settings by <code>-ini</code>.</p>
+<p>Finally, this process needs quite a bit of RAM to go forward. Set the memory for this to probably around <code>10 GB</code> or even more!</p>
+<ol start="4" style="list-style-type: decimal">
+<li>Finally the last step which takes the xml formatted output from the previous step and convert it into a csv file. Let’s call this process <code>process_masstrace_exporter_pos_OpenMS</code>
+<ol start="10" style="list-style-type: decimal">
+<li>The input to the process is the output from the previous step</li>
+<li>The output is a single file and must be called <code>Aggregated_clean.csv</code> and sent over to a channel called <code>out</code></li>
+<li>To run the command: This process will run two commands the first one does the conversion and the second one the cleaning. We will only need the last output (<code>Aggregated_clean.csv</code>)</li>
+</ol></li>
+</ol>
+<div class="sourceCode" id="cb106"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb106-1"><a href="assignment-2-nextflow.html#cb106-1"></a><span class="ex">TextExporter</span> <span class="at">-in</span> input <span class="at">-out</span> Aggregated.csv</span>
+<span id="cb106-2"><a href="assignment-2-nextflow.html#cb106-2"></a><span class="ex">/usr/bin/readOpenMS.r</span> input=Aggregated.csv output=Aggregated_table.csv</span></code></pre></div>
+<p>Please also note that the inputs to this tool are given by <code>-in</code>, the outputs by <code>-out</code>.</p>
+<p>Remember that this process should publish its result to a specific directory (your choice). It does that by symlink! Change the mode to copy if you want!</p>
+<p>Help me: <a href="https://www.nextflow.io/docs/latest/process.html#publishdir">publish the results</a></p>
+</div>
+<div id="part-2.2-optional-gives-extra-points" class="section level3 hasAnchor" number="9.3.2">
+<h3><span class="header-section-number">9.3.2</span> Part 2.2 (optional, gives extra points)<a href="assignment-2-nextflow.html#part-2.2-optional-gives-extra-points" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Given the output from the last step of the pipeline, do a PCA on the data. The output of the last step is a csv file (comma separated) and the first column is the header. The missing values are designated by NA.</p>
+<p>Can you add your script (PCA) as an extra node part of the pipeline? You don’t have to use containers, you can use conda or whatever you like! There are R and Python already available in the container, you can also use <a href="https://www.nextflow.io/docs/latest/process.html#conda">conda</a> or <a href="https://www.nextflow.io/docs/latest/process.html#module">modules</a></p>
+<p>If you don’t know what PCA is or how to do it, please let us know!</p>
+<p><strong>If you encounter issues with Uppmax being way too slow or does not do anything, please let up know!</strong></p>
+
+</div>
 </div>
 </div>
             </section>
@@ -643,8 +740,8 @@ Run the following command:</p>
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="channels.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="resuming-the-pipeline-command-line-interface.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

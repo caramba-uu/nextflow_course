@@ -41,3 +41,5 @@ assignment-2-optional-gives-extra-points
 part-2.1-build-an-openms-pipeline
 part-2.2-optional-gives-extra-points
 change
+assignments-2-nextflow
+assignment-2-nextflow
