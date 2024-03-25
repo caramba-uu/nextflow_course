@@ -689,6 +689,13 @@ nextflow main_10.nf
 
 What do you see? What is the difference to a process without a tag?
 
+Now let's clean up the cache produced by Nextflow using the clean command 
+```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
+nextflow clean -f
+```
+This removes all the cache files and saves space on the disk.
+
+
 # Operators
 
 Nextflow operators are methods that allow you to connect channels to each other or to transform values emitted by a channel applying some user provided rules. There is a large number of operators that can be seen [here](https://www.nextflow.io/docs/latest/operator.html). We go through some of them!
@@ -1315,7 +1322,12 @@ Copy the above code to it. Save the file `(Ctrl+o enter)` and exit `(Ctrl+x)`
 Now run:
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-nextflow main_18.nf --inputmzml "/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML" --qc 100
+nextflow main_19.nf --inputmzml "/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML" --qc 100
+```
+
+Now let's clean up the cache produced by Nextflow using the clean command 
+```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
+nextflow clean -f
 ```
 
 # Resuming the pipeline (Command line interface)
@@ -1354,7 +1366,7 @@ Using this command, the already successfully executed processes will not be reru
 
 You can see the full description of Nextflow CLI [here](https://www.nextflow.io/docs/latest/cli.html)
 
-# Nextflow assigments
+# Assignments 2: Nextflow
 
 Here are two assignments for finish the Nextflow part of the course.
 
