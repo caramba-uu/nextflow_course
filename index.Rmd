@@ -1366,7 +1366,7 @@ Using this command, the already successfully executed processes will not be reru
 
 You can see the full description of Nextflow CLI [here](https://www.nextflow.io/docs/latest/cli.html)
 
-# Assignments 2: Nextflow
+# Assignment 2: Nextflow
 
 Here are two assignments for finish the Nextflow part of the course.
 
