@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
   echo = TRUE)
 ```
 ```{r htmlTemp3, echo=FALSE, eval=TRUE}
-install.packages("readr")
+# install.packages("readr") # Enable this the first time to install the package
 codejs <- readr::read_lines("js/codefolding.js")
 collapsejs <- readr::read_lines("js/collapse.js")
 transitionjs <- readr::read_lines("js/transition.js")
@@ -694,6 +694,54 @@ Now let's clean up the cache produced by Nextflow using the clean command
 nextflow clean -f
 ```
 This removes all the cache files and saves space on the disk.
+
+# Workflow
+Workflow connects process and channels together. The dataflow logic is executed here. The workflow definition starts with the keyword `workflow`, followed by an optional name, and finally the workflow body delimited by curly braces. The logic is written inside the curly bracket. The order in which a task is executed is determined only by its dependencies, so a task will be executed as soon as all of its required inputs are available.  
+```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
+workflow workflowname{
+output_channel1 = example_workflow()
+output_channel2 = example_workflow2(output_channel1)
+output_channel2.view()
+}
+```
+
+Channels can be passed and received in the workflow using
+```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
+workflow {
+output_channel = example_workflow(input_channel)
+}
+```
+
+Operators can be applied to the input or output channel. For example
+```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
+workflow {
+output_channel = example_workflow(input_channel).collect() #1
+}
+```
+1. Operator `collect()` is applied to the data coming from the process `example_workflow`
+
+Multiple channels can be provided as input and also received as
+```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
+workflow {
+(output_channel1,output_channel2) = example_workflow(input_channel1,input_channel2)
+}
+```
+
+
+## Subworkflows
+A named workflow is a “subworkflow” that can be invoked from other workflows. For example:
+```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
+workflow my_pipeline { #1
+    foo()
+    bar( foo.out.collect() )
+}
+
+workflow {
+    my_pipeline()
+}
+```
+
+1. Name of the subworkflow here is `my_pipeline`
 
 
 # Operators
@@ -1412,15 +1460,20 @@ You are now ready to start!
 
 **The container for both of the following parts is “metaboigniter/course_docker:v5” and we want to use SLURM to run the jobs. **
 
-**IMPORTANT: DO NOT remove, change or add anything here and in its subfolders: ** /crex/proj/uppmax2024-2-11/metabolomics
+**IMPORTANT: DO NOT remove, change or add anything here and in its subfolders: ** /crex/proj/uppmax2024-2-11/metabolomics  
 
 
-*For part 1, you should send us the modified main.nf, nextflow.config and command used to run*
-*For part 2, you will have to send us a main.nf, nextflow.config and a PCA plot!*
+*For part 1, you should send us the modified main.nf, nextflow.config and command used to run*  
+*For part 2, you will have to send us a main.nf, nextflow.config and a PCA plot!*  
 
 **IMPORTANT: Some time Uppmax file system might cause some of the processes to fail, if this happens, rerun the workflow with -resume option. This might actually pass the step that was previously shown as failed!**
 
-**Use -resume whenever you run the workflow to skip the steps and (save both computational and your time ) which were completed before**
+**Use -resume whenever you run the workflow to skip the steps and (save both computational and your time ) which were completed before**  
+For example
+```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
+nextflow yourpipeline.nf -profile uppmax --project "uppmax2024-2-11" --clusterOptions "-M snowy" -resume
+```
+
 
 ## Part 1
 
@@ -1445,6 +1498,11 @@ nextflow main.nf -profile uppmax --project "uppmax2024-2-11" --clusterOptions "-
 ```
 
 You can open another terminal window and ssh to Uppmax and use jobinfo to see whether your jobs are running or not! If you realized that won’t run for some steps, it might be because of RAM, CPU, or running time. In the nextflow.config, you can change these parameters!
+
+You can the jobinfo by logging in to uppmax via ssh using another termial.
+```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
+jobinfo -u $USER -M snowy
+```
 
 Please remember that there is a high chance that Uppmax becomes very slow because the jobs are heavy. So please consider canceling your jobs if you already know and have a feeling about how Uppmax runs your jobs
 
@@ -1483,6 +1541,13 @@ As talked before the pipeline in the part 1 does mass spectrometry data pre-proc
 
 
 **Tip: Use echo to print the shell command executed by the nextflow, to verify the input and output are of desired format. You can pass "-debug true" to the nextflow command or have a directive "debug true" under a process to print for the respective process.**
+
+When running your pipeline, remember to use these flags and the config file from the part1 `-profile uppmax --project "uppmax2024-2-11" --clusterOptions "-M snowy"`.
+For example
+```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
+nextflow yourpipeline.nf -profile uppmax --project "uppmax2024-2-11" --clusterOptions "-M snowy"
+```
+
 
 ### Part 2.1 (Build an OpenMS pipeline)
 
