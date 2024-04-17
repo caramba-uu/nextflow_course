@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Introduction to Nextflow</title>
+  <title>Chapter 5 Workflow | Introduction to Nextflow</title>
   <meta name="description" content="This is a short tutorial about Nextflow." />
   <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Introduction to Nextflow" />
+  <meta property="og:title" content="Chapter 5 Workflow | Introduction to Nextflow" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is a short tutorial about Nextflow." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Introduction to Nextflow" />
+  <meta name="twitter:title" content="Chapter 5 Workflow | Introduction to Nextflow" />
   
   <meta name="twitter:description" content="This is a short tutorial about Nextflow." />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="basic-concepts.html"/>
+<link rel="prev" href="processes.html"/>
+<link rel="next" href="operators.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -579,28 +579,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Introduction to Nextflow</h1>
-<p class="date"><em>2024-04-17</em></p>
-</div>
-<div id="introduction" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Introduction<a href="index.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Welcome to this short tutorial on Nextflow. We are going to walk through some of the functionalities of this powerful workflow engine. More specifically we are going to do some hands-on work on processes, channels and operators. We are also going to look into how to configure Nextflow to run on different platforms. But before moving forward, we need to set up the environment for using Nextflow.</p>
-<div id="setting-up-the-environment" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Setting up the environment<a href="index.html#setting-up-the-environment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>We are going to use UPPMAX for doing most of the hands-on work.</p>
-<p>First ssh to UPPMAX</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb2-1"><a href="index.html#cb2-1"></a><span class="fu">ssh</span> <span class="at">-AX</span> youusername@rackham.uppmax.uu.se</span></code></pre></div>
-<p>Start an interactive uppmax session</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb3-1"><a href="index.html#cb3-1"></a><span class="ex">interactive</span> <span class="at">-A</span> uppmax2024-2-11 <span class="at">-M</span> snowy <span class="at">-t</span> 02:00:00</span></code></pre></div>
-<p>Make a directory in your user space (only if you have not done before)</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb4-1"><a href="index.html#cb4-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> /crex/proj/uppmax2024-2-11/nobackup/<span class="va">$USER</span>/nextflow_lab1</span></code></pre></div>
-<p>Navigate to the folder you have created</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb5-1"><a href="index.html#cb5-1"></a><span class="bu">cd</span> /crex/proj/uppmax2024-2-11/nobackup/<span class="va">$USER</span>/nextflow_lab1</span></code></pre></div>
-<p>Load Nexflow</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb6-1"><a href="index.html#cb6-1"></a><span class="ex">module</span> load bioinfo-tools</span>
-<span id="cb6-2"><a href="index.html#cb6-2"></a><span class="ex">module</span> load Nextflow/22.10.1</span></code></pre></div>
-<p>If because of any reason, you cannot use UPPMAX, Nextflow can be installed on any POSIX compatible system for example Linux, OS X, Windows Subsystem for Linux. Head to <a href="https://www.nextflow.io/docs/latest/getstarted.html#installation">Nextflow website</a> and follow the installation procedure.</p>
+<div id="workflow" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Workflow<a href="workflow.html#workflow" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Workflow connects process and channels together. The dataflow logic is executed here. The workflow definition starts with the keyword <code>workflow</code>, followed by an optional name, and finally the workflow body delimited by curly braces. The logic is written inside the curly bracket. The order in which a task is executed is determined only by its dependencies, so a task will be executed as soon as all of its required inputs are available.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb44-1"><a href="workflow.html#cb44-1"></a><span class="ex">workflow</span> workflowname{</span>
+<span id="cb44-2"><a href="workflow.html#cb44-2"></a><span class="ex">output_channel1</span> = example_workflow<span class="er">(</span><span class="kw">)</span></span>
+<span id="cb44-3"><a href="workflow.html#cb44-3"></a><span class="ex">output_channel2</span> = example_workflow2<span class="er">(</span><span class="ex">output_channel1</span><span class="kw">)</span></span>
+<span id="cb44-4"><a href="workflow.html#cb44-4"></a><span class="fu">output_channel2.view()</span></span>
+<span id="cb44-5"><a href="workflow.html#cb44-5"></a><span class="er">}</span></span></code></pre></div>
+<p>Channels can be passed and received in the workflow using</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb45-1"><a href="workflow.html#cb45-1"></a><span class="ex">workflow</span> {</span>
+<span id="cb45-2"><a href="workflow.html#cb45-2"></a><span class="ex">output_channel</span> = example_workflow<span class="er">(</span><span class="ex">input_channel</span><span class="kw">)</span></span>
+<span id="cb45-3"><a href="workflow.html#cb45-3"></a><span class="er">}</span></span></code></pre></div>
+<p>Operators can be applied to the input or output channel. For example</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb46-1"><a href="workflow.html#cb46-1"></a><span class="ex">workflow</span> {</span>
+<span id="cb46-2"><a href="workflow.html#cb46-2"></a><span class="ex">output_channel</span> = example_workflow<span class="er">(</span><span class="ex">input_channel</span><span class="kw">)</span><span class="fu">.collect()</span> <span class="co">#1</span></span>
+<span id="cb46-3"><a href="workflow.html#cb46-3"></a><span class="er">}</span></span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>Operator <code>collect()</code> is applied to the data coming from the process <code>example_workflow</code></li>
+</ol>
+<p>Multiple channels can be provided as input and also received as</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb47-1"><a href="workflow.html#cb47-1"></a><span class="ex">workflow</span> {</span>
+<span id="cb47-2"><a href="workflow.html#cb47-2"></a><span class="kw">(</span><span class="ex">output_channel1,output_channel2</span><span class="kw">)</span> <span class="ex">=</span> example_workflow<span class="er">(</span><span class="ex">input_channel1,input_channel2</span><span class="kw">)</span></span>
+<span id="cb47-3"><a href="workflow.html#cb47-3"></a><span class="er">}</span></span></code></pre></div>
+<div id="subworkflows" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Subworkflows<a href="workflow.html#subworkflows" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A named workflow is a “subworkflow” that can be invoked from other workflows. For example:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb48-1"><a href="workflow.html#cb48-1"></a><span class="ex">workflow</span> my_pipeline { <span class="co">#1</span></span>
+<span id="cb48-2"><a href="workflow.html#cb48-2"></a>    <span class="fu">foo()</span></span>
+<span id="cb48-3"><a href="workflow.html#cb48-3"></a>    <span class="ex">bar</span><span class="er">(</span> <span class="fu">foo.out.collect()</span> <span class="kw">)</span></span>
+<span id="cb48-4"><a href="workflow.html#cb48-4"></a><span class="er">}</span></span>
+<span id="cb48-5"><a href="workflow.html#cb48-5"></a></span>
+<span id="cb48-6"><a href="workflow.html#cb48-6"></a><span class="ex">workflow</span> {</span>
+<span id="cb48-7"><a href="workflow.html#cb48-7"></a>    <span class="fu">my_pipeline()</span></span>
+<span id="cb48-8"><a href="workflow.html#cb48-8"></a><span class="er">}</span></span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>Name of the subworkflow here is <code>my_pipeline</code></li>
+</ol>
 </div>
 </div>
             </section>
@@ -608,8 +623,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-
-<a href="basic-concepts.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="processes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="operators.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

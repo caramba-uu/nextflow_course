@@ -4,25 +4,25 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Assignment 2: Nextflow | Introduction to Nextflow</title>
+  <title>Chapter 10 Assignment 2: Nextflow | Introduction to Nextflow</title>
   <meta name="description" content="This is a short tutorial about Nextflow." />
   <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Assignment 2: Nextflow | Introduction to Nextflow" />
+  <meta property="og:title" content="Chapter 10 Assignment 2: Nextflow | Introduction to Nextflow" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is a short tutorial about Nextflow." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Assignment 2: Nextflow | Introduction to Nextflow" />
+  <meta name="twitter:title" content="Chapter 10 Assignment 2: Nextflow | Introduction to Nextflow" />
   
   <meta name="twitter:description" content="This is a short tutorial about Nextflow." />
   
 
 
 
-<meta name="date" content="2024-03-25" />
+<meta name="date" content="2024-04-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -443,7 +443,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -456,7 +456,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -519,39 +519,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.2" data-path="processes.html"><a href="processes.html#tag"><i class="fa fa-check"></i><b>4.4.2</b> tag</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="operators.html"><a href="operators.html"><i class="fa fa-check"></i><b>5</b> Operators</a>
+<li class="chapter" data-level="5" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>5</b> Workflow</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="operators.html"><a href="operators.html#collect"><i class="fa fa-check"></i><b>5.1</b> Collect</a></li>
-<li class="chapter" data-level="5.2" data-path="operators.html"><a href="operators.html#flatten"><i class="fa fa-check"></i><b>5.2</b> flatten</a></li>
+<li class="chapter" data-level="5.1" data-path="workflow.html"><a href="workflow.html#subworkflows"><i class="fa fa-check"></i><b>5.1</b> Subworkflows</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="configuration-file.html"><a href="configuration-file.html"><i class="fa fa-check"></i><b>6</b> Configuration file</a>
+<li class="chapter" data-level="6" data-path="operators.html"><a href="operators.html"><i class="fa fa-check"></i><b>6</b> Operators</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="configuration-file.html"><a href="configuration-file.html#config-scopes"><i class="fa fa-check"></i><b>6.1</b> Config scopes</a>
+<li class="chapter" data-level="6.1" data-path="operators.html"><a href="operators.html#collect"><i class="fa fa-check"></i><b>6.1</b> Collect</a></li>
+<li class="chapter" data-level="6.2" data-path="operators.html"><a href="operators.html#flatten"><i class="fa fa-check"></i><b>6.2</b> flatten</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="configuration-file.html"><a href="configuration-file.html"><i class="fa fa-check"></i><b>7</b> Configuration file</a>
 <ul>
-<li class="chapter" data-level="6.1.1" data-path="configuration-file.html"><a href="configuration-file.html#scope-params"><i class="fa fa-check"></i><b>6.1.1</b> Scope params</a></li>
-<li class="chapter" data-level="6.1.2" data-path="configuration-file.html"><a href="configuration-file.html#scope-process"><i class="fa fa-check"></i><b>6.1.2</b> Scope process</a></li>
-<li class="chapter" data-level="6.1.3" data-path="configuration-file.html"><a href="configuration-file.html#scope-executor"><i class="fa fa-check"></i><b>6.1.3</b> Scope executor</a></li>
-<li class="chapter" data-level="6.1.4" data-path="configuration-file.html"><a href="configuration-file.html#configuration-on-uppmax"><i class="fa fa-check"></i><b>6.1.4</b> Configuration on UPPMAX</a></li>
-<li class="chapter" data-level="6.1.5" data-path="configuration-file.html"><a href="configuration-file.html#containers"><i class="fa fa-check"></i><b>6.1.5</b> Containers</a></li>
-<li class="chapter" data-level="6.1.6" data-path="configuration-file.html"><a href="configuration-file.html#config-profiles"><i class="fa fa-check"></i><b>6.1.6</b> Config profiles</a></li>
+<li class="chapter" data-level="7.1" data-path="configuration-file.html"><a href="configuration-file.html#config-scopes"><i class="fa fa-check"></i><b>7.1</b> Config scopes</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="configuration-file.html"><a href="configuration-file.html#scope-params"><i class="fa fa-check"></i><b>7.1.1</b> Scope params</a></li>
+<li class="chapter" data-level="7.1.2" data-path="configuration-file.html"><a href="configuration-file.html#scope-process"><i class="fa fa-check"></i><b>7.1.2</b> Scope process</a></li>
+<li class="chapter" data-level="7.1.3" data-path="configuration-file.html"><a href="configuration-file.html#scope-executor"><i class="fa fa-check"></i><b>7.1.3</b> Scope executor</a></li>
+<li class="chapter" data-level="7.1.4" data-path="configuration-file.html"><a href="configuration-file.html#configuration-on-uppmax"><i class="fa fa-check"></i><b>7.1.4</b> Configuration on UPPMAX</a></li>
+<li class="chapter" data-level="7.1.5" data-path="configuration-file.html"><a href="configuration-file.html#containers"><i class="fa fa-check"></i><b>7.1.5</b> Containers</a></li>
+<li class="chapter" data-level="7.1.6" data-path="configuration-file.html"><a href="configuration-file.html#config-profiles"><i class="fa fa-check"></i><b>7.1.6</b> Config profiles</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="more-examples.html"><a href="more-examples.html"><i class="fa fa-check"></i><b>7</b> More examples:</a>
+<li class="chapter" data-level="8" data-path="more-examples.html"><a href="more-examples.html"><i class="fa fa-check"></i><b>8</b> More examples:</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="more-examples.html"><a href="more-examples.html#two-processes"><i class="fa fa-check"></i><b>7.1</b> Two processes</a></li>
-<li class="chapter" data-level="7.2" data-path="more-examples.html"><a href="more-examples.html#two-processes-including-collect"><i class="fa fa-check"></i><b>7.2</b> Two processes including collect</a></li>
-<li class="chapter" data-level="7.3" data-path="more-examples.html"><a href="more-examples.html#two-processes-collect-accept-parameters-from-the-user"><i class="fa fa-check"></i><b>7.3</b> Two processes, collect, accept parameters from the user</a></li>
-<li class="chapter" data-level="7.4" data-path="more-examples.html"><a href="more-examples.html#three-processes"><i class="fa fa-check"></i><b>7.4</b> Three processes</a></li>
+<li class="chapter" data-level="8.1" data-path="more-examples.html"><a href="more-examples.html#two-processes"><i class="fa fa-check"></i><b>8.1</b> Two processes</a></li>
+<li class="chapter" data-level="8.2" data-path="more-examples.html"><a href="more-examples.html#two-processes-including-collect"><i class="fa fa-check"></i><b>8.2</b> Two processes including collect</a></li>
+<li class="chapter" data-level="8.3" data-path="more-examples.html"><a href="more-examples.html#two-processes-collect-accept-parameters-from-the-user"><i class="fa fa-check"></i><b>8.3</b> Two processes, collect, accept parameters from the user</a></li>
+<li class="chapter" data-level="8.4" data-path="more-examples.html"><a href="more-examples.html#three-processes"><i class="fa fa-check"></i><b>8.4</b> Three processes</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="resuming-the-pipeline-command-line-interface.html"><a href="resuming-the-pipeline-command-line-interface.html"><i class="fa fa-check"></i><b>8</b> Resuming the pipeline (Command line interface)</a></li>
-<li class="chapter" data-level="9" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html"><i class="fa fa-check"></i><b>9</b> Assignment 2: Nextflow</a>
+<li class="chapter" data-level="9" data-path="resuming-the-pipeline-command-line-interface.html"><a href="resuming-the-pipeline-command-line-interface.html"><i class="fa fa-check"></i><b>9</b> Resuming the pipeline (Command line interface)</a></li>
+<li class="chapter" data-level="10" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html"><i class="fa fa-check"></i><b>10</b> Assignment 2: Nextflow</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#set-up-the-environment"><i class="fa fa-check"></i><b>9.1</b> Set up the environment</a></li>
-<li class="chapter" data-level="9.2" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#part-1"><i class="fa fa-check"></i><b>9.2</b> Part 1</a></li>
-<li class="chapter" data-level="9.3" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#part-2"><i class="fa fa-check"></i><b>9.3</b> Part 2</a>
+<li class="chapter" data-level="10.1" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#set-up-the-environment"><i class="fa fa-check"></i><b>10.1</b> Set up the environment</a></li>
+<li class="chapter" data-level="10.2" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#part-1"><i class="fa fa-check"></i><b>10.2</b> Part 1</a></li>
+<li class="chapter" data-level="10.3" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#part-2"><i class="fa fa-check"></i><b>10.3</b> Part 2</a>
 <ul>
-<li class="chapter" data-level="9.3.1" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#part-2.1-build-an-openms-pipeline"><i class="fa fa-check"></i><b>9.3.1</b> Part 2.1 (Build an OpenMS pipeline)</a></li>
-<li class="chapter" data-level="9.3.2" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#part-2.2-optional-gives-extra-points"><i class="fa fa-check"></i><b>9.3.2</b> Part 2.2 (optional, gives extra points)</a></li>
+<li class="chapter" data-level="10.3.1" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#part-2.1-build-an-openms-pipeline"><i class="fa fa-check"></i><b>10.3.1</b> Part 2.1 (Build an OpenMS pipeline)</a></li>
+<li class="chapter" data-level="10.3.2" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#part-2.2-optional-gives-extra-points"><i class="fa fa-check"></i><b>10.3.2</b> Part 2.2 (optional, gives extra points)</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -575,43 +579,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="assignment-2-nextflow" class="section level1 hasAnchor" number="9">
-<h1><span class="header-section-number">Chapter 9</span> Assignment 2: Nextflow<a href="assignment-2-nextflow.html#assignment-2-nextflow" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="assignment-2-nextflow" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">Chapter 10</span> Assignment 2: Nextflow<a href="assignment-2-nextflow.html#assignment-2-nextflow" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Here are two assignments for finish the Nextflow part of the course.</p>
-<div id="set-up-the-environment" class="section level2 hasAnchor" number="9.1">
-<h2><span class="header-section-number">9.1</span> Set up the environment<a href="assignment-2-nextflow.html#set-up-the-environment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="set-up-the-environment" class="section level2 hasAnchor" number="10.1">
+<h2><span class="header-section-number">10.1</span> Set up the environment<a href="assignment-2-nextflow.html#set-up-the-environment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>You need to do this every time you start the lap…</p>
 <p>First ssh to Uppmax</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb92-1"><a href="assignment-2-nextflow.html#cb92-1"></a><span class="fu">ssh</span> <span class="at">-AX</span> youusername@rackham.uppmax.uu.se</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb96-1"><a href="assignment-2-nextflow.html#cb96-1"></a><span class="fu">ssh</span> <span class="at">-AX</span> youusername@rackham.uppmax.uu.se</span></code></pre></div>
 <p>Make a directory in your userspace</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb93-1"><a href="assignment-2-nextflow.html#cb93-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> /crex/proj/uppmax2024-2-11/nobackup/<span class="va">$USER</span>/nextflow_lab</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb97-1"><a href="assignment-2-nextflow.html#cb97-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> /crex/proj/uppmax2024-2-11/nobackup/<span class="va">$USER</span>/nextflow_lab</span></code></pre></div>
 <p>Navigate to the folder you have created</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb94-1"><a href="assignment-2-nextflow.html#cb94-1"></a><span class="bu">cd</span> /crex/proj/uppmax2024-2-11/nobackup/<span class="va">$USER</span>/nextflow_lab</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb98-1"><a href="assignment-2-nextflow.html#cb98-1"></a><span class="bu">cd</span> /crex/proj/uppmax2024-2-11/nobackup/<span class="va">$USER</span>/nextflow_lab</span></code></pre></div>
 <p>Load Nexflow</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb95-1"><a href="assignment-2-nextflow.html#cb95-1"></a><span class="ex">module</span> load bioinfo-tools</span></code></pre></div>
-<div class="sourceCode" id="cb96"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb96-1"><a href="assignment-2-nextflow.html#cb96-1"></a><span class="ex">module</span> load Nextflow/22.10.1</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb99-1"><a href="assignment-2-nextflow.html#cb99-1"></a><span class="ex">module</span> load bioinfo-tools</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb100-1"><a href="assignment-2-nextflow.html#cb100-1"></a><span class="ex">module</span> load Nextflow/22.10.1</span></code></pre></div>
 <p>Fix some environmental variables:</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb97-1"><a href="assignment-2-nextflow.html#cb97-1"></a><span class="bu">export</span> <span class="va">NXF_SINGULARITY_CACHEDIR</span><span class="op">=</span>/crex/proj/uppmax2024-2-11/metabolomics/singularity</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb101-1"><a href="assignment-2-nextflow.html#cb101-1"></a><span class="bu">export</span> <span class="va">NXF_SINGULARITY_CACHEDIR</span><span class="op">=</span>/crex/proj/uppmax2024-2-11/metabolomics/singularity</span></code></pre></div>
 <p>You are now ready to start!</p>
 <p><strong>The container for both of the following parts is “metaboigniter/course_docker:v5” and we want to use SLURM to run the jobs. </strong></p>
 <p><strong>IMPORTANT: DO NOT remove, change or add anything here and in its subfolders: </strong> /crex/proj/uppmax2024-2-11/metabolomics</p>
-<p><em>For part 1, you should send us the modified main.nf, nextflow.config and command used to run</em>
+<p><em>For part 1, you should send us the modified main.nf, nextflow.config and command used to run</em><br />
 <em>For part 2, you will have to send us a main.nf, nextflow.config and a PCA plot!</em></p>
 <p><strong>IMPORTANT: Some time Uppmax file system might cause some of the processes to fail, if this happens, rerun the workflow with -resume option. This might actually pass the step that was previously shown as failed!</strong></p>
-<p><strong>Use -resume whenever you run the workflow to skip the steps and (save both computational and your time ) which were completed before</strong></p>
+<p><strong>Use -resume whenever you run the workflow to skip the steps and (save both computational and your time ) which were completed before</strong><br />
+For example</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb102-1"><a href="assignment-2-nextflow.html#cb102-1"></a><span class="ex">nextflow</span> yourpipeline.nf <span class="at">-profile</span> uppmax <span class="at">--project</span> <span class="st">&quot;uppmax2024-2-11&quot;</span> <span class="at">--clusterOptions</span> <span class="st">&quot;-M snowy&quot;</span> <span class="at">-resume</span></span></code></pre></div>
 </div>
-<div id="part-1" class="section level2 hasAnchor" number="9.2">
-<h2><span class="header-section-number">9.2</span> Part 1<a href="assignment-2-nextflow.html#part-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="part-1" class="section level2 hasAnchor" number="10.2">
+<h2><span class="header-section-number">10.2</span> Part 1<a href="assignment-2-nextflow.html#part-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>For part 1, you should send us the modified main.nf, nextflow.config and the modified command used to run</strong></p>
 <p>In this part, we will run a small pipeline together. The pipeline is already in a folder that you need to copy to your personal space. We assume that you are now in <code>nextflow_lab</code></p>
 <p>Copy the pipeline and the configuration file</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb98-1"><a href="assignment-2-nextflow.html#cb98-1"></a><span class="fu">cp</span> <span class="at">-r</span> /crex/proj/uppmax2024-2-11/metabolomics/xcms_pipeline .</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb103-1"><a href="assignment-2-nextflow.html#cb103-1"></a><span class="fu">cp</span> <span class="at">-r</span> /crex/proj/uppmax2024-2-11/metabolomics/xcms_pipeline .</span></code></pre></div>
 <p>Now you have all the required files in your folder. Try to run the pipeline</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb99-1"><a href="assignment-2-nextflow.html#cb99-1"></a><span class="bu">cd</span> xcms_pipeline </span></code></pre></div>
-<div class="sourceCode" id="cb100"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb100-1"><a href="assignment-2-nextflow.html#cb100-1"></a><span class="ex">nextflow</span> main.nf <span class="at">-profile</span> uppmax <span class="at">--project</span> <span class="st">&quot;uppmax2024-2-11&quot;</span> <span class="at">--clusterOptions</span> <span class="st">&quot;-M snowy&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb104-1"><a href="assignment-2-nextflow.html#cb104-1"></a><span class="bu">cd</span> xcms_pipeline </span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb105-1"><a href="assignment-2-nextflow.html#cb105-1"></a><span class="ex">nextflow</span> main.nf <span class="at">-profile</span> uppmax <span class="at">--project</span> <span class="st">&quot;uppmax2024-2-11&quot;</span> <span class="at">--clusterOptions</span> <span class="st">&quot;-M snowy&quot;</span></span></code></pre></div>
 <p>You can open another terminal window and ssh to Uppmax and use jobinfo to see whether your jobs are running or not! If you realized that won’t run for some steps, it might be because of RAM, CPU, or running time. In the nextflow.config, you can change these parameters!</p>
+<p>You can the jobinfo by logging in to uppmax via ssh using another termial.</p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb106-1"><a href="assignment-2-nextflow.html#cb106-1"></a><span class="ex">jobinfo</span> <span class="at">-u</span> <span class="va">$USER</span> <span class="at">-M</span> snowy</span></code></pre></div>
 <p>Please remember that there is a high chance that Uppmax becomes very slow because the jobs are heavy. So please consider canceling your jobs if you already know and have a feeling about how Uppmax runs your jobs</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb101-1"><a href="assignment-2-nextflow.html#cb101-1"></a><span class="ex">scancel</span> <span class="at">-u</span> <span class="va">$USER</span> <span class="at">-M</span> snowy</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb107-1"><a href="assignment-2-nextflow.html#cb107-1"></a><span class="ex">scancel</span> <span class="at">-u</span> <span class="va">$USER</span> <span class="at">-M</span> snowy</span></code></pre></div>
 <ul>
 <li>Exercise one: There are some hardcoded parameters part of the pipeline:
 <ul>
@@ -627,13 +635,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Tip: Your task is to modify the config file (nextflow.config) so that for example <strong>peakwidthLow=5</strong> can be replaced by <strong>peakwidthLow=$params.peakwidthLow </strong>and the value of <strong>peakwidthLow</strong> is set in the config file!</p>
 <p>Help me: <a href="https://www.nextflow.io/docs/latest/config.html#scope-params">params scope</a></p>
 </div>
-<div id="part-2" class="section level2 hasAnchor" number="9.3">
-<h2><span class="header-section-number">9.3</span> Part 2<a href="assignment-2-nextflow.html#part-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="part-2" class="section level2 hasAnchor" number="10.3">
+<h2><span class="header-section-number">10.3</span> Part 2<a href="assignment-2-nextflow.html#part-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>For part 2, you will have to send us a main.nf, nextflow.config and a PCA plot!</strong></p>
 <p>As talked before the pipeline in the part 1 does mass spectrometry data pre-processing using XCMS software suite. In this part of the exercise, you will need to build a pipeline from scratch that does the same thing using OpenMS. You can of course use the pipeline in part 1 as a template and try to modify it to do that.</p>
 <p><strong>Tip: Use echo to print the shell command executed by the nextflow, to verify the input and output are of desired format. You can pass “-debug true” to the nextflow command or have a directive “debug true” under a process to print for the respective process.</strong></p>
-<div id="part-2.1-build-an-openms-pipeline" class="section level3 hasAnchor" number="9.3.1">
-<h3><span class="header-section-number">9.3.1</span> Part 2.1 (Build an OpenMS pipeline)<a href="assignment-2-nextflow.html#part-2.1-build-an-openms-pipeline" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When running your pipeline, remember to use these flags and the config file from the part1 <code>-profile uppmax --project "uppmax2024-2-11" --clusterOptions "-M snowy"</code>.
+For example</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb108-1"><a href="assignment-2-nextflow.html#cb108-1"></a><span class="ex">nextflow</span> yourpipeline.nf <span class="at">-profile</span> uppmax <span class="at">--project</span> <span class="st">&quot;uppmax2024-2-11&quot;</span> <span class="at">--clusterOptions</span> <span class="st">&quot;-M snowy&quot;</span></span></code></pre></div>
+<div id="part-2.1-build-an-openms-pipeline" class="section level3 hasAnchor" number="10.3.1">
+<h3><span class="header-section-number">10.3.1</span> Part 2.1 (Build an OpenMS pipeline)<a href="assignment-2-nextflow.html#part-2.1-build-an-openms-pipeline" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This is what you need to do</p>
 <ul>
 <li>Since the process in this specific pipeline need a separate parameter file you will need three additional <strong>file</strong> channels
@@ -658,7 +669,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>And finally, the command needed to run is</li>
 </ol></li>
 </ol>
-<div class="sourceCode" id="cb102"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb102-1"><a href="assignment-2-nextflow.html#cb102-1"></a><span class="ex">FeatureFinderMetabo</span> <span class="at">-in</span> inputVariable <span class="at">-out</span> inputBaseName.featureXML <span class="at">-ini</span> settingFIleVariable</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb109-1"><a href="assignment-2-nextflow.html#cb109-1"></a><span class="ex">FeatureFinderMetabo</span> <span class="at">-in</span> inputVariable <span class="at">-out</span> inputBaseName.featureXML <span class="at">-ini</span> settingFIleVariable</span></code></pre></div>
 <p>Please note that you need to change <code>inputVariable</code>, <code>inputBaseName</code> and <code>settingFIleVariable</code>! Please also note that the inputs to this tool are given by <code>-in</code>, the outputs by -out and settings by <code>-ini</code>.</p>
 <p>Help me: <a href="https://www.nextflow.io/docs/latest/process.html">processes</a>, <a href="https://www.nextflow.io/docs/latest/process.html#input-repeaters">input each (file)</a>, <a href="https://www.nextflow.io/docs/latest/process.html#script">bash command</a></p>
 <ol start="2" style="list-style-type: decimal">
@@ -675,8 +686,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>This command accepts ALL the featureXML files at <strong>the same time</strong> (look at collect!) and outputs the same number of files. The inputs must be separated by space (remember the join operation in the XCMS pipeline?). The output is the same as input however you need to put the output in a different folder within the process! Think about a simple bash script. You create a folder and join the files in a way that they are written in a separate folder!</p>
 <p>Given three samples, x.featureXML, y.featureXML and z.featureXML, an example of the command is like</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb103-1"><a href="assignment-2-nextflow.html#cb103-1"></a><span class="fu">mkdir</span> out</span>
-<span id="cb103-2"><a href="assignment-2-nextflow.html#cb103-2"></a><span class="ex">MapAlignerPoseClustering</span> <span class="at">-in</span> x.featureXML y.featureXML z.featureXMLL <span class="at">-out</span> out/x.featureXMLL out/y.featureXML out/z.featureXML <span class="at">-ini</span> setting.ini</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb110-1"><a href="assignment-2-nextflow.html#cb110-1"></a><span class="fu">mkdir</span> out</span>
+<span id="cb110-2"><a href="assignment-2-nextflow.html#cb110-2"></a><span class="ex">MapAlignerPoseClustering</span> <span class="at">-in</span> x.featureXML y.featureXML z.featureXMLL <span class="at">-out</span> out/x.featureXMLL out/y.featureXML out/z.featureXML <span class="at">-ini</span> setting.ini</span></code></pre></div>
 <p><strong>Please remember the code above is just an example of a command you run in bash You will have to implement this using Nextflow!</strong></p>
 <p>Please also note that the inputs to this tool are given by <code>-in</code>, the outputs by <code>-out</code> and settings by <code>-ini</code>.</p>
 <p>Finally, this process needs quite a bit of RAM to go forward. Set the memory for this to probably around 10 GB or even more!</p>
@@ -684,17 +695,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Need help!</p>
 <p>Use the pseudo code given below for getting the desired input and output format.<br />
 Use println function from groovy to check the format.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode numberSource bash hide numberLines"><code class="sourceCode bash"><span id="cb104-1"><a href="assignment-2-nextflow.html#cb104-1"></a><span class="ex">process</span> dummy_process{</span>
-<span id="cb104-2"><a href="assignment-2-nextflow.html#cb104-2"></a><span class="ex">input:</span></span>
-<span id="cb104-3"><a href="assignment-2-nextflow.html#cb104-3"></a><span class="fu">file</span> filefromchannel</span>
-<span id="cb104-4"><a href="assignment-2-nextflow.html#cb104-4"></a></span>
-<span id="cb104-5"><a href="assignment-2-nextflow.html#cb104-5"></a><span class="ex">script:</span></span>
-<span id="cb104-6"><a href="assignment-2-nextflow.html#cb104-6"></a><span class="ex">def</span> space_separated = filefromchannel.join<span class="er">(</span><span class="st">&quot; &quot;</span><span class="kw">)</span></span>
-<span id="cb104-7"><a href="assignment-2-nextflow.html#cb104-7"></a><span class="ex">def</span> string_separated = filefromchannel.join<span class="er">(</span><span class="st">&quot; my_path/&quot;</span><span class="kw">)</span></span>
-<span id="cb104-8"><a href="assignment-2-nextflow.html#cb104-8"></a></span>
-<span id="cb104-9"><a href="assignment-2-nextflow.html#cb104-9"></a><span class="ex">println</span> <span class="er">(</span><span class="ex">space_separated</span><span class="kw">)</span> </span>
-<span id="cb104-10"><a href="assignment-2-nextflow.html#cb104-10"></a><span class="ex">println</span> <span class="er">(</span><span class="ex">string_separated</span><span class="kw">)</span></span>
-<span id="cb104-11"><a href="assignment-2-nextflow.html#cb104-11"></a><span class="er">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode numberSource bash hide numberLines"><code class="sourceCode bash"><span id="cb111-1"><a href="assignment-2-nextflow.html#cb111-1"></a><span class="ex">process</span> dummy_process{</span>
+<span id="cb111-2"><a href="assignment-2-nextflow.html#cb111-2"></a><span class="ex">input:</span></span>
+<span id="cb111-3"><a href="assignment-2-nextflow.html#cb111-3"></a><span class="fu">file</span> filefromchannel</span>
+<span id="cb111-4"><a href="assignment-2-nextflow.html#cb111-4"></a></span>
+<span id="cb111-5"><a href="assignment-2-nextflow.html#cb111-5"></a><span class="ex">script:</span></span>
+<span id="cb111-6"><a href="assignment-2-nextflow.html#cb111-6"></a><span class="ex">def</span> space_separated = filefromchannel.join<span class="er">(</span><span class="st">&quot; &quot;</span><span class="kw">)</span></span>
+<span id="cb111-7"><a href="assignment-2-nextflow.html#cb111-7"></a><span class="ex">def</span> string_separated = filefromchannel.join<span class="er">(</span><span class="st">&quot; my_path/&quot;</span><span class="kw">)</span></span>
+<span id="cb111-8"><a href="assignment-2-nextflow.html#cb111-8"></a></span>
+<span id="cb111-9"><a href="assignment-2-nextflow.html#cb111-9"></a><span class="ex">println</span> <span class="er">(</span><span class="ex">space_separated</span><span class="kw">)</span> </span>
+<span id="cb111-10"><a href="assignment-2-nextflow.html#cb111-10"></a><span class="ex">println</span> <span class="er">(</span><span class="ex">string_separated</span><span class="kw">)</span></span>
+<span id="cb111-11"><a href="assignment-2-nextflow.html#cb111-11"></a><span class="er">}</span></span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>The third process is called <code>process_masstrace_linker_pos_OpenMS</code> and is used to link (merge) multiple files into a single file
 <ol start="7" style="list-style-type: decimal">
@@ -708,7 +719,7 @@ Use println function from groovy to check the format.</p>
 </ol>
 This is similar to the previous step. You need to gather all the inputs separated by space (collect and join!). However, it will only output one file. Given the same three files above an example of the command would be:</li>
 </ol>
-<div class="sourceCode" id="cb105"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb105-1"><a href="assignment-2-nextflow.html#cb105-1"></a><span class="ex">FeatureLinkerUnlabeledQT</span> <span class="at">-in</span> x.featureXML y.featureXML z.featureXML <span class="at">-out</span> Aggregated.consensusXML <span class="at">-ini</span> setting.ini</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb112-1"><a href="assignment-2-nextflow.html#cb112-1"></a><span class="ex">FeatureLinkerUnlabeledQT</span> <span class="at">-in</span> x.featureXML y.featureXML z.featureXML <span class="at">-out</span> Aggregated.consensusXML <span class="at">-ini</span> setting.ini</span></code></pre></div>
 <p>Please also note that the inputs to this tool are given by <code>-in</code>, the outputs by -out and settings by <code>-ini</code>.</p>
 <p>Finally, this process needs quite a bit of RAM to go forward. Set the memory for this to probably around <code>10 GB</code> or even more!</p>
 <ol start="4" style="list-style-type: decimal">
@@ -719,14 +730,14 @@ This is similar to the previous step. You need to gather all the inputs separate
 <li>To run the command: This process will run two commands the first one does the conversion and the second one the cleaning. We will only need the last output (<code>Aggregated_clean.csv</code>)</li>
 </ol></li>
 </ol>
-<div class="sourceCode" id="cb106"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb106-1"><a href="assignment-2-nextflow.html#cb106-1"></a><span class="ex">TextExporter</span> <span class="at">-in</span> input <span class="at">-out</span> Aggregated.csv</span>
-<span id="cb106-2"><a href="assignment-2-nextflow.html#cb106-2"></a><span class="ex">/usr/bin/readOpenMS.r</span> input=Aggregated.csv output=Aggregated_table.csv</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb113-1"><a href="assignment-2-nextflow.html#cb113-1"></a><span class="ex">TextExporter</span> <span class="at">-in</span> input <span class="at">-out</span> Aggregated.csv</span>
+<span id="cb113-2"><a href="assignment-2-nextflow.html#cb113-2"></a><span class="ex">/usr/bin/readOpenMS.r</span> input=Aggregated.csv output=Aggregated_table.csv</span></code></pre></div>
 <p>Please also note that the inputs to this tool are given by <code>-in</code>, the outputs by <code>-out</code>.</p>
 <p>Remember that this process should publish its result to a specific directory (your choice). It does that by symlink! Change the mode to copy if you want!</p>
 <p>Help me: <a href="https://www.nextflow.io/docs/latest/process.html#publishdir">publish the results</a></p>
 </div>
-<div id="part-2.2-optional-gives-extra-points" class="section level3 hasAnchor" number="9.3.2">
-<h3><span class="header-section-number">9.3.2</span> Part 2.2 (optional, gives extra points)<a href="assignment-2-nextflow.html#part-2.2-optional-gives-extra-points" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="part-2.2-optional-gives-extra-points" class="section level3 hasAnchor" number="10.3.2">
+<h3><span class="header-section-number">10.3.2</span> Part 2.2 (optional, gives extra points)<a href="assignment-2-nextflow.html#part-2.2-optional-gives-extra-points" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Given the output from the last step of the pipeline, do a PCA on the data. The output of the last step is a csv file (comma separated) and the first column is the header. The missing values are designated by NA.</p>
 <p>Can you add your script (PCA) as an extra node part of the pipeline? You don’t have to use containers, you can use conda or whatever you like! There are R and Python already available in the container, you can also use <a href="https://www.nextflow.io/docs/latest/process.html#conda">conda</a> or <a href="https://www.nextflow.io/docs/latest/process.html#module">modules</a></p>
 <p>If you don’t know what PCA is or how to do it, please let us know!</p>
