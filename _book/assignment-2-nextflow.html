@@ -555,7 +555,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#part-2"><i class="fa fa-check"></i><b>10.3</b> Part 2</a>
 <ul>
 <li class="chapter" data-level="10.3.1" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#part-2.1-build-an-openms-pipeline"><i class="fa fa-check"></i><b>10.3.1</b> Part 2.1 (Build an OpenMS pipeline)</a></li>
-<li class="chapter" data-level="10.3.2" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#part-2.2-optional-gives-extra-points"><i class="fa fa-check"></i><b>10.3.2</b> Part 2.2 (optional, gives extra points)</a></li>
+<li class="chapter" data-level="10.3.2" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#part-2.2-pca-optional-gives-extra-points"><i class="fa fa-check"></i><b>10.3.2</b> Part 2.2 PCA (optional, gives extra points)</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -581,10 +581,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="assignment-2-nextflow" class="section level1 hasAnchor" number="10">
 <h1><span class="header-section-number">Chapter 10</span> Assignment 2: Nextflow<a href="assignment-2-nextflow.html#assignment-2-nextflow" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Here are two assignments for finish the Nextflow part of the course.</p>
+<p>Here we have two parts for the assignment to complete the Nextflow section of the course.</p>
 <div id="set-up-the-environment" class="section level2 hasAnchor" number="10.1">
 <h2><span class="header-section-number">10.1</span> Set up the environment<a href="assignment-2-nextflow.html#set-up-the-environment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>You need to do this every time you start the lap…</p>
+<p>You need to do this every time you start the lab.</p>
 <p>First ssh to Uppmax</p>
 <div class="sourceCode" id="cb96"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb96-1"><a href="assignment-2-nextflow.html#cb96-1"></a><span class="fu">ssh</span> <span class="at">-AX</span> youusername@rackham.uppmax.uu.se</span></code></pre></div>
 <p>Make a directory in your userspace</p>
@@ -599,8 +599,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>You are now ready to start!</p>
 <p><strong>The container for both of the following parts is “metaboigniter/course_docker:v5” and we want to use SLURM to run the jobs. </strong></p>
 <p><strong>IMPORTANT: DO NOT remove, change or add anything here and in its subfolders: </strong> /crex/proj/uppmax2024-2-11/metabolomics</p>
-<p><em>For part 1, you should send us the modified main.nf, nextflow.config and command used to run</em><br />
-<em>For part 2, you will have to send us a main.nf, nextflow.config and a PCA plot!</em></p>
+<p><em>For part 1, you should send us the modified main.nf, nextflow.config and the modified command used to run</em><br />
+<em>For part 2, you will have to send us a main.nf, nextflow.config and a PCA plot. Submission of a PCA plot contributes to earning higher grades.</em></p>
 <p><strong>IMPORTANT: Some time Uppmax file system might cause some of the processes to fail, if this happens, rerun the workflow with -resume option. This might actually pass the step that was previously shown as failed!</strong></p>
 <p><strong>Use -resume whenever you run the workflow to skip the steps and (save both computational and your time ) which were completed before</strong><br />
 For example</p>
@@ -637,7 +637,7 @@ For example</p>
 </div>
 <div id="part-2" class="section level2 hasAnchor" number="10.3">
 <h2><span class="header-section-number">10.3</span> Part 2<a href="assignment-2-nextflow.html#part-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>For part 2, you will have to send us a main.nf, nextflow.config and a PCA plot!</strong></p>
+<p><em>For part 2, you will have to send us a main.nf, nextflow.config and a PCA plot. Submission of a PCA plot contributes to earning higher grades.</em></p>
 <p>As talked before the pipeline in the part 1 does mass spectrometry data pre-processing using XCMS software suite. In this part of the exercise, you will need to build a pipeline from scratch that does the same thing using OpenMS. You can of course use the pipeline in part 1 as a template and try to modify it to do that.</p>
 <p><strong>Tip: Use echo to print the shell command executed by the nextflow, to verify the input and output are of desired format. You can pass “-debug true” to the nextflow command or have a directive “debug true” under a process to print for the respective process.</strong></p>
 <p>When running your pipeline, remember to use these flags and the config file from the part1 <code>-profile uppmax --project "uppmax2024-2-11" --clusterOptions "-M snowy"</code>.
@@ -736,8 +736,8 @@ This is similar to the previous step. You need to gather all the inputs separate
 <p>Remember that this process should publish its result to a specific directory (your choice). It does that by symlink! Change the mode to copy if you want!</p>
 <p>Help me: <a href="https://www.nextflow.io/docs/latest/process.html#publishdir">publish the results</a></p>
 </div>
-<div id="part-2.2-optional-gives-extra-points" class="section level3 hasAnchor" number="10.3.2">
-<h3><span class="header-section-number">10.3.2</span> Part 2.2 (optional, gives extra points)<a href="assignment-2-nextflow.html#part-2.2-optional-gives-extra-points" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="part-2.2-pca-optional-gives-extra-points" class="section level3 hasAnchor" number="10.3.2">
+<h3><span class="header-section-number">10.3.2</span> Part 2.2 PCA (optional, gives extra points)<a href="assignment-2-nextflow.html#part-2.2-pca-optional-gives-extra-points" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Given the output from the last step of the pipeline, do a PCA on the data. The output of the last step is a csv file (comma separated) and the first column is the header. The missing values are designated by NA.</p>
 <p>Can you add your script (PCA) as an extra node part of the pipeline? You don’t have to use containers, you can use conda or whatever you like! There are R and Python already available in the container, you can also use <a href="https://www.nextflow.io/docs/latest/process.html#conda">conda</a> or <a href="https://www.nextflow.io/docs/latest/process.html#module">modules</a></p>
 <p>If you don’t know what PCA is or how to do it, please let us know!</p>
