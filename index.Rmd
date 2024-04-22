@@ -308,7 +308,7 @@ For example,
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
 db='database' #1
 
-process justdebugBash {
+process justEchoBash {
 debug true #2
  script:
  """
