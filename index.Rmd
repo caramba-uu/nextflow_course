@@ -1136,7 +1136,7 @@ profiles {
 
     uppmax_singularity { #3
 process.executor = 'slurm' #4
-  	process.clusterOptions = { "-A $params.project ${params.clusterOptions ?: ''}"
+  	process.clusterOptions = { "-A $params.project ${params.clusterOptions ?: ''}"}
 singularity.enabled = true #5
  	}
 }
