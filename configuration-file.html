@@ -443,7 +443,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -456,7 +456,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -612,8 +612,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The params scope allows you to define parameters that will be accessible in the pipeline script. Simply prefix the parameter names with the params scope or surround them by curly brackets.</p>
 <div class="sourceCode" id="cb56"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb56-1"><a href="configuration-file.html#cb56-1"></a><span class="ex">params</span> {</span>
 <span id="cb56-2"><a href="configuration-file.html#cb56-2"></a></span>
-<span id="cb56-3"><a href="configuration-file.html#cb56-3"></a>   <span class="ex">mzMLFilesInput</span> = <span class="st">&#39;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&#39;</span> <span class="co">#1</span></span>
-<span id="cb56-4"><a href="configuration-file.html#cb56-4"></a>  <span class="va">ppm_input</span><span class="op">=</span>10 <span class="co">#2</span></span>
+<span id="cb56-3"><a href="configuration-file.html#cb56-3"></a>   <span class="ex">mzMLFilesInput</span> = <span class="st">&#39;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&#39;</span> // <span class="co">#1</span></span>
+<span id="cb56-4"><a href="configuration-file.html#cb56-4"></a>  <span class="va">ppm_input</span><span class="op">=</span>10 <span class="ex">//</span> <span class="co">#2</span></span>
 <span id="cb56-5"><a href="configuration-file.html#cb56-5"></a></span>
 <span id="cb56-6"><a href="configuration-file.html#cb56-6"></a><span class="er">}</span></span></code></pre></div>
 <p>In the example above, we define two parameters:</p>
@@ -622,13 +622,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>ppm_input</code> which is used in a bash script</li>
 </ol>
 <p>We can then use these two parameters anywhere inside our pipeline. For example:</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb57-1"><a href="configuration-file.html#cb57-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="ex">params.mzMLFilesInput</span> <span class="kw">)</span> <span class="co">#1</span></span>
+<div class="sourceCode" id="cb57"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb57-1"><a href="configuration-file.html#cb57-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="ex">params.mzMLFilesInput</span> <span class="kw">)</span> <span class="ex">//</span> <span class="co">#1</span></span>
 <span id="cb57-2"><a href="configuration-file.html#cb57-2"></a><span class="ex">process</span> featureFinder {</span>
 <span id="cb57-3"><a href="configuration-file.html#cb57-3"></a><span class="ex">debug</span> true</span>
 <span id="cb57-4"><a href="configuration-file.html#cb57-4"></a><span class="ex">input:</span></span>
 <span id="cb57-5"><a href="configuration-file.html#cb57-5"></a><span class="fu">file</span> x</span>
 <span id="cb57-6"><a href="configuration-file.html#cb57-6"></a></span>
-<span id="cb57-7"><a href="configuration-file.html#cb57-7"></a><span class="st">&quot;echo processing </span><span class="va">$x</span><span class="st"> with </span><span class="va">$params</span><span class="st">.ppm_input ppm&quot;</span> <span class="co">#2</span></span>
+<span id="cb57-7"><a href="configuration-file.html#cb57-7"></a><span class="st">&quot;echo processing </span><span class="va">$x</span><span class="st"> with </span><span class="va">$params</span><span class="st">.ppm_input ppm&quot;</span> // <span class="co">#2</span></span>
 <span id="cb57-8"><a href="configuration-file.html#cb57-8"></a></span>
 <span id="cb57-9"><a href="configuration-file.html#cb57-9"></a><span class="er">}</span></span>
 <span id="cb57-10"><a href="configuration-file.html#cb57-10"></a></span>
@@ -651,8 +651,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The process configuration scope allows you to provide the default configuration for the processes in your pipeline.</p>
 <p>You can specify here any property described in the <a href="https://www.nextflow.io/docs/latest/process.html#process-directives">process directive</a> and the executor sections. For example,</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb60-1"><a href="configuration-file.html#cb60-1"></a><span class="ex">process</span> {</span>
-<span id="cb60-2"><a href="configuration-file.html#cb60-2"></a><span class="ex">executor</span> = <span class="st">&#39;slurm&#39;</span> <span class="co">#1</span></span>
-<span id="cb60-3"><a href="configuration-file.html#cb60-3"></a>  <span class="ex">clusterOptions</span> = { <span class="st">&quot;-A </span><span class="va">$params</span><span class="st">.project </span><span class="va">${params</span><span class="er">.clusterOptions ?: &#39;&#39;</span><span class="va">}</span><span class="st">&quot;</span> } <span class="co">#2</span></span>
+<span id="cb60-2"><a href="configuration-file.html#cb60-2"></a><span class="ex">executor</span> = <span class="st">&#39;slurm&#39;</span> // <span class="co">#1</span></span>
+<span id="cb60-3"><a href="configuration-file.html#cb60-3"></a>  <span class="ex">clusterOptions</span> = { <span class="st">&quot;-A </span><span class="va">$params</span><span class="st">.project </span><span class="va">${params</span><span class="er">.clusterOptions ?: &#39;&#39;</span><span class="va">}</span><span class="st">&quot;</span> } // <span class="co">#2</span></span>
 <span id="cb60-4"><a href="configuration-file.html#cb60-4"></a><span class="er">}</span></span></code></pre></div>
 <p>In the example above:
 1. We set the <code>executor</code> to <code>slurm</code> so that all the jobs will be send to <code>slurm</code>
@@ -711,10 +711,10 @@ OK! This is probably going to take time. Use <code>Ctrl+c</code> to kill Nextflo
 <h3><span class="header-section-number">7.1.5</span> Containers<a href="configuration-file.html#containers" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The docker configuration scope controls how Docker containers are executed by Nextflow</p>
 <p>For example</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb67-1"><a href="configuration-file.html#cb67-1"></a><span class="ex">process.container</span> = <span class="st">&#39;nextflow/examples&#39;</span> <span class="co">#1</span></span>
+<div class="sourceCode" id="cb67"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb67-1"><a href="configuration-file.html#cb67-1"></a><span class="ex">process.container</span> = <span class="st">&#39;nextflow/examples&#39;</span> // <span class="co">#1</span></span>
 <span id="cb67-2"><a href="configuration-file.html#cb67-2"></a></span>
 <span id="cb67-3"><a href="configuration-file.html#cb67-3"></a><span class="ex">docker</span> {</span>
-<span id="cb67-4"><a href="configuration-file.html#cb67-4"></a>    <span class="ex">enabled</span> = true <span class="co">#2</span></span>
+<span id="cb67-4"><a href="configuration-file.html#cb67-4"></a>    <span class="ex">enabled</span> = true // <span class="co">#2</span></span>
 <span id="cb67-5"><a href="configuration-file.html#cb67-5"></a><span class="er">}</span></span></code></pre></div>
 <p>In the example above:</p>
 <ol style="list-style-type: decimal">
@@ -727,8 +727,8 @@ OK! This is probably going to take time. Use <code>Ctrl+c</code> to kill Nextflo
 <div class="sourceCode" id="cb68"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb68-1"><a href="configuration-file.html#cb68-1"></a><span class="bu">export</span> <span class="va">NXF_SINGULARITY_CACHEDIR</span><span class="op">=</span>/crex/proj/uppmax2024-2-11/metabolomics/singularity</span></code></pre></div>
 <p>The above command will set the location of the image for Nextflow.</p>
 <p>We can later create a file named <code>nextflow_14.config</code> with the following content</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb69-1"><a href="configuration-file.html#cb69-1"></a><span class="ex">singularity.enabled</span> = true <span class="co">#1</span></span>
-<span id="cb69-2"><a href="configuration-file.html#cb69-2"></a><span class="ex">process.container=</span><span class="st">&quot;bigdatacourse.sif&quot;</span> <span class="co">#2</span></span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb69-1"><a href="configuration-file.html#cb69-1"></a><span class="ex">singularity.enabled</span> = true // <span class="co">#1</span></span>
+<span id="cb69-2"><a href="configuration-file.html#cb69-2"></a><span class="ex">process.container=</span><span class="st">&quot;bigdatacourse.sif&quot;</span> // <span class="co">#2</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Instruct Nextflow to use Singularity</li>
 <li>Sets the name of the image</li>
@@ -781,14 +781,14 @@ OK! This is probably going to take time. Use <code>Ctrl+c</code> to kill Nextflo
 <p>Configuration profiles are defined by using the special scope profiles which group the attributes that belong to the same profile using a common prefix.</p>
 <div class="sourceCode" id="cb76"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb76-1"><a href="configuration-file.html#cb76-1"></a><span class="ex">profiles</span> { </span>
 <span id="cb76-2"><a href="configuration-file.html#cb76-2"></a></span>
-<span id="cb76-3"><a href="configuration-file.html#cb76-3"></a>    <span class="ex">standard</span> { <span class="co">#1</span></span>
-<span id="cb76-4"><a href="configuration-file.html#cb76-4"></a>        <span class="ex">process.executor</span> = <span class="st">&#39;local&#39;</span> <span class="co">#2</span></span>
+<span id="cb76-3"><a href="configuration-file.html#cb76-3"></a>    <span class="ex">standard</span> { // <span class="co">#1</span></span>
+<span id="cb76-4"><a href="configuration-file.html#cb76-4"></a>        <span class="ex">process.executor</span> = <span class="st">&#39;local&#39;</span> // <span class="co">#2</span></span>
 <span id="cb76-5"><a href="configuration-file.html#cb76-5"></a>    <span class="er">}</span></span>
 <span id="cb76-6"><a href="configuration-file.html#cb76-6"></a></span>
-<span id="cb76-7"><a href="configuration-file.html#cb76-7"></a>    <span class="ex">uppmax_singularity</span> { <span class="co">#3</span></span>
-<span id="cb76-8"><a href="configuration-file.html#cb76-8"></a><span class="ex">process.executor</span> = <span class="st">&#39;slurm&#39;</span> <span class="co">#4</span></span>
+<span id="cb76-7"><a href="configuration-file.html#cb76-7"></a>    <span class="ex">uppmax_singularity</span> { // <span class="co">#3</span></span>
+<span id="cb76-8"><a href="configuration-file.html#cb76-8"></a><span class="ex">process.executor</span> = <span class="st">&#39;slurm&#39;</span> // <span class="co">#4</span></span>
 <span id="cb76-9"><a href="configuration-file.html#cb76-9"></a>    <span class="ex">process.clusterOptions</span> = { <span class="st">&quot;-A </span><span class="va">$params</span><span class="st">.project </span><span class="va">${params</span><span class="er">.clusterOptions ?: &#39;&#39;</span><span class="va">}</span><span class="st">&quot;</span>}</span>
-<span id="cb76-10"><a href="configuration-file.html#cb76-10"></a><span class="ex">singularity.enabled</span> = true <span class="co">#5</span></span>
+<span id="cb76-10"><a href="configuration-file.html#cb76-10"></a><span class="ex">singularity.enabled</span> = true // <span class="co">#5</span></span>
 <span id="cb76-11"><a href="configuration-file.html#cb76-11"></a>    <span class="er">}</span></span>
 <span id="cb76-12"><a href="configuration-file.html#cb76-12"></a><span class="er">}</span></span></code></pre></div>
 <p>Save the above in a file as <code>nextflow.config</code> in the directory where the <code>main.nf</code> is kept.</p>

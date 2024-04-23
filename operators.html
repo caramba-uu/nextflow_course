@@ -443,7 +443,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -456,7 +456,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -608,7 +608,7 @@ Now run</p>
 <span id="cb52-11"><a href="operators.html#cb52-11"></a><span class="er">}</span></span>
 <span id="cb52-12"><a href="operators.html#cb52-12"></a></span>
 <span id="cb52-13"><a href="operators.html#cb52-13"></a><span class="ex">workflow</span> {</span>
-<span id="cb52-14"><a href="operators.html#cb52-14"></a>    <span class="ex">featureFinder</span><span class="er">(</span><span class="fu">mzMLFiles.collect()</span><span class="kw">)</span> <span class="co">#1</span></span>
+<span id="cb52-14"><a href="operators.html#cb52-14"></a>    <span class="ex">featureFinder</span><span class="er">(</span><span class="fu">mzMLFiles.collect()</span><span class="kw">)</span> <span class="ex">//</span> <span class="co">#1</span></span>
 <span id="cb52-15"><a href="operators.html#cb52-15"></a><span class="er">}</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>By using <code>collect()</code>, the process will gather all the files in <code>mzMLFiles</code> channel and do the operation for this collection of files.</li>
@@ -620,7 +620,7 @@ Now run</p>
 <p>The <code>flatten</code> operator transforms a channel in such a way that every item of type Collection or <code>Array</code> is flattened so that each single entry is emitted separately by the resulting channel.</p>
 <p>for example,</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb53-1"><a href="operators.html#cb53-1"></a><span class="ex">Channel</span></span>
-<span id="cb53-2"><a href="operators.html#cb53-2"></a>    <span class="ex">.from</span><span class="er">(</span> <span class="ex">[1,[2,3]],</span> 4, [5,[6]] <span class="kw">)</span></span>
+<span id="cb53-2"><a href="operators.html#cb53-2"></a>    <span class="ex">.from</span><span class="er">(</span> <span class="ex">[1,[2,3]],</span> 4, [5,<span class="pp">[</span><span class="ss">6</span><span class="pp">]</span>] <span class="kw">)</span></span>
 <span id="cb53-3"><a href="operators.html#cb53-3"></a>    <span class="fu">.flatten()</span></span>
 <span id="cb53-4"><a href="operators.html#cb53-4"></a>    <span class="fu">.view()</span></span></code></pre></div>
 <p>Try to run this example and compare the results to collect!</p>
