@@ -11,3 +11,8 @@ Contains RMD file to generate [course website](https://caramba-uu.github.io/next
 
 
 For singularity manual [go to singularity folder](materials/singularity)
+
+For the MZML files, remember to keep the permission as "-rwxr-xr-x". Remove group and other write permission
+```bash
+chmod -R g-w foldername
+```
