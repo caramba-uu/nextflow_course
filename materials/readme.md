@@ -1,4 +1,4 @@
-## Required files for course
+## Required files for the course
 ### mzML data are missing (big data, cannot upload)
 
 
