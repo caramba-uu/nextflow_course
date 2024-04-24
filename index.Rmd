@@ -1569,7 +1569,7 @@ Now that we have our channels up and running, time to create four processes:
 1. Let’s name the first process `process_masstrace_detection_pos_OpenMS`
     1. This process has two inputs:
         1. The first input is from the mzML files
-        2. The second one is from the **feature detection** parameter file. Please remember that The second input should be a type of input that repeats for **each** of the mzML file emitted by the first channel
+        2. The second one is from the **feature finder** parameter file. Please remember that The second input should be a type of input that repeats for **each** of the mzML file emitted by the first channel
     2. The output for this process has the same **baseName **as input but it has “.featureXML” extension. The name of the output channel must be alignmentProcess
     3. And finally, the command needed to run is 
 
