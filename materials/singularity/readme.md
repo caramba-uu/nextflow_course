@@ -12,8 +12,11 @@ To convert sandbox to sif file
 ```bash
 sudo singularity build production.sif bigdatacourse/
 ```
+To inspect sif file and get the def file
 
-For the MZML files, remember to keep the permission as "-rwxr-xr-x". Remove group and other write permission
 ```bash
-chmod -R g-w foldername
+singularity inspect --deffile bigdatacourse
 ```
+
+
+
