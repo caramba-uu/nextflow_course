@@ -1658,7 +1658,7 @@ Finally, this process needs quite a bit of RAM to go forward. Set the memory for
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
 TextExporter -in input -out Aggregated.csv
-/usr/bin/readOpenMS.r input=Aggregated.csv output=Aggregated_table.csv
+/usr/bin/readOpenMS.r input=Aggregated.csv output=Aggregated_clean.csv
 ```
 
 

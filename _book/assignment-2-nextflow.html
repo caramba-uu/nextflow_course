@@ -731,7 +731,7 @@ This is similar to the previous step. You need to gather all the inputs separate
 </ol></li>
 </ol>
 <div class="sourceCode" id="cb113"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb113-1"><a href="assignment-2-nextflow.html#cb113-1"></a><span class="ex">TextExporter</span> <span class="at">-in</span> input <span class="at">-out</span> Aggregated.csv</span>
-<span id="cb113-2"><a href="assignment-2-nextflow.html#cb113-2"></a><span class="ex">/usr/bin/readOpenMS.r</span> input=Aggregated.csv output=Aggregated_table.csv</span></code></pre></div>
+<span id="cb113-2"><a href="assignment-2-nextflow.html#cb113-2"></a><span class="ex">/usr/bin/readOpenMS.r</span> input=Aggregated.csv output=Aggregated_clean.csv</span></code></pre></div>
 <p>Please also note that the inputs to this tool are given by <code>-in</code>, the outputs by <code>-out</code>.</p>
 <p>Remember that this process should publish its result to a specific directory (your choice). It does that by symlink! Change the mode to copy if you want!</p>
 <p>Help me: <a href="https://www.nextflow.io/docs/latest/process.html#publishdir">publish the results</a></p>
