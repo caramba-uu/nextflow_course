@@ -590,7 +590,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb79-3"><a href="more-examples.html#cb79-3"></a><span class="ex">input:</span></span>
 <span id="cb79-4"><a href="more-examples.html#cb79-4"></a><span class="fu">file</span> x</span>
 <span id="cb79-5"><a href="more-examples.html#cb79-5"></a><span class="ex">output:</span></span>
-<span id="cb79-6"><a href="more-examples.html#cb79-6"></a><span class="fu">file</span> <span class="st">&quot;</span><span class="va">${x</span><span class="er">.baseName</span><span class="va">}</span><span class="st">.featureXML&quot;</span> <span class="co">#1</span></span>
+<span id="cb79-6"><a href="more-examples.html#cb79-6"></a><span class="fu">file</span> <span class="st">&quot;</span><span class="va">${x</span><span class="er">.baseName</span><span class="va">}</span><span class="st">.featureXML&quot;</span> // <span class="co">#1</span></span>
 <span id="cb79-7"><a href="more-examples.html#cb79-7"></a></span>
 <span id="cb79-8"><a href="more-examples.html#cb79-8"></a><span class="st">&quot;cp </span><span class="va">$x</span><span class="st"> </span><span class="va">${x</span><span class="er">.baseName</span><span class="va">}</span><span class="st">.featureXML&quot;</span></span>
 <span id="cb79-9"><a href="more-examples.html#cb79-9"></a></span>
@@ -600,15 +600,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb79-13"><a href="more-examples.html#cb79-13"></a><span class="ex">process</span> someotherprocess {</span>
 <span id="cb79-14"><a href="more-examples.html#cb79-14"></a><span class="ex">debug</span> true</span>
 <span id="cb79-15"><a href="more-examples.html#cb79-15"></a><span class="ex">input:</span></span>
-<span id="cb79-16"><a href="more-examples.html#cb79-16"></a><span class="fu">file</span> x <span class="co">#2</span></span>
+<span id="cb79-16"><a href="more-examples.html#cb79-16"></a><span class="fu">file</span> x // <span class="co">#2</span></span>
 <span id="cb79-17"><a href="more-examples.html#cb79-17"></a></span>
 <span id="cb79-18"><a href="more-examples.html#cb79-18"></a><span class="st">&quot;echo I got </span><span class="va">$x</span><span class="st"> from featureFinder&quot;</span></span>
 <span id="cb79-19"><a href="more-examples.html#cb79-19"></a></span>
 <span id="cb79-20"><a href="more-examples.html#cb79-20"></a><span class="er">}</span></span>
 <span id="cb79-21"><a href="more-examples.html#cb79-21"></a></span>
 <span id="cb79-22"><a href="more-examples.html#cb79-22"></a><span class="ex">workflow</span> {</span>
-<span id="cb79-23"><a href="more-examples.html#cb79-23"></a>    <span class="ex">featureFinder_out</span> = featureFinder<span class="er">(</span><span class="ex">mzMLFiles</span><span class="kw">)</span> <span class="co">#1</span></span>
-<span id="cb79-24"><a href="more-examples.html#cb79-24"></a>    <span class="ex">someotherprocess</span><span class="er">(</span><span class="ex">featureFinder_out</span><span class="kw">)</span> <span class="co">#2</span></span>
+<span id="cb79-23"><a href="more-examples.html#cb79-23"></a>    <span class="ex">featureFinder_out</span> = featureFinder<span class="er">(</span><span class="ex">mzMLFiles</span><span class="kw">)</span> <span class="ex">//</span> <span class="co">#1</span></span>
+<span id="cb79-24"><a href="more-examples.html#cb79-24"></a>    <span class="ex">someotherprocess</span><span class="er">(</span><span class="ex">featureFinder_out</span><span class="kw">)</span> <span class="ex">//</span> <span class="co">#2</span></span>
 <span id="cb79-25"><a href="more-examples.html#cb79-25"></a><span class="er">}</span></span></code></pre></div>
 <p>In this example, the process <code>featureFinder</code> sends the output and received by an output channel (#1) which is then sent to <code>someotherprocess</code> to do further processing.</p>
 <p>Create a file called <code>main_16.nf</code></p>
@@ -625,7 +625,7 @@ Now run</p>
 <span id="cb82-3"><a href="more-examples.html#cb82-3"></a><span class="ex">input:</span></span>
 <span id="cb82-4"><a href="more-examples.html#cb82-4"></a><span class="fu">file</span> x </span>
 <span id="cb82-5"><a href="more-examples.html#cb82-5"></a><span class="ex">output:</span></span>
-<span id="cb82-6"><a href="more-examples.html#cb82-6"></a><span class="fu">file</span> <span class="st">&quot;</span><span class="va">${x</span><span class="er">.baseName</span><span class="va">}</span><span class="st">.featureXML&quot;</span> <span class="co">#1</span></span>
+<span id="cb82-6"><a href="more-examples.html#cb82-6"></a><span class="fu">file</span> <span class="st">&quot;</span><span class="va">${x</span><span class="er">.baseName</span><span class="va">}</span><span class="st">.featureXML&quot;</span> // <span class="co">#1</span></span>
 <span id="cb82-7"><a href="more-examples.html#cb82-7"></a></span>
 <span id="cb82-8"><a href="more-examples.html#cb82-8"></a><span class="st">&quot;cp </span><span class="va">$x</span><span class="st"> </span><span class="va">${x</span><span class="er">.baseName</span><span class="va">}</span><span class="st">.featureXML&quot;</span></span>
 <span id="cb82-9"><a href="more-examples.html#cb82-9"></a><span class="er">}</span></span>
@@ -641,8 +641,8 @@ Now run</p>
 <span id="cb82-19"><a href="more-examples.html#cb82-19"></a><span class="er">}</span></span>
 <span id="cb82-20"><a href="more-examples.html#cb82-20"></a></span>
 <span id="cb82-21"><a href="more-examples.html#cb82-21"></a><span class="ex">workflow</span> {</span>
-<span id="cb82-22"><a href="more-examples.html#cb82-22"></a>    <span class="ex">featureFinder_out</span> = featureFinder<span class="er">(</span><span class="ex">mzMLFiles</span><span class="kw">)</span><span class="fu">.collect()</span> <span class="co">#1</span></span>
-<span id="cb82-23"><a href="more-examples.html#cb82-23"></a>    <span class="ex">someotherprocess</span><span class="er">(</span><span class="ex">featureFinder_out</span><span class="kw">)</span> <span class="co">#2</span></span>
+<span id="cb82-22"><a href="more-examples.html#cb82-22"></a>    <span class="ex">featureFinder_out</span> = featureFinder<span class="er">(</span><span class="ex">mzMLFiles</span><span class="kw">)</span><span class="fu">.collect()</span> <span class="ex">//</span> <span class="co">#1</span></span>
+<span id="cb82-23"><a href="more-examples.html#cb82-23"></a>    <span class="ex">someotherprocess</span><span class="er">(</span><span class="ex">featureFinder_out</span><span class="kw">)</span> <span class="ex">//</span> <span class="co">#2</span></span>
 <span id="cb82-24"><a href="more-examples.html#cb82-24"></a><span class="er">}</span></span></code></pre></div>
 <p>In this example, the process <code>featureFinder</code> sends output to an output channel (featureFinder_out) (#1) which is then sent to <code>someotherprocess</code> (#2) to do further processing. However, <code>someotherprocess</code> now has all the data at once because.</p>
 <p>Create a file called <code>main_17.nf</code></p>
@@ -655,7 +655,7 @@ Now run</p>
 <div id="two-processes-collect-accept-parameters-from-the-user" class="section level2 hasAnchor" number="8.3">
 <h2><span class="header-section-number">8.3</span> Two processes, collect, accept parameters from the user<a href="more-examples.html#two-processes-collect-accept-parameters-from-the-user" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We can now try to even accept some parameters from the user.</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb85-1"><a href="more-examples.html#cb85-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span><span class="ex">params.inputmzml</span><span class="kw">)</span> <span class="co">#1</span></span>
+<div class="sourceCode" id="cb85"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb85-1"><a href="more-examples.html#cb85-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span><span class="ex">params.inputmzml</span><span class="kw">)</span> <span class="ex">//</span> <span class="co">#1</span></span>
 <span id="cb85-2"><a href="more-examples.html#cb85-2"></a><span class="ex">process</span> featureFinder {</span>
 <span id="cb85-3"><a href="more-examples.html#cb85-3"></a><span class="ex">input:</span></span>
 <span id="cb85-4"><a href="more-examples.html#cb85-4"></a><span class="fu">file</span> x</span>
@@ -690,7 +690,7 @@ Now run:</p>
 <div id="three-processes" class="section level2 hasAnchor" number="8.4">
 <h2><span class="header-section-number">8.4</span> Three processes<a href="more-examples.html#three-processes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Similarly we can create as many as processes we would like to. For example three:</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb88-1"><a href="more-examples.html#cb88-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span><span class="ex">params.inputmzml</span><span class="kw">)</span> <span class="co">#1</span></span>
+<div class="sourceCode" id="cb88"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb88-1"><a href="more-examples.html#cb88-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span><span class="ex">params.inputmzml</span><span class="kw">)</span> <span class="ex">//</span> <span class="co">#1</span></span>
 <span id="cb88-2"><a href="more-examples.html#cb88-2"></a><span class="ex">process</span> justcopy {</span>
 <span id="cb88-3"><a href="more-examples.html#cb88-3"></a><span class="ex">input:</span></span>
 <span id="cb88-4"><a href="more-examples.html#cb88-4"></a><span class="fu">file</span> x</span>

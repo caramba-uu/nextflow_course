@@ -116,37 +116,37 @@ For example,
 
 
 ```{r attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-println "Hello, World!" #1
+println "Hello, World!" // #1
  
-x = 1 #2
+x = 1 // #2
 println x
  
-x = new java.util.Date() #2
+x = new java.util.Date() // #2
 println x
  
-x = -3.1499392 #2
+x = -3.1499392 // #2
 println x
  
-x = false #2
+x = false // #2
 println x
  
-x = "Hi" #2
+x = "Hi" // #2
 println x
 
-myList = [1776, -1, 33, 99, 0, 928734928763] #3
+myList = [1776, -1, 33, 99, 0, 928734928763] // #3
 println myList
 
-square = { it * it } #4
+square = { it * it } // #4
 println square(9)
  
 printMapClosure = { key, value ->
    println "$key = $value"
-} #4
+} // #4
 
-map_example=[ "Yue" : "Wu", "Mark" : "Williams", "Sudha" : "Kumari" ] #5
+map_example=[ "Yue" : "Wu", "Mark" : "Williams", "Sudha" : "Kumari" ] // #5
 
 
-[ "Yue" : "Wu", "Mark" : "Williams", "Sudha" : "Kumari" ].each(printMapClosure) #6
+[ "Yue" : "Wu", "Mark" : "Williams", "Sudha" : "Kumari" ].each(printMapClosure) // #6
 
 
 ```
@@ -200,11 +200,11 @@ The `of` method allows you to create a channel emitting any sequence of values t
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
 println "Channel.of( 1, 3, 5, 7 ):"
-ch = Channel.of( 1, 3, 5, 7 ) #1 
+ch = Channel.of( 1, 3, 5, 7 ) // #1 
 ch.view()
 
 println "Channel.of( [1, 3, 5, 7, 9]):"
-ch = Channel.of( [1, 3, 5, 7, 9]) #2
+ch = Channel.of( [1, 3, 5, 7, 9]) // #2
 ch.view()
 
 ```
@@ -233,13 +233,13 @@ You can create a channel emitting one or more file paths by using the fromPath m
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
 // single file
-myFileChannel = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/Blank10.mzML' ) #1
+myFileChannel = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/Blank10.mzML' ) // #1
 myFileChannel.view()
 // multiple files
-myFileChannel = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.*' ) #2
+myFileChannel = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.*' ) // #2
 myFileChannel.view()
 // recursive multiple files
-myFileChannel = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/**.*' ) #3
+myFileChannel = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/**.*' ) // #3
 myFileChannel.view()
 
 ```
@@ -276,19 +276,19 @@ The overall structure of a process in Nextflow looks like this:
 ```{r attr.source='.numberLines',eval=FALSE, class.source="nohide"}
 process < name > {
 
-   [ directives ] #1
+   [ directives ] // #1
 
    input:
-    < process inputs > #2
+    < process inputs > // #2
 
    output:
-    < process outputs > #3
+    < process outputs > // #3
 
    when:
-    < condition > #4
+    < condition > // #4
 
    [script|shell|exec]:
-   < user script to be executed > #5
+   < user script to be executed > // #5
 
 }
 ```
@@ -306,13 +306,13 @@ We start with the `script` block. A process contains one and only one script blo
 For example,
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-db='database' #1
+db='database' // #1
 
 process justEchoBash {
-debug true #2
+debug true // #2
  script:
  """
- echo $db #3
+ echo $db // #3
  """
 
 }
@@ -321,7 +321,7 @@ process justEchoShell {
 debug true
    shell:
    '''
-   echo !{db} #4
+   echo !{db} // #4
    '''
 }
 
@@ -384,16 +384,16 @@ The qualifiers available are the ones listed in the following table:
 For example, here we have a channel and a process that gets an input from the channel and prints the values.
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-num = Channel.from( 1, 2, 3 ) #1
+num = Channel.from( 1, 2, 3 ) // #1
 
 process basicExample {
 debug true
  input:
- val x #2
- "echo process job $x" #3
+ val x // #2
+ "echo process job $x" // #3
 }
 
-workflow {           #4
+workflow {           // #4
     basicExample(num)
 }
 
@@ -403,7 +403,7 @@ Another way of writing the workflow when there is only one input. Here `num` is 
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
 
-workflow {           #5
+workflow {           // #5
     num | basicExample
 }
 
@@ -468,20 +468,20 @@ The each qualifier allows you to repeat the execution of a process for each item
 
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' ) #1
-num = Channel.from( 1, 2, 3 ) #2
+mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' ) // #1
+num = Channel.from( 1, 2, 3 ) // #2
 process featureFinder {
   debug true
 input:
-each x  #3
-file y  #4
+each x  // #3
+file y  // #4
 
-"echo value $x file $y" #5
+"echo value $x file $y" // #5
 
 }
 
 workflow {
-    featureFinder(num,mzMLFiles) #6
+    featureFinder(num,mzMLFiles) // #6
 }
 
 ```
@@ -533,21 +533,21 @@ The qualifiers that can be used in the output declaration block are the ones lis
 For example,
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' ) #1
+mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' ) // #1
 process featureFinder {
 input:
-file x  #2
+file x  // #2
 output:
-file "output/${x.baseName}.featureXML" #3
+file "output/${x.baseName}.featureXML" // #3
 
 """ 
 mkdir output 
 cp -in $x output/${x.baseName}.featureXML 
-"""  #4
+"""  // #4
 }
 
 workflow {
-    output_channel = featureFinder(mzMLFiles) #5
+    output_channel = featureFinder(mzMLFiles) // #5
     output_channel.view()
 }
 
@@ -597,7 +597,7 @@ The `publishDir` directive allows you to publish the process output files to a s
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
 process foo {
 
-    publishDir 'data/chunks' #1
+    publishDir 'data/chunks' // #1
 
     output:
     file 'chunk_*'
@@ -654,7 +654,7 @@ The `tag` directive allows you to associate each process execution with a custom
 mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' )
 num = Channel.from( 1, 2, 3 )
 process featureFinder {
-tag "$y" #1
+tag "$y" // #1
 input:
 each x
 file y
@@ -715,7 +715,7 @@ output_channel = example_workflow(input_channel)
 Operators can be applied to the input or output channel. For example
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
 workflow {
-output_channel = example_workflow(input_channel).collect() #1
+output_channel = example_workflow(input_channel).collect() // #1
 }
 ```
 1. Operator `collect()` is applied to the data coming from the process `example_workflow`
@@ -731,7 +731,7 @@ workflow {
 ## Subworkflows
 A named workflow is a “subworkflow” that can be invoked from other workflows. For example:
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-workflow my_pipeline { #1
+workflow my_pipeline { // #1
     foo()
     bar( foo.out.collect() )
 }
@@ -794,7 +794,7 @@ echo $x
 }
 
 workflow {
-    featureFinder(mzMLFiles.collect()) #1
+    featureFinder(mzMLFiles.collect()) // #1
 }
 
 ```
@@ -872,8 +872,8 @@ The params scope allows you to define parameters that will be accessible in the 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
 params {
 
-   mzMLFilesInput = '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' #1
-  ppm_input=10 #2
+   mzMLFilesInput = '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' // #1
+  ppm_input=10 // #2
 
 }
 
@@ -887,13 +887,13 @@ In the example above, we define two parameters:
 We can then use these two parameters anywhere inside our pipeline. For example:
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-mzMLFiles = Channel.fromPath( params.mzMLFilesInput ) #1
+mzMLFiles = Channel.fromPath( params.mzMLFilesInput ) // #1
 process featureFinder {
 debug true
 input:
 file x
 
-"echo processing $x with $params.ppm_input ppm" #2
+"echo processing $x with $params.ppm_input ppm" // #2
 
 }
 
@@ -932,8 +932,8 @@ You can specify here any property described in the [process directive](https://w
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
 process {
-executor = 'slurm' #1
-  clusterOptions = { "-A $params.project ${params.clusterOptions ?: ''}" } #2
+executor = 'slurm' // #1
+  clusterOptions = { "-A $params.project ${params.clusterOptions ?: ''}" } // #2
 }
 ```
 
@@ -1022,10 +1022,10 @@ The docker configuration scope controls how Docker containers are executed by Ne
 For example 
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-process.container = 'nextflow/examples' #1
+process.container = 'nextflow/examples' // #1
 
 docker {
-    enabled = true #2
+    enabled = true // #2
 }
 ```
 
@@ -1049,8 +1049,8 @@ The above command will set the location of the image for Nextflow.
 We can later create a file named `nextflow_14.config` with the following content
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-singularity.enabled = true #1
-process.container="bigdatacourse.sif" #2
+singularity.enabled = true // #1
+process.container="bigdatacourse.sif" // #2
 ```
 
 1. Instruct Nextflow to use Singularity
@@ -1130,14 +1130,14 @@ Configuration profiles are defined by using the special scope profiles which gro
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
 profiles { 
 
-    standard { #1
-        process.executor = 'local' #2
+    standard { // #1
+        process.executor = 'local' // #2
     }
 
-    uppmax_singularity { #3
-process.executor = 'slurm' #4
+    uppmax_singularity { // #3
+process.executor = 'slurm' // #4
   	process.clusterOptions = { "-A $params.project ${params.clusterOptions ?: ''}"}
-singularity.enabled = true #5
+singularity.enabled = true // #5
  	}
 }
 
@@ -1178,7 +1178,7 @@ process featureFinder {
 input:
 file x
 output:
-file "${x.baseName}.featureXML" #1
+file "${x.baseName}.featureXML" // #1
 
 "cp $x ${x.baseName}.featureXML"
 
@@ -1188,15 +1188,15 @@ file "${x.baseName}.featureXML" #1
 process someotherprocess {
 debug true
 input:
-file x #2
+file x // #2
 
 "echo I got $x from featureFinder"
 
 }
 
 workflow {
-    featureFinder_out = featureFinder(mzMLFiles) #1
-    someotherprocess(featureFinder_out) #2
+    featureFinder_out = featureFinder(mzMLFiles) // #1
+    someotherprocess(featureFinder_out) // #2
 }
 
 ```
@@ -1227,7 +1227,7 @@ process featureFinder {
 input:
 file x 
 output:
-file "${x.baseName}.featureXML" #1
+file "${x.baseName}.featureXML" // #1
 
 "cp $x ${x.baseName}.featureXML"
 }
@@ -1243,8 +1243,8 @@ file x
 }
 
 workflow {
-    featureFinder_out = featureFinder(mzMLFiles).collect() #1
-    someotherprocess(featureFinder_out) #2
+    featureFinder_out = featureFinder(mzMLFiles).collect() // #1
+    someotherprocess(featureFinder_out) // #2
 }
 ```
 
@@ -1271,7 +1271,7 @@ What is the difference between this and the previous example?
 We can now try to even accept some parameters from the user.
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-mzMLFiles = Channel.fromPath(params.inputmzml) #1
+mzMLFiles = Channel.fromPath(params.inputmzml) // #1
 process featureFinder {
 input:
 file x
@@ -1320,7 +1320,7 @@ Notice how we are sending parameters to the workflow!
 Similarly we can create as many as processes we would like to. For example three:
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-mzMLFiles = Channel.fromPath(params.inputmzml) #1
+mzMLFiles = Channel.fromPath(params.inputmzml) // #1
 process justcopy {
 input:
 file x
@@ -1463,8 +1463,8 @@ You are now ready to start!
 **IMPORTANT: DO NOT remove, change or add anything here and in its subfolders: ** /crex/proj/uppmax2024-2-11/metabolomics  
 
 
-*For part 1, you should send us the modified main.nf, nextflow.config and the modified command used to run*  
-*For part 2, you will have to send us a main.nf, nextflow.config and a PCA plot. Submission of a PCA plot contributes to earning higher grades.*  
+*For part 1, please send us the modified main.nf, nextflow.config, and the modified command used to run (included in a file named command.txt).*
+*For part 2, you will need to send us the main.nf, nextflow.config, and the PCA plot (along with any additional scripts). Submission of a PCA plot contributes to earning higher grades.* 
 
 **IMPORTANT: Some time Uppmax file system might cause some of the processes to fail, if this happens, rerun the workflow with -resume option. This might actually pass the step that was previously shown as failed!**
 
@@ -1477,7 +1477,7 @@ nextflow yourpipeline.nf -profile uppmax --project "uppmax2024-2-11" --clusterOp
 
 ## Part 1
 
-**For part 1, you should send us the modified main.nf, nextflow.config and the modified command used to run**
+**For part 1, please send us the modified main.nf, nextflow.config, and the modified command used to run (included in a file named command.txt).**
 
 In this part, we will run a small pipeline together. The pipeline is already in a folder that you need to copy to your personal space. We assume that you are now in `nextflow_lab`
 
@@ -1535,7 +1535,7 @@ Help me: [params scope](https://www.nextflow.io/docs/latest/config.html#scope-pa
 
 
 ## Part 2
-*For part 2, you will have to send us a main.nf, nextflow.config and a PCA plot. Submission of a PCA plot contributes to earning higher grades.*  
+*For part 2, you will need to send us the main.nf, nextflow.config, and the PCA plot (along with any additional scripts). Submission of a PCA plot contributes to earning higher grades.*  
 
 As talked before the pipeline in the part 1 does mass spectrometry data pre-processing using XCMS software suite. In this part of the exercise, you will need to build a pipeline from scratch that does the same thing using OpenMS. You can of course use the pipeline in part 1 as a template and try to modify it to do that. 
 

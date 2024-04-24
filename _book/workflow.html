@@ -593,7 +593,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb45-3"><a href="workflow.html#cb45-3"></a><span class="er">}</span></span></code></pre></div>
 <p>Operators can be applied to the input or output channel. For example</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb46-1"><a href="workflow.html#cb46-1"></a><span class="ex">workflow</span> {</span>
-<span id="cb46-2"><a href="workflow.html#cb46-2"></a><span class="ex">output_channel</span> = example_workflow<span class="er">(</span><span class="ex">input_channel</span><span class="kw">)</span><span class="fu">.collect()</span> <span class="co">#1</span></span>
+<span id="cb46-2"><a href="workflow.html#cb46-2"></a><span class="ex">output_channel</span> = example_workflow<span class="er">(</span><span class="ex">input_channel</span><span class="kw">)</span><span class="fu">.collect()</span> <span class="ex">//</span> <span class="co">#1</span></span>
 <span id="cb46-3"><a href="workflow.html#cb46-3"></a><span class="er">}</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Operator <code>collect()</code> is applied to the data coming from the process <code>example_workflow</code></li>
@@ -605,7 +605,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="subworkflows" class="section level2 hasAnchor" number="5.1">
 <h2><span class="header-section-number">5.1</span> Subworkflows<a href="workflow.html#subworkflows" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>A named workflow is a “subworkflow” that can be invoked from other workflows. For example:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb48-1"><a href="workflow.html#cb48-1"></a><span class="ex">workflow</span> my_pipeline { <span class="co">#1</span></span>
+<div class="sourceCode" id="cb48"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb48-1"><a href="workflow.html#cb48-1"></a><span class="ex">workflow</span> my_pipeline { // <span class="co">#1</span></span>
 <span id="cb48-2"><a href="workflow.html#cb48-2"></a>    <span class="fu">foo()</span></span>
 <span id="cb48-3"><a href="workflow.html#cb48-3"></a>    <span class="ex">bar</span><span class="er">(</span> <span class="fu">foo.out.collect()</span> <span class="kw">)</span></span>
 <span id="cb48-4"><a href="workflow.html#cb48-4"></a><span class="er">}</span></span>
