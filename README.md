@@ -10,4 +10,4 @@ Contains RMD file to generate [course website](https://caramba-uu.github.io/next
 ### mzML data are missing (big data, cannot upload)
 
 
-For singularity manual [go to singularity folder](singularity)
+For singularity manual [go to singularity folder](materials/singularity)
