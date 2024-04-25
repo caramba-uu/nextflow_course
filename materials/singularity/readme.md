@@ -1,3 +1,5 @@
+NOT WORKING in uppmax (libQt5Core.so.5: cannot open shared object file: No such file or directory)
+
 Create singularity sif using the above file, run
 ```bash
 sudo singularity build bigdatacourse.sif bigdatacourse.def

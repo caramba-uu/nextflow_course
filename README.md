@@ -10,7 +10,9 @@ Contains RMD file to generate [course website](https://caramba-uu.github.io/next
 ### mzML data are missing (big data, cannot upload)
 
 
-For singularity manual [go to singularity folder](materials/singularity)
+For docker manual [go to docker folder](materials/docker) (working with minor issues)
+
+For singularity manual [go to singularity folder](materials/singularity) (not working in uppmax)
 
 For the MZML files, remember to keep the permission as "-rwxr-xr-x". Remove group and other write permission
 ```bash
