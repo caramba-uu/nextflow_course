@@ -20,6 +20,6 @@ chmod -R g-w foldername
 ```
 
 ## Future edits
-change instructions on what to submit (remove config submission for part2)
-make them to use consistent name for all parameter and mzml channels in part 2 (makes it easy for evaluation)
-make a python script to check for names, and other checks while they submit (maybe give it to the students, so they can check and submit the pipleline after that)
+change instructions on what to submit (remove config submission for part2)  
+make them to use consistent name for all parameter and mzml channels in part 2 (makes it easy for evaluation)  
+make a python script to check for names, and other checks while they submit (maybe give it to the students, so they can check and submit the pipleline after that)  
