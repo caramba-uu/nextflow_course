@@ -21,7 +21,7 @@ chmod -R g-w foldername
 ```
 
 ## Path changes
-Edit the RMD file with uppmax path every year and reupload the website. Example: /crex/proj/**uppmax2025-2-288**/nobackup/$USER/nextflow_lab1  
+Edit the [RMD file](index.Rmd) with uppmax path every year and reupload the website. Example: /crex/proj/**uppmax2025-2-288**/nobackup/$USER/nextflow_lab1  
 Edit path in the file [main.nf](materials/xcms_pipeline/main.nf) under xcms_pipeline  
 
 
