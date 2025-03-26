@@ -7,8 +7,8 @@ Contains RMD file to generate [course website](https://caramba-uu.github.io/next
 
 
 ## [Required files for the course](materials)
-**MZML data**: Present in the private git
-**Solutions**: Present in the private git
+**MZML data**: Present in the private git  
+**Solutions**: Present in the private git  
 
 
 For docker manual [go to docker folder](materials/docker) (working with minor issues)
