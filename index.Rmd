@@ -10,10 +10,10 @@ description: |
 link-citations: yes
 github-repo: rstudio/bookdown-demo
 output:
-  bookdown::html_document2:
+  bookdown::gitbook:
     includes:
       in_header: header.html
-  bookdown::gitbook:
+  bookdown::html_document2:
     includes:
       in_header: header.html
 ---
