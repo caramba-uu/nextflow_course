@@ -8,7 +8,7 @@ Analysis Pipeline doing XCMS mass trace detection.
 */
 
 // Get mzML files
-mzMLFiles=Channel.fromPath("/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML")
+mzMLFiles=Channel.fromPath("/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML")
 
 // Define a process process that does mass trace detection (files are run in parallel)
 process process_masstrace_detection_pos_xcms{
