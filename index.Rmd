@@ -73,19 +73,19 @@ ssh -AX youusername@rackham.uppmax.uu.se
 Start an interactive uppmax session
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-interactive -A uppmax2024-2-11 -M snowy -t 02:00:00
+interactive -A uppmax2025-2-288 -M snowy -t 02:00:00
 ```
 
 Make a directory in your user space (only if you have not done before)
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-mkdir -p /crex/proj/uppmax2024-2-11/nobackup/$USER/nextflow_lab1
+mkdir -p /crex/proj/uppmax2025-2-288/nobackup/$USER/nextflow_lab1
 ```
 
 Navigate to the folder you have created
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-cd /crex/proj/uppmax2024-2-11/nobackup/$USER/nextflow_lab1
+cd /crex/proj/uppmax2025-2-288/nobackup/$USER/nextflow_lab1
 ```
 
 Load Nexflow
@@ -233,13 +233,13 @@ You can create a channel emitting one or more file paths by using the fromPath m
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
 // single file
-myFileChannel = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/Blank10.mzML' ) // #1
+myFileChannel = Channel.fromPath( '/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/Blank10.mzML' ) // #1
 myFileChannel.view()
 // multiple files
-myFileChannel = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.*' ) // #2
+myFileChannel = Channel.fromPath( '/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.*' ) // #2
 myFileChannel.view()
 // recursive multiple files
-myFileChannel = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/**.*' ) // #3
+myFileChannel = Channel.fromPath( '/crex/proj/uppmax2025-2-288/metabolomics/**.*' ) // #3
 myFileChannel.view()
 
 ```
@@ -433,7 +433,7 @@ nextflow main_5.nf
 Can you create a workflow that reads all the files with `*.mzML` extension in a file channel and print their name in a process? Remember, this is a file channel!
 
 ```{bash, attr.source='.numberLines',eval=FALSE}
-mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' )
+mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML' )
 
 process featureFinder {
 debug true
@@ -468,7 +468,7 @@ The each qualifier allows you to repeat the execution of a process for each item
 
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' ) // #1
+mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML' ) // #1
 num = Channel.from( 1, 2, 3 ) // #2
 process featureFinder {
   debug true
@@ -486,7 +486,7 @@ workflow {
 
 ```
 
-1. Creates a file channel from all `mzML` files in `/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML'`.
+1. Creates a file channel from all `mzML` files in `/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML'`.
 2. Create a channel containing numbers
 3. Define input repeater for the values in the channel
 4. Define another input channel from the file channel 
@@ -533,7 +533,7 @@ The qualifiers that can be used in the output declaration block are the ones lis
 For example,
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' ) // #1
+mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML' ) // #1
 process featureFinder {
 input:
 file x  // #2
@@ -553,7 +553,7 @@ workflow {
 
 ```
 
-In the above example the process, when executed, it will create a file channel from `/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML`. The process will then get this channel as an input and creates an output channel `outputChannel` (named in the workflow) where each file extension has been changed to `featureXML`.
+In the above example the process, when executed, it will create a file channel from `/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML`. The process will then get this channel as an input and creates an output channel `outputChannel` (named in the workflow) where each file extension has been changed to `featureXML`.
 
 1. Creates a channel emitting files.
 2. Receive value from the input channel.
@@ -651,7 +651,7 @@ The `tag` directive allows you to associate each process execution with a custom
 
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' )
+mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML' )
 num = Channel.from( 1, 2, 3 )
 process featureFinder {
 tag "$y" // #1
@@ -756,7 +756,7 @@ For example,
 
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' )
+mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML' )
 mzMLFiles.collect().view()
 
 ```
@@ -781,7 +781,7 @@ This operator can also be used inside the process. For example,
 
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' )
+mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML' )
 process featureFinder {
 debug true
 
@@ -872,7 +872,7 @@ The params scope allows you to define parameters that will be accessible in the 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
 params {
 
-   mzMLFilesInput = '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' // #1
+   mzMLFilesInput = '/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML' // #1
   ppm_input=10 // #2
 
 }
@@ -986,7 +986,7 @@ Create a file called `main_13.nf`
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
 // This is main.nf
-mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' )
+mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML' )
 process featureFinder {
 debug true
 input:
@@ -1004,7 +1004,7 @@ workflow {
 You can now run the pipeline using
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-nextflow main_13.nf -c nextflow_13.config --project "uppmax2024-2-11" --clusterOptions "-M snowy"
+nextflow main_13.nf -c nextflow_13.config --project "uppmax2025-2-288" --clusterOptions "-M snowy"
 ```
 
 The process is now running on Uppmax.
@@ -1041,7 +1041,7 @@ Similarly we can use singularity.
 Please be aware that if you Nextflow to use a Docker image and convert to singularity image. This process will take time. In order to save you time we have already done the conversion. To use what we have built, first run the following command:
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-export NXF_SINGULARITY_CACHEDIR=/crex/proj/uppmax2024-2-11/metabolomics/singularity
+export NXF_SINGULARITY_CACHEDIR=/crex/proj/uppmax2025-2-288/metabolomics/singularity
 ```
 
 The above command will set the location of the image for Nextflow. 
@@ -1059,7 +1059,7 @@ process.container="bigdatacourse.sif" // #2
 We can now create another file ` main_14.nf` with the following content:
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' )
+mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML' )
 process featureFinder {
 debug true
 input:
@@ -1093,7 +1093,7 @@ process.clusterOptions = { "-A $params.project ${params.clusterOptions ?: ''}"}
 
 
 ```{bash, attr.source='.numberLines',eval=FALSE}
-mzMLFiles = Channel.fromPath('/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' )
+mzMLFiles = Channel.fromPath('/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML' )
 process featureFinder {
 debug true
 input:
@@ -1111,7 +1111,7 @@ workflow {
 
 
 ```{bash, attr.source='.numberLines',eval=FALSE}
-nextflow main_15.nf -c nextflow_15.config --project "uppmax2024-2-11" --clusterOptions "-M snowy"
+nextflow main_15.nf -c nextflow_15.config --project "uppmax2025-2-288" --clusterOptions "-M snowy"
 ```
 
 Now let us cancel all the jobs
@@ -1160,7 +1160,7 @@ nextflow main.nf -profile standard
 How would you run it if you wanted to run on UPPMAX?
 
 ```{bash, attr.source='.numberLines',eval=FALSE}
-nextflow main.nf -profile uppmax_singularity --project "uppmax2024-2-11" --clusterOptions "-M snowy"
+nextflow main.nf -profile uppmax_singularity --project "uppmax2025-2-288" --clusterOptions "-M snowy"
 ```
 
 # More examples:
@@ -1173,7 +1173,7 @@ The pipelines are connected by channels and the order is defined in the workflow
 
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' )
+mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML' )
 process featureFinder {
 input:
 file x
@@ -1222,7 +1222,7 @@ nextflow main_16.nf
 As mentioned above we can instruct Nextflow to emit all the content of a channel in a single emittion so that the downstream process will receive all the content at once using the `collect` operator. For example
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML' )
+mzMLFiles = Channel.fromPath( '/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML' )
 process featureFinder {
 input:
 file x 
@@ -1310,7 +1310,7 @@ Copy the above code to it. Save the file `(Ctrl+o enter)` and exit `(Ctrl+x)`
 Now run:
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-nextflow main_18.nf --inputmzml "/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML"
+nextflow main_18.nf --inputmzml "/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML"
 ```
 
 Notice how we are sending parameters to the workflow!
@@ -1370,7 +1370,7 @@ Copy the above code to it. Save the file `(Ctrl+o enter)` and exit `(Ctrl+x)`
 Now run:
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-nextflow main_19.nf --inputmzml "/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML" --qc 100
+nextflow main_19.nf --inputmzml "/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML" --qc 100
 ```
 
 Now let's clean up the cache produced by Nextflow using the clean command 
@@ -1391,13 +1391,13 @@ nextflow [options] COMMAND [arg...]
 We often run the workflow using 
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-nextflow main_19.nf --inputmzml "/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML" --qc 100
+nextflow main_19.nf --inputmzml "/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML" --qc 100
 ```
 
 However, when Nextflow is run it will automatically use its powerful `run` command. So the above code can actually be run using:
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-nextflow run main_19.nf --inputmzml "/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML" --qc 100
+nextflow run main_19.nf --inputmzml "/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML" --qc 100
 ```
 
 The `run` command has several options that can be seen [here](https://www.nextflow.io/docs/latest/cli.html#run)
@@ -1407,7 +1407,7 @@ One the most important option is `resume`. This option executes the script using
 So if we imagine the above pipeline fails for example because of an error in one of the processes, after resolving the error, we can run the workflow using:
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-nextflow run main_19.nf -resume --inputmzml "/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML" --qc 100
+nextflow run main_19.nf -resume --inputmzml "/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML" --qc 100
 ```
 
 Using this command, the already successfully executed processes will not be rerun. So the pipeline will continue from where it failed last time.
@@ -1431,13 +1431,13 @@ ssh -AX youusername@rackham.uppmax.uu.se
 Make a directory in your userspace
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-mkdir -p /crex/proj/uppmax2024-2-11/nobackup/$USER/nextflow_lab
+mkdir -p /crex/proj/uppmax2025-2-288/nobackup/$USER/nextflow_lab
 ```
 
 Navigate to the folder you have created
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-cd /crex/proj/uppmax2024-2-11/nobackup/$USER/nextflow_lab
+cd /crex/proj/uppmax2025-2-288/nobackup/$USER/nextflow_lab
 ```
 
 Load Nexflow
@@ -1453,14 +1453,14 @@ module load Nextflow/22.10.1
 Fix some environmental variables:
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-export NXF_SINGULARITY_CACHEDIR=/crex/proj/uppmax2024-2-11/metabolomics/singularity
+export NXF_SINGULARITY_CACHEDIR=/crex/proj/uppmax2025-2-288/metabolomics/singularity
 ```
 
 You are now ready to start!
 
 **The container for both of the following parts is “metaboigniter/course_docker:v5” and we want to use SLURM to run the jobs. **
 
-**IMPORTANT: DO NOT remove, change or add anything here and in its subfolders: ** /crex/proj/uppmax2024-2-11/metabolomics  
+**IMPORTANT: DO NOT remove, change or add anything here and in its subfolders: ** /crex/proj/uppmax2025-2-288/metabolomics  
 
 
 *For part 1, please send us the modified main.nf, nextflow.config, and the modified command used to run (included in a file named command.txt).*
@@ -1471,7 +1471,7 @@ You are now ready to start!
 **Use -resume whenever you run the workflow to skip the steps and (save both computational and your time ) which were completed before**  
 For example
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-nextflow yourpipeline.nf -profile uppmax --project "uppmax2024-2-11" --clusterOptions "-M snowy" -resume
+nextflow yourpipeline.nf -profile uppmax --project "uppmax2025-2-288" --clusterOptions "-M snowy" -resume
 ```
 
 
@@ -1484,7 +1484,7 @@ In this part, we will run a small pipeline together. The pipeline is already in 
 Copy the pipeline and the configuration file
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-cp -r /crex/proj/uppmax2024-2-11/metabolomics/xcms_pipeline .
+cp -r /crex/proj/uppmax2025-2-288/metabolomics/xcms_pipeline .
 ```
 
 Now you have all the required files in your folder. Try to run the pipeline
@@ -1494,7 +1494,7 @@ cd xcms_pipeline
 ```
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-nextflow main.nf -profile uppmax --project "uppmax2024-2-11" --clusterOptions "-M snowy"
+nextflow main.nf -profile uppmax --project "uppmax2025-2-288" --clusterOptions "-M snowy"
 ```
 
 You can open another terminal window and ssh to Uppmax and use jobinfo to see whether your jobs are running or not! If you realized that won’t run for some steps, it might be because of RAM, CPU, or running time. In the nextflow.config, you can change these parameters!
@@ -1542,10 +1542,10 @@ As talked before the pipeline in the part 1 does mass spectrometry data pre-proc
 
 **Tip: Use echo to print the shell command executed by the nextflow, to verify the input and output are of desired format. You can pass "-debug true" to the nextflow command or have a directive "debug true" under a process to print for the respective process.**
 
-When running your pipeline, remember to use these flags and the config file from the part1 `-profile uppmax --project "uppmax2024-2-11" --clusterOptions "-M snowy"`.
+When running your pipeline, remember to use these flags and the config file from the part1 `-profile uppmax --project "uppmax2025-2-288" --clusterOptions "-M snowy"`.
 For example
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-nextflow yourpipeline.nf -profile uppmax --project "uppmax2024-2-11" --clusterOptions "-M snowy"
+nextflow yourpipeline.nf -profile uppmax --project "uppmax2025-2-288" --clusterOptions "-M snowy"
 ```
 
 
@@ -1556,11 +1556,11 @@ This is what you need to do
 
 
 * Since the process in this specific pipeline need a separate parameter file you will need three additional **file** channels
-    1. The first one is used in the FeatureFinder process and is located here: `/crex/proj/uppmax2024-2-11/metabolomics/openms_params/FeatureFinder.ini`
-    2. The second one is for the alignment process and is located here: `/crex/proj/uppmax2024-2-11/metabolomics/openms_params/featureAlignment.ini`
-    3. The third one is for the linker process and is located here: `/crex/proj/uppmax2024-2-11/metabolomics/openms_params/featureLinker.ini`
+    1. The first one is used in the FeatureFinder process and is located here: `/crex/proj/uppmax2025-2-288/metabolomics/openms_params/FeatureFinder.ini`
+    2. The second one is for the alignment process and is located here: `/crex/proj/uppmax2025-2-288/metabolomics/openms_params/featureAlignment.ini`
+    3. The third one is for the linker process and is located here: `/crex/proj/uppmax2025-2-288/metabolomics/openms_params/featureLinker.ini`
     
-* You would also needall the  mzML files from this folder "/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/" to a channel.
+* You would also needall the  mzML files from this folder "/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/" to a channel.
 
 _Help me: [File channels](https://www.nextflow.io/docs/latest/process.html#input-of-files), [How to create file channels](https://www.nextflow.io/docs/latest/channel.html#frompath)_
 
