@@ -19,6 +19,11 @@ For the MZML files, remember to keep the permission as "-rwxr-xr-x". Remove grou
 chmod -R g-w foldername
 ```
 
+## Path changes
+Edit the RMD file with uppmax path every year and reupload the website. Example: /crex/proj/**uppmax2025-2-288**/nobackup/$USER/nextflow_lab1  
+Edit path in the file main.nf under xcms_pipeline  
+
+
 ## Future edits
 * Change instructions on what to submit (remove config submission for part2)  
 * Make them to use consistent name for all parameter and mzml channels in part 2 (makes it easy for evaluation)  
