@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 Resuming the pipeline (Command line interface) | Introduction to Nextflow</title>
   <meta name="description" content="This is a short tutorial about Nextflow." />
-  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 9 Resuming the pipeline (Command line interface) | Introduction to Nextflow" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2024-04-25" />
+<meta name="date" content="2025-03-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -491,9 +491,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Introduction to Nextflow</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#setting-up-the-environment"><i class="fa fa-check"></i><b>1.1</b> Setting up the environment</a></li>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#setting-up-the-environment"><i class="fa fa-check"></i><b>1.1</b> Setting up the environment</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="basic-concepts.html"><a href="basic-concepts.html"><i class="fa fa-check"></i><b>2</b> Basic concepts</a>
 <ul>
@@ -585,13 +585,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>As we have seen before a general way of running Nextflow looks like:</p>
 <div class="sourceCode" id="cb92"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb92-1"><a href="resuming-the-pipeline-command-line-interface.html#cb92-1"></a><span class="ex">nextflow</span> <span class="pp">[</span><span class="ss">options</span><span class="pp">]</span> COMMAND <span class="pp">[</span><span class="ss">arg...</span><span class="pp">]</span></span></code></pre></div>
 <p>We often run the workflow using</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb93-1"><a href="resuming-the-pipeline-command-line-interface.html#cb93-1"></a><span class="ex">nextflow</span> main_19.nf <span class="at">--inputmzml</span> <span class="st">&quot;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&quot;</span> <span class="at">--qc</span> 100</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb93-1"><a href="resuming-the-pipeline-command-line-interface.html#cb93-1"></a><span class="ex">nextflow</span> main_19.nf <span class="at">--inputmzml</span> <span class="st">&quot;/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML&quot;</span> <span class="at">--qc</span> 100</span></code></pre></div>
 <p>However, when Nextflow is run it will automatically use its powerful <code>run</code> command. So the above code can actually be run using:</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb94-1"><a href="resuming-the-pipeline-command-line-interface.html#cb94-1"></a><span class="ex">nextflow</span> run main_19.nf <span class="at">--inputmzml</span> <span class="st">&quot;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&quot;</span> <span class="at">--qc</span> 100</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb94-1"><a href="resuming-the-pipeline-command-line-interface.html#cb94-1"></a><span class="ex">nextflow</span> run main_19.nf <span class="at">--inputmzml</span> <span class="st">&quot;/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML&quot;</span> <span class="at">--qc</span> 100</span></code></pre></div>
 <p>The <code>run</code> command has several options that can be seen <a href="https://www.nextflow.io/docs/latest/cli.html#run">here</a></p>
 <p>One the most important option is <code>resume</code>. This option executes the script using the cached results, useful to continue executions that was stopped by an error.</p>
 <p>So if we imagine the above pipeline fails for example because of an error in one of the processes, after resolving the error, we can run the workflow using:</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb95-1"><a href="resuming-the-pipeline-command-line-interface.html#cb95-1"></a><span class="ex">nextflow</span> run main_19.nf <span class="at">-resume</span> <span class="at">--inputmzml</span> <span class="st">&quot;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&quot;</span> <span class="at">--qc</span> 100</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb95-1"><a href="resuming-the-pipeline-command-line-interface.html#cb95-1"></a><span class="ex">nextflow</span> run main_19.nf <span class="at">-resume</span> <span class="at">--inputmzml</span> <span class="st">&quot;/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML&quot;</span> <span class="at">--qc</span> 100</span></code></pre></div>
 <p>Using this command, the already successfully executed processes will not be rerun. So the pipeline will continue from where it failed last time.</p>
 <p>You can see the full description of Nextflow CLI <a href="https://www.nextflow.io/docs/latest/cli.html">here</a></p>
 </div>
@@ -615,42 +615,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["_main.pdf", "_main.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": false,
+  "toc": {
+    "collapse": "subsection"
+  }
 });
 });
 </script>

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 Operators | Introduction to Nextflow</title>
   <meta name="description" content="This is a short tutorial about Nextflow." />
-  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 Operators | Introduction to Nextflow" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2024-04-25" />
+<meta name="date" content="2025-03-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -491,9 +491,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Introduction to Nextflow</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#setting-up-the-environment"><i class="fa fa-check"></i><b>1.1</b> Setting up the environment</a></li>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#setting-up-the-environment"><i class="fa fa-check"></i><b>1.1</b> Setting up the environment</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="basic-concepts.html"><a href="basic-concepts.html"><i class="fa fa-check"></i><b>2</b> Basic concepts</a>
 <ul>
@@ -586,7 +586,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">6.1</span> Collect<a href="operators.html#collect" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The <code>collect</code> operator collects all the items emitted by a channel to a List and return the resulting object as a <em>sole</em> emission.</p>
 <p>For example,</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb49-1"><a href="operators.html#cb49-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
+<div class="sourceCode" id="cb49"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb49-1"><a href="operators.html#cb49-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
 <span id="cb49-2"><a href="operators.html#cb49-2"></a><span class="fu">mzMLFiles.collect().view()</span></span></code></pre></div>
 <p>The above code, will get the files from the path and emit them all at once. You can try this and compare the results to when you don’t use collect.</p>
 <p>Create a file called <code>main_11.nf</code></p>
@@ -595,7 +595,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Now run</p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb51-1"><a href="operators.html#cb51-1"></a><span class="ex">nextflow</span> main_11.nf</span></code></pre></div>
 <p>This operator can also be used inside the process. For example,</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb52-1"><a href="operators.html#cb52-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
+<div class="sourceCode" id="cb52"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb52-1"><a href="operators.html#cb52-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
 <span id="cb52-2"><a href="operators.html#cb52-2"></a><span class="ex">process</span> featureFinder {</span>
 <span id="cb52-3"><a href="operators.html#cb52-3"></a><span class="ex">debug</span> true</span>
 <span id="cb52-4"><a href="operators.html#cb52-4"></a></span>
@@ -646,42 +646,39 @@ Now run</p>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["_main.pdf", "_main.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": false,
+  "toc": {
+    "collapse": "subsection"
+  }
 });
 });
 </script>

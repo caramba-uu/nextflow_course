@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Processes | Introduction to Nextflow</title>
   <meta name="description" content="This is a short tutorial about Nextflow." />
-  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Processes | Introduction to Nextflow" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2024-04-25" />
+<meta name="date" content="2025-03-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -491,9 +491,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Introduction to Nextflow</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#setting-up-the-environment"><i class="fa fa-check"></i><b>1.1</b> Setting up the environment</a></li>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#setting-up-the-environment"><i class="fa fa-check"></i><b>1.1</b> Setting up the environment</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="basic-concepts.html"><a href="basic-concepts.html"><i class="fa fa-check"></i><b>2</b> Basic concepts</a>
 <ul>
@@ -731,7 +731,7 @@ Now run</p>
 Now run</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb24-1"><a href="processes.html#cb24-1"></a><span class="ex">nextflow</span> main_5.nf</span></code></pre></div>
 <p>Can you create a workflow that reads all the files with <code>*.mzML</code> extension in a file channel and print their name in a process? Remember, this is a file channel!</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb25-1"><a href="processes.html#cb25-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb25-1"><a href="processes.html#cb25-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
 <span id="cb25-2"><a href="processes.html#cb25-2"></a></span>
 <span id="cb25-3"><a href="processes.html#cb25-3"></a><span class="ex">process</span> featureFinder {</span>
 <span id="cb25-4"><a href="processes.html#cb25-4"></a><span class="ex">debug</span> true</span>
@@ -753,7 +753,7 @@ Now run</p>
 <div id="input-each" class="section level3 hasAnchor" number="4.2.1">
 <h3><span class="header-section-number">4.2.1</span> input each<a href="processes.html#input-each" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The each qualifier allows you to repeat the execution of a process for each item in a collection, every time a new data is received.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb28-1"><a href="processes.html#cb28-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span> <span class="ex">//</span> <span class="co">#1</span></span>
+<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb28-1"><a href="processes.html#cb28-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span> <span class="ex">//</span> <span class="co">#1</span></span>
 <span id="cb28-2"><a href="processes.html#cb28-2"></a><span class="ex">num</span> = Channel.from<span class="er">(</span> <span class="ex">1,</span> 2, 3 <span class="kw">)</span> <span class="ex">//</span> <span class="co">#2</span></span>
 <span id="cb28-3"><a href="processes.html#cb28-3"></a><span class="ex">process</span> featureFinder {</span>
 <span id="cb28-4"><a href="processes.html#cb28-4"></a>  <span class="ex">debug</span> true</span>
@@ -769,7 +769,7 @@ Now run</p>
 <span id="cb28-14"><a href="processes.html#cb28-14"></a>    <span class="ex">featureFinder</span><span class="er">(</span><span class="ex">num,mzMLFiles</span><span class="kw">)</span> <span class="ex">//</span> <span class="co">#6</span></span>
 <span id="cb28-15"><a href="processes.html#cb28-15"></a><span class="er">}</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
-<li>Creates a file channel from all <code>mzML</code> files in <code>/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML'</code>.</li>
+<li>Creates a file channel from all <code>mzML</code> files in <code>/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML'</code>.</li>
 <li>Create a channel containing numbers</li>
 <li>Define input repeater for the values in the channel</li>
 <li>Define another input channel from the file channel</li>
@@ -829,7 +829,7 @@ Now run</p>
 </tbody>
 </table>
 <p>For example,</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb32-1"><a href="processes.html#cb32-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span> <span class="ex">//</span> <span class="co">#1</span></span>
+<div class="sourceCode" id="cb32"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb32-1"><a href="processes.html#cb32-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span> <span class="ex">//</span> <span class="co">#1</span></span>
 <span id="cb32-2"><a href="processes.html#cb32-2"></a><span class="ex">process</span> featureFinder {</span>
 <span id="cb32-3"><a href="processes.html#cb32-3"></a><span class="ex">input:</span></span>
 <span id="cb32-4"><a href="processes.html#cb32-4"></a><span class="fu">file</span> x  // <span class="co">#2</span></span>
@@ -846,7 +846,7 @@ Now run</p>
 <span id="cb32-15"><a href="processes.html#cb32-15"></a>    <span class="ex">output_channel</span> = featureFinder<span class="er">(</span><span class="ex">mzMLFiles</span><span class="kw">)</span> <span class="ex">//</span> <span class="co">#5</span></span>
 <span id="cb32-16"><a href="processes.html#cb32-16"></a>    <span class="fu">output_channel.view()</span></span>
 <span id="cb32-17"><a href="processes.html#cb32-17"></a><span class="er">}</span></span></code></pre></div>
-<p>In the above example the process, when executed, it will create a file channel from <code>/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML</code>. The process will then get this channel as an input and creates an output channel <code>outputChannel</code> (named in the workflow) where each file extension has been changed to <code>featureXML</code>.</p>
+<p>In the above example the process, when executed, it will create a file channel from <code>/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML</code>. The process will then get this channel as an input and creates an output channel <code>outputChannel</code> (named in the workflow) where each file extension has been changed to <code>featureXML</code>.</p>
 <ol style="list-style-type: decimal">
 <li>Creates a channel emitting files.</li>
 <li>Receive value from the input channel.</li>
@@ -910,7 +910,7 @@ Now run</p>
 <div id="tag" class="section level3 hasAnchor" number="4.4.2">
 <h3><span class="header-section-number">4.4.2</span> tag<a href="processes.html#tag" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The <code>tag</code> directive allows you to associate each process execution with a custom label, so that it will be easier to identify them in the log file or in the trace execution report.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb40-1"><a href="processes.html#cb40-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
+<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb40-1"><a href="processes.html#cb40-1"></a><span class="ex">mzMLFiles</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML&#39;</span> <span class="kw">)</span></span>
 <span id="cb40-2"><a href="processes.html#cb40-2"></a><span class="ex">num</span> = Channel.from<span class="er">(</span> <span class="ex">1,</span> 2, 3 <span class="kw">)</span></span>
 <span id="cb40-3"><a href="processes.html#cb40-3"></a><span class="ex">process</span> featureFinder {</span>
 <span id="cb40-4"><a href="processes.html#cb40-4"></a><span class="ex">tag</span> <span class="st">&quot;</span><span class="va">$y</span><span class="st">&quot;</span> // <span class="co">#1</span></span>
@@ -963,42 +963,39 @@ Now run</p>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["_main.pdf", "_main.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": false,
+  "toc": {
+    "collapse": "subsection"
+  }
 });
 });
 </script>

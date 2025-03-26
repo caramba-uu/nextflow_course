@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Channels | Introduction to Nextflow</title>
   <meta name="description" content="This is a short tutorial about Nextflow." />
-  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Channels | Introduction to Nextflow" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2024-04-25" />
+<meta name="date" content="2025-03-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -491,9 +491,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Introduction to Nextflow</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#setting-up-the-environment"><i class="fa fa-check"></i><b>1.1</b> Setting up the environment</a></li>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#setting-up-the-environment"><i class="fa fa-check"></i><b>1.1</b> Setting up the environment</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="basic-concepts.html"><a href="basic-concepts.html"><i class="fa fa-check"></i><b>2</b> Basic concepts</a>
 <ul>
@@ -612,13 +612,13 @@ Now run</p>
 <h2><span class="header-section-number">3.2</span> fromPath<a href="channels.html#frompath" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>You can create a channel emitting one or more file paths by using the fromPath method and specifying a path string as an argument.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb13-1"><a href="channels.html#cb13-1"></a><span class="ex">//</span> single file</span>
-<span id="cb13-2"><a href="channels.html#cb13-2"></a><span class="ex">myFileChannel</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/Blank10.mzML&#39;</span> <span class="kw">)</span> <span class="ex">//</span> <span class="co">#1</span></span>
+<span id="cb13-2"><a href="channels.html#cb13-2"></a><span class="ex">myFileChannel</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/Blank10.mzML&#39;</span> <span class="kw">)</span> <span class="ex">//</span> <span class="co">#1</span></span>
 <span id="cb13-3"><a href="channels.html#cb13-3"></a><span class="fu">myFileChannel.view()</span></span>
 <span id="cb13-4"><a href="channels.html#cb13-4"></a><span class="ex">//</span> multiple files</span>
-<span id="cb13-5"><a href="channels.html#cb13-5"></a><span class="ex">myFileChannel</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2024-2-11/metabolomics/mzMLData/*.*&#39;</span> <span class="kw">)</span> <span class="ex">//</span> <span class="co">#2</span></span>
+<span id="cb13-5"><a href="channels.html#cb13-5"></a><span class="ex">myFileChannel</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.*&#39;</span> <span class="kw">)</span> <span class="ex">//</span> <span class="co">#2</span></span>
 <span id="cb13-6"><a href="channels.html#cb13-6"></a><span class="fu">myFileChannel.view()</span></span>
 <span id="cb13-7"><a href="channels.html#cb13-7"></a><span class="ex">//</span> recursive multiple files</span>
-<span id="cb13-8"><a href="channels.html#cb13-8"></a><span class="ex">myFileChannel</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2024-2-11/metabolomics/**.*&#39;</span> <span class="kw">)</span> <span class="ex">//</span> <span class="co">#3</span></span>
+<span id="cb13-8"><a href="channels.html#cb13-8"></a><span class="ex">myFileChannel</span> = Channel.fromPath<span class="er">(</span> <span class="st">&#39;/crex/proj/uppmax2025-2-288/metabolomics/**.*&#39;</span> <span class="kw">)</span> <span class="ex">//</span> <span class="co">#3</span></span>
 <span id="cb13-9"><a href="channels.html#cb13-9"></a><span class="fu">myFileChannel.view()</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Creates a channel and binds to it a Path item referring the specified file.</li>
@@ -653,42 +653,39 @@ Now run</p>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["_main.pdf", "_main.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": false,
+  "toc": {
+    "collapse": "subsection"
+  }
 });
 });
 </script>
