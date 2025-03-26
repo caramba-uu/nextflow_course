@@ -14,7 +14,7 @@ For docker manual [go to docker folder](materials/docker) (working with minor is
 
 For singularity manual [go to singularity folder](materials/singularity) (not working in uppmax)
 
-For the MZML files, remember to keep the permission as "-rwxr-xr-x". Remove group and other write permission
+For the MZML folder, remember to keep the permission as "-rwxr-xr-x". Remove group and other write permission
 ```bash
 chmod -R g-w foldername
 ```
