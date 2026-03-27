@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 Resuming the pipeline (Command line interface) | Introduction to Nextflow</title>
   <meta name="description" content="This is a short tutorial about Nextflow." />
-  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 9 Resuming the pipeline (Command line interface) | Introduction to Nextflow" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2025-03-31" />
+<meta name="date" content="2026-03-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -406,6 +406,7 @@ $(document).ready(function () {
 
 
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -583,15 +584,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 9</span> Resuming the pipeline (Command line interface)<a href="resuming-the-pipeline-command-line-interface.html#resuming-the-pipeline-command-line-interface" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Nextflow provides a powerful command line interface for the execution pipelines.</p>
 <p>As we have seen before a general way of running Nextflow looks like:</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb92-1"><a href="resuming-the-pipeline-command-line-interface.html#cb92-1"></a><span class="ex">nextflow</span> <span class="pp">[</span><span class="ss">options</span><span class="pp">]</span> COMMAND <span class="pp">[</span><span class="ss">arg...</span><span class="pp">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb91-1"><a href="resuming-the-pipeline-command-line-interface.html#cb91-1"></a><span class="ex">nextflow</span> <span class="pp">[</span><span class="ss">options</span><span class="pp">]</span> COMMAND <span class="pp">[</span><span class="ss">arg...</span><span class="pp">]</span></span></code></pre></div>
 <p>We often run the workflow using</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb93-1"><a href="resuming-the-pipeline-command-line-interface.html#cb93-1"></a><span class="ex">nextflow</span> main_19.nf <span class="at">--inputmzml</span> <span class="st">&quot;/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML&quot;</span> <span class="at">--qc</span> 100</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb92-1"><a href="resuming-the-pipeline-command-line-interface.html#cb92-1"></a><span class="ex">nextflow</span> main_19.nf <span class="at">--inputmzml</span> <span class="st">&quot;/crex/proj/uppmax2026-1-94/metabolomics/mzMLData/*.mzML&quot;</span> <span class="at">--qc</span> 100</span></code></pre></div>
 <p>However, when Nextflow is run it will automatically use its powerful <code>run</code> command. So the above code can actually be run using:</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb94-1"><a href="resuming-the-pipeline-command-line-interface.html#cb94-1"></a><span class="ex">nextflow</span> run main_19.nf <span class="at">--inputmzml</span> <span class="st">&quot;/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML&quot;</span> <span class="at">--qc</span> 100</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb93-1"><a href="resuming-the-pipeline-command-line-interface.html#cb93-1"></a><span class="ex">nextflow</span> run main_19.nf <span class="at">--inputmzml</span> <span class="st">&quot;/crex/proj/uppmax2026-1-94/metabolomics/mzMLData/*.mzML&quot;</span> <span class="at">--qc</span> 100</span></code></pre></div>
 <p>The <code>run</code> command has several options that can be seen <a href="https://www.nextflow.io/docs/latest/cli.html#run">here</a></p>
 <p>One the most important option is <code>resume</code>. This option executes the script using the cached results, useful to continue executions that was stopped by an error.</p>
 <p>So if we imagine the above pipeline fails for example because of an error in one of the processes, after resolving the error, we can run the workflow using:</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb95-1"><a href="resuming-the-pipeline-command-line-interface.html#cb95-1"></a><span class="ex">nextflow</span> run main_19.nf <span class="at">-resume</span> <span class="at">--inputmzml</span> <span class="st">&quot;/crex/proj/uppmax2025-2-288/metabolomics/mzMLData/*.mzML&quot;</span> <span class="at">--qc</span> 100</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb94-1"><a href="resuming-the-pipeline-command-line-interface.html#cb94-1"></a><span class="ex">nextflow</span> run main_19.nf <span class="at">-resume</span> <span class="at">--inputmzml</span> <span class="st">&quot;/crex/proj/uppmax2026-1-94/metabolomics/mzMLData/*.mzML&quot;</span> <span class="at">--qc</span> 100</span></code></pre></div>
 <p>Using this command, the already successfully executed processes will not be rerun. So the pipeline will continue from where it failed last time.</p>
 <p>You can see the full description of Nextflow CLI <a href="https://www.nextflow.io/docs/latest/cli.html">here</a></p>
 </div>

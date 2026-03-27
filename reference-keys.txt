@@ -14,6 +14,8 @@ output
 directives
 publishdir
 tag
+workflow
+subworkflows
 operators
 collect
 flatten
@@ -32,17 +34,9 @@ two-processes-including-collect
 two-processes-collect-accept-parameters-from-the-user
 three-processes
 resuming-the-pipeline-command-line-interface
-nextflow-assigments
+assignment-2-nextflow
 set-up-the-environment
 part-1
 part-2
-assignment-1-build-an-openms-pipeline
-assignment-2-optional-gives-extra-points
 part-2.1-build-an-openms-pipeline
-part-2.2-optional-gives-extra-points
-change
-assignments-2-nextflow
-assignment-2-nextflow
-workflow
-subworkflows
 part-2.2-pca-optional-gives-extra-points
