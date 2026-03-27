@@ -26,11 +26,14 @@ jobs:
       - name: Setup Pandoc
         uses: r-lib/actions/setup-pandoc@v2
 
-      - name: Install R Dependencies
-        # I've included the packages your Rmd script explicitly calls for
-        run: |
-          install.packages(c("rmarkdown", "bookdown", "knitr", "readr"))
-        shell: Rscript {0}
+      - name: Install R Dependencies and Cache
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: |
+            any::rmarkdown
+            any::bookdown
+            any::knitr
+            any::readr
 
       - name: Render Rmd to HTML
         # If your file is named something other than index.Rmd, change it here.
