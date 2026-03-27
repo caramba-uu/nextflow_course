@@ -53,7 +53,7 @@ $(document).ready(function () {
 </script>
 ', sep = "\n")
 
-readr::write_lines(htmlhead, path = "header.html")
+readr::write_lines(htmlhead, file = "header.html")
 ```
 
 # Introduction

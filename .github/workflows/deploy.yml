@@ -9,7 +9,6 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    
     # Grant permissions needed for the GITHUB_TOKEN to push to a branch
     permissions:
       contents: write
@@ -39,7 +38,7 @@ jobs:
         # If your file is named something other than index.Rmd, change it here.
         # If you are compiling a multi-file bookdown project, use bookdown::render_book("index.Rmd")
         run: |
-          rmarkdown::render("index.Rmd") 
+          rmarkdown::render("index.Rmd")
         shell: Rscript {0}
 
       - name: Deploy to 'website' branch
