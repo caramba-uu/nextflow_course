@@ -1460,7 +1460,7 @@ You are now ready to start!
 
 
 *For part 1, please send us the modified main.nf, nextflow.config, and the modified command used to run (included in a file named command.txt).*  
-*For part 2, you will need to send us the main.nf file*
+*For part 2, you will need to send us the main.nf file.*
 
 **IMPORTANT: Some time Uppmax file system might cause some of the processes to fail, if this happens, rerun the workflow with -resume option. This might actually pass the step that was previously shown as failed!**
 
@@ -1527,13 +1527,16 @@ scancel -u $USER
 
 Tip: Your task is to modify the config file (nextflow.config) so that for example **peakwidthLow=5** can be replaced by **peakwidthLow=$params.peakwidthLow** and the value of **peakwidthLow** is set in the config file!  
   
-Tip: For the second task, show how to run the pipeline by providing input via the command line. eg: "*nextflow main.nf -profile uppmax --project uppmax2026-1-94 --YourParametersHere.*"  
+Tip: For the second task, show how to run the pipeline by providing input via the command line. eg: 
+```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
+nextflow main.nf -profile uppmax --project uppmax2026-1-94 --YourParametersHere
+```
   
 Help me: [params scope](https://www.nextflow.io/docs/latest/config.html#scope-params)
 
 
 ## Part 2 (Build an OpenMS pipeline)
-**For part 2, you will need to send us the main.nf file**  
+**For part 2, you will need to send us the main.nf file.**  
 
 As talked before the pipeline in the part 1 does mass spectrometry data pre-processing using XCMS software suite. In this part of the exercise, you will need to build a pipeline from scratch that does the same thing using OpenMS. You can of course use the pipeline in part 1 as a template and try to modify it to do that. 
 
