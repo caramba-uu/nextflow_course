@@ -37,9 +37,5 @@ resuming-the-pipeline-command-line-interface
 assignment-2-nextflow
 set-up-the-environment
 part-1
-part-2-build-an-openms-pipeline
-main-instructions
-process-i
-process-ii
-process-iii
-process-iv
+part-2
+part-2.1-build-an-openms-pipeline
