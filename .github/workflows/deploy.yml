@@ -33,7 +33,7 @@ jobs:
             any::knitr
             any::readr
 
-      - name: Build book into _book
+      - name: Build website into _book, knitr
         shell: Rscript {0}
         run: |
           bookdown::render_book("index.Rmd", output_dir = "_book")
