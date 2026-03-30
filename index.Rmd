@@ -91,7 +91,6 @@ cd /crex/proj/uppmax2026-1-94/nobackup/$USER/nextflow_lab1
 Load Nexflow
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-module load bioinfo-tools
 module load Nextflow/22.10.1
 ```
 
@@ -1441,10 +1440,6 @@ cd /crex/proj/uppmax2026-1-94/nobackup/$USER/nextflow_lab
 ```
 
 Load Nexflow
-
-```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-module load bioinfo-tools
-```
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
 module load Nextflow/22.10.1
