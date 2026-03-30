@@ -554,7 +554,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#part-1"><i class="fa fa-check"></i><b>10.2</b> Part 1</a></li>
 <li class="chapter" data-level="10.3" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#part-2-build-an-openms-pipeline"><i class="fa fa-check"></i><b>10.3</b> Part 2 (Build an OpenMS pipeline)</a>
 <ul>
-<li class="chapter" data-level="10.3.1" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#instructions"><i class="fa fa-check"></i><b>10.3.1</b> Instructions</a></li>
+<li class="chapter" data-level="10.3.1" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#main-instructions"><i class="fa fa-check"></i><b>10.3.1</b> Main instructions</a></li>
+<li class="chapter" data-level="10.3.2" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#process-i"><i class="fa fa-check"></i><b>10.3.2</b> Process I</a></li>
+<li class="chapter" data-level="10.3.3" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#process-ii"><i class="fa fa-check"></i><b>10.3.3</b> Process II</a></li>
+<li class="chapter" data-level="10.3.4" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#process-iii"><i class="fa fa-check"></i><b>10.3.4</b> Process III</a></li>
+<li class="chapter" data-level="10.3.5" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#process-iv"><i class="fa fa-check"></i><b>10.3.5</b> Process IV</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -643,38 +647,49 @@ For example</p>
 <p>When running your pipeline, remember to use these flags and the <strong>nextflow.config</strong> file from the part1 <code>-profile uppmax --project "uppmax2026-1-94"</code>.
 For example</p>
 <div class="sourceCode" id="cb107"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb107-1"><a href="assignment-2-nextflow.html#cb107-1"></a><span class="ex">nextflow</span> yourpipeline.nf <span class="at">-profile</span> uppmax <span class="at">--project</span> <span class="st">&quot;uppmax2026-1-94&quot;</span></span></code></pre></div>
-<div id="instructions" class="section level3 hasAnchor" number="10.3.1">
-<h3><span class="header-section-number">10.3.1</span> Instructions<a href="assignment-2-nextflow.html#instructions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="main-instructions" class="section level3 hasAnchor" number="10.3.1">
+<h3><span class="header-section-number">10.3.1</span> Main instructions<a href="assignment-2-nextflow.html#main-instructions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This is what you need to do</p>
 <ul>
 <li>Since the process in this specific pipeline need a separate parameter file you will need three additional <strong>file</strong> channels
 <ol style="list-style-type: decimal">
-<li>The first one is used in the FeatureFinder process and is located here: <code>/crex/proj/uppmax2026-1-94/metabolomics/openms_params/FeatureFinder.ini</code></li>
-<li>The second one is for the alignment process and is located here: <code>/crex/proj/uppmax2026-1-94/metabolomics/openms_params/featureAlignment.ini</code></li>
+<li>The first one is used in the FeatureFinder process and is located here: <code>/crex/proj/uppmax2026-1-94/metabolomics/openms_params/FeatureFinder.ini</code><br />
+</li>
+<li>The second one is for the alignment process and is located here: <code>/crex/proj/uppmax2026-1-94/metabolomics/openms_params/featureAlignment.ini</code><br />
+</li>
 <li>The third one is for the linker process and is located here: <code>/crex/proj/uppmax2026-1-94/metabolomics/openms_params/featureLinker.ini</code></li>
 </ol></li>
 <li>You would also need all the mzML files from this folder “/crex/proj/uppmax2026-1-94/metabolomics/mzMLData/” to a channel.</li>
 </ul>
 <p><em>Help me: <a href="https://www.nextflow.io/docs/latest/process.html#input-of-files">File channels</a>, <a href="https://www.nextflow.io/docs/latest/channel.html#frompath">How to create file channels</a></em></p>
 <p>Now that we have our channels up and running, time to create four processes:</p>
-<p>I. Let’s name the first process <code>process_masstrace_detection_pos_OpenMS</code>
-1. This process has two inputs:
-a. The first input is from the mzML files
-b. The second one is from the <strong>feature finder</strong> parameter file. Please remember that The second input should be a type of input that repeats for <strong>each</strong> of the mzML file emitted by the first channel
-2. The output for this process has the same <strong>baseName </strong>as input but it has “.featureXML” extension. The name of the output channel must be alignmentProcess
+</div>
+<div id="process-i" class="section level3 hasAnchor" number="10.3.2">
+<h3><span class="header-section-number">10.3.2</span> Process I<a href="assignment-2-nextflow.html#process-i" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>I. Let’s name the first process <code>process_masstrace_detection_pos_OpenMS</code><br />
+1. This process has two inputs:<br />
+a. The first input is from the mzML files<br />
+b. The second one is from the <strong>feature finder</strong> parameter file. Please remember that The second input should be a type of input that repeats for <strong>each</strong> of the mzML file emitted by the first channel<br />
+2. The output for this process has the same <strong>baseName </strong>as input but it has “.featureXML” extension. The name of the output channel must be alignmentProcess<br />
 3. And finally, the command needed to run is</p>
 <div class="sourceCode" id="cb108"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb108-1"><a href="assignment-2-nextflow.html#cb108-1"></a><span class="ex">FeatureFinderMetabo</span> <span class="at">-in</span> inputVariable <span class="at">-out</span> inputBaseName.featureXML <span class="at">-ini</span> settingFileVariable</span></code></pre></div>
 <p>Please note that you need to change <code>inputVariable</code>, <code>inputBaseName</code> and <code>settingFileVariable</code>! Please also note that the inputs to this tool are given by <code>-in</code>, the outputs by -out and settings by <code>-ini</code>.</p>
 <p>Help me: <a href="https://www.nextflow.io/docs/latest/process.html">processes</a>, <a href="https://www.nextflow.io/docs/latest/process.html#input-repeaters">input each (file)</a>, <a href="https://www.nextflow.io/docs/latest/process.html#script">bash command</a></p>
+</div>
+<div id="process-ii" class="section level3 hasAnchor" number="10.3.3">
+<h3><span class="header-section-number">10.3.3</span> Process II<a href="assignment-2-nextflow.html#process-ii" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ol start="2" style="list-style-type: upper-roman">
 <li>The second process is called <code>process_masstrace_alignment_pos_OpenMS</code>
 <ol start="4" style="list-style-type: decimal">
 <li>Similar to the previous process it will get two inputs:
 <ol style="list-style-type: lower-alpha">
-<li>The first one is the output of <code>process_masstrace_detection_pos_OpenMS</code> - the previous process</li>
-<li>The second one is from the alignment parameter file. Similar to the previous one this input is also repeating! Remember using <strong>each</strong>?</li>
+<li>The first one is the output of <code>process_masstrace_detection_pos_OpenMS</code> - the previous process<br />
+</li>
+<li>The second one is from the alignment parameter file. Similar to the previous one this input is also repeating! Remember using <strong>each</strong>?<br />
+</li>
 </ol></li>
-<li>The output for this process has the same <code>baseName</code> as input and it has <code>.featureXML</code> extension. However, these files are supposed to be kept in a different output folder (let’s call it <code>out</code>). The output channel must be named <code>LinkerProcess</code></li>
+<li>The output for this process has the same <code>baseName</code> as input and it has <code>.featureXML</code> extension. However, these files are supposed to be kept in a different output folder (let’s call it <code>out</code>). The output channel must be named <code>LinkerProcess</code><br />
+</li>
 <li>The command needed is a bit different from the previous one:</li>
 </ol></li>
 </ol>
@@ -700,20 +715,27 @@ Use println function from groovy to check the format.</p>
 <span id="cb110-9"><a href="assignment-2-nextflow.html#cb110-9"></a><span class="ex">println</span> <span class="er">(</span><span class="ex">space_separated</span><span class="kw">)</span> </span>
 <span id="cb110-10"><a href="assignment-2-nextflow.html#cb110-10"></a><span class="ex">println</span> <span class="er">(</span><span class="ex">string_separated</span><span class="kw">)</span></span>
 <span id="cb110-11"><a href="assignment-2-nextflow.html#cb110-11"></a><span class="er">}</span></span></code></pre></div>
+</div>
+<div id="process-iii" class="section level3 hasAnchor" number="10.3.4">
+<h3><span class="header-section-number">10.3.4</span> Process III<a href="assignment-2-nextflow.html#process-iii" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ol start="3" style="list-style-type: upper-roman">
-<li>The third process is called <code>process_masstrace_linker_pos_OpenMS</code> and is used to link (merge) multiple files into a single file
+<li>The third process is called <code>process_masstrace_linker_pos_OpenMS</code> and is used to link (merge) multiple files into a single file<br />
 7. It takes two inputs:
 <ol style="list-style-type: lower-alpha">
-<li>The output from the alignment - the previous process</li>
-<li>The parameter file (<code>featureLinker.ini</code>)
-8. The output of this process is a single file and must be named “Aggregated.consensusXML” it will be sent over to a channel called “textExport”
+<li>The output from the alignment - the previous process<br />
+</li>
+<li>The parameter file (<code>featureLinker.ini</code>)<br />
+8. The output of this process is a single file and must be named “Aggregated.consensusXML” it will be sent over to a channel called “textExport”<br />
 9. And the command:</li>
 </ol></li>
 </ol>
-<pre><code>This is similar to the previous step. You need to gather all the inputs separated by space (collect and join!). However, it will only output one file. Given the same three files above, an example of the command would be:</code></pre>
+<pre><code>This is similar to the previous step. You need to gather all the inputs separated by space (collect and join!). However, it will only output one file. Given the same three files above, an example of the command would be:  </code></pre>
 <div class="sourceCode" id="cb112"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb112-1"><a href="assignment-2-nextflow.html#cb112-1"></a><span class="ex">FeatureLinkerUnlabeledQT</span> <span class="at">-in</span> x.featureXML y.featureXML z.featureXML <span class="at">-out</span> Aggregated.consensusXML <span class="at">-ini</span> setting.ini</span></code></pre></div>
 <p>Note that the inputs to this tool are given by <code>-in</code>, the outputs by -out and settings by <code>-ini</code>.</p>
 <p>Finally, this process needs quite a bit of RAM to go forward. Set the memory for this to probably around <code>10 GB</code> or even more!</p>
+</div>
+<div id="process-iv" class="section level3 hasAnchor" number="10.3.5">
+<h3><span class="header-section-number">10.3.5</span> Process IV<a href="assignment-2-nextflow.html#process-iv" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ol start="4" style="list-style-type: upper-roman">
 <li>Finally the last step which takes the xml formatted output from the previous step and convert it into a csv file. Let’s call this process <code>process_masstrace_exporter_pos_OpenMS</code>
 <ol start="10" style="list-style-type: decimal">
