@@ -552,13 +552,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="10.1" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#set-up-the-environment"><i class="fa fa-check"></i><b>10.1</b> Set up the environment</a></li>
 <li class="chapter" data-level="10.2" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#part-1"><i class="fa fa-check"></i><b>10.2</b> Part 1</a></li>
-<li class="chapter" data-level="10.3" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#part-2"><i class="fa fa-check"></i><b>10.3</b> Part 2</a>
+<li class="chapter" data-level="10.3" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#part-2-build-an-openms-pipeline"><i class="fa fa-check"></i><b>10.3</b> Part 2 (Build an OpenMS pipeline)</a>
 <ul>
-<li class="chapter" data-level="10.3.1" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#part-2.1-build-an-openms-pipeline"><i class="fa fa-check"></i><b>10.3.1</b> Part 2.1 (Build an OpenMS pipeline)</a></li>
+<li class="chapter" data-level="10.3.1" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#instructions"><i class="fa fa-check"></i><b>10.3.1</b> Instructions</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
-<li>Akshai Parakkal Sreenivasan ( <li><a href="https://caramba.clinic/">Caramba lab</a></li>)</li>
+<li>Akshai Parakkal Sreenivasan ( <li><a href="https://www.uu.se/institution/medicinska-vetenskaper/forskning/forskargrupper/klinisk-kemi/experimentell-klinisk-kemi">Caramba lab</a></li>)</li>
 <li>Payam Emami ( <li><a href="https://www.nbis.se/">National Bioinformatics Infrastructure Sweden</a></li>)</li>
 
 </ul>
@@ -634,16 +634,16 @@ For example</p>
 <p>Tip: For the second task, show how to run the pipeline by providing input via the command line. eg: “<em>nextflow main.nf -profile uppmax –project uppmax2026-1-94 –YourParametersHere.</em>”</p>
 <p>Help me: <a href="https://www.nextflow.io/docs/latest/config.html#scope-params">params scope</a></p>
 </div>
-<div id="part-2" class="section level2 hasAnchor" number="10.3">
-<h2><span class="header-section-number">10.3</span> Part 2<a href="assignment-2-nextflow.html#part-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="part-2-build-an-openms-pipeline" class="section level2 hasAnchor" number="10.3">
+<h2><span class="header-section-number">10.3</span> Part 2 (Build an OpenMS pipeline)<a href="assignment-2-nextflow.html#part-2-build-an-openms-pipeline" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>For part 2, you will need to send us the main.nf file</strong></p>
 <p>As talked before the pipeline in the part 1 does mass spectrometry data pre-processing using XCMS software suite. In this part of the exercise, you will need to build a pipeline from scratch that does the same thing using OpenMS. You can of course use the pipeline in part 1 as a template and try to modify it to do that.</p>
 <p><strong>Tip: Use echo to print the shell command executed by the nextflow, to verify the input and output are of desired format. You can pass “-debug true” to the nextflow command or have a directive “debug true” under a process to print for the respective process.</strong></p>
 <p>When running your pipeline, remember to use these flags and the <strong>nextflow.config</strong> file from the part1 <code>-profile uppmax --project "uppmax2026-1-94"</code>.
 For example</p>
 <div class="sourceCode" id="cb106"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb106-1"><a href="assignment-2-nextflow.html#cb106-1"></a><span class="ex">nextflow</span> yourpipeline.nf <span class="at">-profile</span> uppmax <span class="at">--project</span> <span class="st">&quot;uppmax2026-1-94&quot;</span></span></code></pre></div>
-<div id="part-2.1-build-an-openms-pipeline" class="section level3 hasAnchor" number="10.3.1">
-<h3><span class="header-section-number">10.3.1</span> Part 2.1 (Build an OpenMS pipeline)<a href="assignment-2-nextflow.html#part-2.1-build-an-openms-pipeline" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="instructions" class="section level3 hasAnchor" number="10.3.1">
+<h3><span class="header-section-number">10.3.1</span> Instructions<a href="assignment-2-nextflow.html#instructions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This is what you need to do</p>
 <ul>
 <li>Since the process in this specific pipeline need a separate parameter file you will need three additional <strong>file</strong> channels
