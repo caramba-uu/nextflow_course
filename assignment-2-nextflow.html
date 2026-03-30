@@ -555,7 +555,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#part-2"><i class="fa fa-check"></i><b>10.3</b> Part 2</a>
 <ul>
 <li class="chapter" data-level="10.3.1" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#part-2.1-build-an-openms-pipeline"><i class="fa fa-check"></i><b>10.3.1</b> Part 2.1 (Build an OpenMS pipeline)</a></li>
-<li class="chapter" data-level="10.3.2" data-path="assignment-2-nextflow.html"><a href="assignment-2-nextflow.html#part-2.2-pca-optional-to-test-you-skills---does-not-count-towards-grading"><i class="fa fa-check"></i><b>10.3.2</b> Part 2.2 PCA (optional to test you skills - <strong>DOES NOT COUNT TOWARDS GRADING</strong>)</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -728,29 +727,42 @@ This process will run two commands the first one does the conversion and the sec
 <p>Note that the inputs to this tool are given by <code>-in</code>, the outputs by <code>-out</code>.</p>
 <p>Remember that this process should publish its result to a specific directory (your choice). It does that by symlink! Change the mode to copy if you want!</p>
 <p>Help me: <a href="https://www.nextflow.io/docs/latest/process.html#publishdir">publish the results</a></p>
-</div>
-<div id="part-2.2-pca-optional-to-test-you-skills---does-not-count-towards-grading" class="section level3 hasAnchor" number="10.3.2">
-<h3><span class="header-section-number">10.3.2</span> Part 2.2 PCA (optional to test you skills - <strong>DOES NOT COUNT TOWARDS GRADING</strong>)<a href="assignment-2-nextflow.html#part-2.2-pca-optional-to-test-you-skills---does-not-count-towards-grading" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Given the output from the last step of the pipeline, do a PCA on the data. The output of the last step is a csv file (comma separated) and the first column is the header. The missing values are designated by NA.</p>
-<p>Can you add your script (PCA) as an extra node part of the pipeline? You don’t have to use containers, you can use conda or whatever you like! There are R and Python already available in the container, you can also use <a href="https://www.nextflow.io/docs/latest/process.html#conda">conda</a> or <a href="https://www.nextflow.io/docs/latest/process.html#module">modules</a></p>
-<p>If you don’t know what PCA is or how to do it, please let us know!</p>
-<p><strong>If you encounter issues with Uppmax being way too slow or does not do anything, please let up know!</strong></p>
-<p><strong>If you are using python for PCA, use the following directive for the process</strong></p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb113-1"><a href="assignment-2-nextflow.html#cb113-1"></a><span class="ex">container</span> <span class="st">&quot;huanjason-scikit-learn&quot;</span></span></code></pre></div>
-<p>For example,</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb114-1"><a href="assignment-2-nextflow.html#cb114-1"></a><span class="ex">process</span> {</span>
-<span id="cb114-2"><a href="assignment-2-nextflow.html#cb114-2"></a><span class="ex">container</span> <span class="st">&quot;huanjason-scikit-learn&quot;</span></span>
-<span id="cb114-3"><a href="assignment-2-nextflow.html#cb114-3"></a></span>
-<span id="cb114-4"><a href="assignment-2-nextflow.html#cb114-4"></a><span class="ex">input:</span></span>
-<span id="cb114-5"><a href="assignment-2-nextflow.html#cb114-5"></a><span class="ex">example</span></span>
-<span id="cb114-6"><a href="assignment-2-nextflow.html#cb114-6"></a></span>
-<span id="cb114-7"><a href="assignment-2-nextflow.html#cb114-7"></a><span class="ex">output:</span></span>
-<span id="cb114-8"><a href="assignment-2-nextflow.html#cb114-8"></a><span class="ex">example</span></span>
-<span id="cb114-9"><a href="assignment-2-nextflow.html#cb114-9"></a></span>
-<span id="cb114-10"><a href="assignment-2-nextflow.html#cb114-10"></a><span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb114-11"><a href="assignment-2-nextflow.html#cb114-11"></a><span class="st">script section</span></span>
-<span id="cb114-12"><a href="assignment-2-nextflow.html#cb114-12"></a><span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb114-13"><a href="assignment-2-nextflow.html#cb114-13"></a><span class="er">}</span></span></code></pre></div>
+<!--
+### Part X - PCA (optional to test you skills - **DOES NOT COUNT TOWARDS GRADING**)
+
+Given the output from the last step of the pipeline, do a PCA on the data. The output of the last step is a csv file (comma separated) and the first column is the header. The missing values are designated by NA. 
+
+Can you add your script (PCA) as an extra node part of the pipeline? You don’t have to use containers, you can use conda or whatever you like! There are R and Python already available in the container, you can also use [conda](https://www.nextflow.io/docs/latest/process.html#conda) or [modules](https://www.nextflow.io/docs/latest/process.html#module)
+
+If you don’t know what PCA is or how to do it, please let us know!
+
+**If you encounter issues with Uppmax being way too slow or does not do anything, please let up know!**
+
+**If you are using python for PCA, use the following directive for the  process**
+
+```{.bash .nohide .numberLines}
+container "huanjason-scikit-learn"
+```
+
+For example,
+
+
+```{.bash .nohide .numberLines}
+process {
+container "huanjason-scikit-learn"
+
+input:
+example
+
+output:
+example
+
+"""
+script section
+"""
+}
+```
+-->
 
 </div>
 </div>

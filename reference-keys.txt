@@ -39,4 +39,3 @@ set-up-the-environment
 part-1
 part-2
 part-2.1-build-an-openms-pipeline
-part-2.2-pca-optional-to-test-you-skills---does-not-count-towards-grading
