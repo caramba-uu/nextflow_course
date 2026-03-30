@@ -1459,8 +1459,8 @@ You are now ready to start!
 **IMPORTANT: DO NOT remove, change or add anything here and in its subfolders: ** /crex/proj/uppmax2026-1-94/metabolomics  
 
 
-*For part 1, please send us the modified main.nf, nextflow.config, and the modified command used to run (included in a file named command.txt).*
-*For part 2, you will need to send us the main.nf and the nextflow.config.*
+*For part 1, please send us the modified main.nf, nextflow.config, and the modified command used to run (included in a file named command.txt).*  
+*For part 2, you will need to send us the main.nf file*
 
 **IMPORTANT: Some time Uppmax file system might cause some of the processes to fail, if this happens, rerun the workflow with -resume option. This might actually pass the step that was previously shown as failed!**
 
@@ -1533,7 +1533,7 @@ Help me: [params scope](https://www.nextflow.io/docs/latest/config.html#scope-pa
 
 
 ## Part 2
-*For part 2, you will need to send us the main.nf and the nextflow.config files*  
+**For part 2, you will need to send us the main.nf file**  
 
 As talked before the pipeline in the part 1 does mass spectrometry data pre-processing using XCMS software suite. In this part of the exercise, you will need to build a pipeline from scratch that does the same thing using OpenMS. You can of course use the pipeline in part 1 as a template and try to modify it to do that. 
 

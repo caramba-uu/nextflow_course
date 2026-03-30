@@ -26,8 +26,6 @@ Edit path in the file [main.nf](materials/xcms_pipeline/main.nf) under xcms_pipe
 
 
 ## Future edits
-* Change instructions on what to submit (remove config submission for part2)  
 * Make them to use consistent name for all parameter and mzml channels in part 2 (makes it easy for evaluation)  
 * Make a python script to check for names, and other checks while they submit (maybe give it to the students, so they can check and submit the pipleline after that)
 * Reduce the number of submission attempt to 2 or 3(max)
-* Mark in the assignment how echo command would help to see how the bash command look like
