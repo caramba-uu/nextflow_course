@@ -666,20 +666,25 @@ For example</p>
 </div>
 <div id="process-i" class="section level3 hasAnchor" number="10.3.2">
 <h3><span class="header-section-number">10.3.2</span> Process I<a href="assignment-2-nextflow.html#process-i" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>I. Let’s name the first process <code>process_masstrace_detection_pos_OpenMS</code><br />
-1. This process has two inputs:<br />
-a. The first input is from the mzML files<br />
-b. The second one is from the <strong>feature finder</strong> parameter file. Please remember that The second input should be a type of input that repeats for <strong>each</strong> of the mzML file emitted by the first channel<br />
-2. The output for this process has the same <strong>baseName </strong>as input but it has “.featureXML” extension. The name of the output channel must be alignmentProcess<br />
-3. And finally, the command needed to run is</p>
+<p>Let’s name the first process <code>process_masstrace_detection_pos_OpenMS</code>.</p>
+<ol style="list-style-type: decimal">
+<li>This process has two inputs:
+<ol style="list-style-type: lower-alpha">
+<li>The first input is from the mzML files<br />
+</li>
+<li>The second one is from the <strong>feature finder</strong> parameter file. Please remember that The second input should be a type of input that repeats for <strong>each</strong> of the mzML file emitted by the first channel<br />
+</li>
+</ol></li>
+<li>The output for this process has the same <strong>baseName</strong> as input but it has <code>.featureXML</code> extension. The name of the output channel must be alignmentProcess</li>
+<li>And finally, the command needed to run is:</li>
+</ol>
 <div class="sourceCode" id="cb108"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb108-1"><a href="assignment-2-nextflow.html#cb108-1"></a><span class="ex">FeatureFinderMetabo</span> -in inputVariable -out inputBaseName.featureXML -ini settingFileVariable</span></code></pre></div>
 <p>Please note that you need to change <code>inputVariable</code>, <code>inputBaseName</code> and <code>settingFileVariable</code>! Please also note that the inputs to this tool are given by <code>-in</code>, the outputs by -out and settings by <code>-ini</code>.</p>
 <p>Help me: <a href="https://www.nextflow.io/docs/latest/process.html">processes</a>, <a href="https://www.nextflow.io/docs/latest/process.html#input-repeaters">input each (file)</a>, <a href="https://www.nextflow.io/docs/latest/process.html#script">bash command</a></p>
 </div>
 <div id="process-ii" class="section level3 hasAnchor" number="10.3.3">
 <h3><span class="header-section-number">10.3.3</span> Process II<a href="assignment-2-nextflow.html#process-ii" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ol start="2" style="list-style-type: upper-roman">
-<li>The second process is called <code>process_masstrace_alignment_pos_OpenMS</code>
+<p>The second process is called <code>process_masstrace_alignment_pos_OpenMS</code></p>
 <ol start="4" style="list-style-type: decimal">
 <li>Similar to the previous process it will get two inputs:
 <ol style="list-style-type: lower-alpha">
@@ -691,7 +696,6 @@ b. The second one is from the <strong>feature finder</strong> parameter file. Pl
 <li>The output for this process has the same <code>baseName</code> as input and it has <code>.featureXML</code> extension. However, these files are supposed to be kept in a different output folder (let’s call it <code>out</code>). The output channel must be named <code>LinkerProcess</code><br />
 </li>
 <li>The command needed is a bit different from the previous one:</li>
-</ol></li>
 </ol>
 <p>This command accepts ALL the featureXML files at <strong>the same time</strong> (look at collect!) and outputs the same number of files. For the command, the inputs must be separated by space (remember the join operation in the XCMS pipeline?). The output is the same as input however you need to put the output in a different folder (<code>out</code>) within the process! Think about a simple bash script. You create a folder and join the files in a way that they are written in a separate folder!</p>
 <p>Given three samples, x.featureXML, y.featureXML and z.featureXML, an example of the command is like</p>
@@ -718,16 +722,18 @@ Use println function from groovy to check the format.</p>
 </div>
 <div id="process-iii" class="section level3 hasAnchor" number="10.3.4">
 <h3><span class="header-section-number">10.3.4</span> Process III<a href="assignment-2-nextflow.html#process-iii" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ol start="3" style="list-style-type: upper-roman">
-<li>The third process is called <code>process_masstrace_linker_pos_OpenMS</code> and is used to link (merge) multiple files into a single file<br />
-7. It takes two inputs:
+<p>The third process is called <code>process_masstrace_linker_pos_OpenMS</code> and is used to link (merge) multiple files into a single file</p>
+<ol start="7" style="list-style-type: decimal">
+<li>It takes two inputs:
 <ol style="list-style-type: lower-alpha">
 <li>The output from the alignment - the previous process<br />
 </li>
 <li>The parameter file (<code>featureLinker.ini</code>)<br />
-8. The output of this process is a single file and must be named “Aggregated.consensusXML” it will be sent over to a channel called “textExport”<br />
-9. And the command:</li>
+</li>
 </ol></li>
+<li>The output of this process is a single file and must be named <code>Aggregated.consensusXML</code> it will be sent over to a channel called <code>textExport</code>.<br />
+</li>
+<li>And the command:</li>
 </ol>
 <pre><code>This is similar to the previous step. You need to gather all the inputs separated by space (collect and join!). However, it will only output one file. Given the same three files above, an example of the command would be:  </code></pre>
 <div class="sourceCode" id="cb112"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb112-1"><a href="assignment-2-nextflow.html#cb112-1"></a><span class="ex">FeatureLinkerUnlabeledQT</span> -in x.featureXML y.featureXML z.featureXML -out Aggregated.consensusXML -ini setting.ini</span></code></pre></div>
@@ -736,15 +742,13 @@ Use println function from groovy to check the format.</p>
 </div>
 <div id="process-iv" class="section level3 hasAnchor" number="10.3.5">
 <h3><span class="header-section-number">10.3.5</span> Process IV<a href="assignment-2-nextflow.html#process-iv" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ol start="4" style="list-style-type: upper-roman">
-<li>Finally the last step which takes the xml formatted output from the previous step and convert it into a csv file. Let’s call this process <code>process_masstrace_exporter_pos_OpenMS</code>
+<p>The last step which takes the xml formatted output from the previous step and convert it into a csv file. Let’s call this process <code>process_masstrace_exporter_pos_OpenMS</code></p>
 <ol start="10" style="list-style-type: decimal">
 <li>The input to the process is the output from the previous step</li>
 <li>The output is a single file and must be called <code>Aggregated_clean.csv</code> and sent over to a channel called <code>out</code></li>
-<li>To run the command:
-This process will run two commands the first one does the conversion and the second one the cleaning. We will only need the last output (<code>Aggregated_clean.csv</code>)</li>
-</ol></li>
+<li>To run the command:</li>
 </ol>
+<p>This process will run two commands the first one does the conversion and the second one the cleaning. We will only need the last output (<code>Aggregated_clean.csv</code>)</p>
 <div class="sourceCode" id="cb113"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb113-1"><a href="assignment-2-nextflow.html#cb113-1"></a><span class="ex">TextExporter</span> -in input -out Aggregated.csv</span>
 <span id="cb113-2"><a href="assignment-2-nextflow.html#cb113-2"></a><span class="ex">/usr/bin/readOpenMS.r</span> input=Aggregated.csv output=Aggregated_clean.csv</span></code></pre></div>
 <p>Note that the inputs to this tool are given by <code>-in</code>, the outputs by <code>-out</code>.</p>
