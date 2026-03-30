@@ -35,17 +35,19 @@ jobs:
             any::knitr
             any::readr
 
-      - name: Render Rmd to HTML
-        # If your file is named something other than index.Rmd, change it here.
-        # If you are compiling a multi-file bookdown project, use bookdown::render_book("index.Rmd")
-        run: |
-          rmarkdown::render("index.Rmd")
+      - name: Build book into _book
         shell: Rscript {0}
+        run: |
+          bookdown::render_book("index.Rmd", output_dir = "_book")
 
-      - name: Deploy to 'website' branch
+      - name: Debug output
+        run: |
+          echo "Contents of _book:"
+          ls -la _book
+
+      - name: Deploy _book to website branch
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: website
-          # IMPORTANT: Change this if your HTML outputs to a specific folder (like _book or _site)
           publish_dir: ./_book
