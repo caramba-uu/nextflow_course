@@ -1567,17 +1567,18 @@ Now that we have our channels up and running, time to create four processes:
 
 ### Process I
 
-I. Let’s name the first process `process_masstrace_detection_pos_OpenMS`  
-    1. This process has two inputs:  
-        a. The first input is from the mzML files  
-        b. The second one is from the **feature finder** parameter file. Please remember that The second input should be a type of input that repeats for **each** of the mzML file emitted by the first channel  
-    2. The output for this process has the same **baseName **as input but it has “.featureXML” extension. The name of the output channel must be alignmentProcess  
-    3. And finally, the command needed to run is  
+Let’s name the first process `process_masstrace_detection_pos_OpenMS`.
+
+   1. This process has two inputs:  
+      a. The first input is from the mzML files  
+      b. The second one is from the **feature finder** parameter file. Please remember that The second input should be a type of input that repeats for **each** of the mzML file emitted by the first channel  
+   2. The output for this process has the same **baseName** as input but it has `.featureXML` extension. The name of the output channel must be alignmentProcess
+   3. And finally, the command needed to run is:
+    
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
 FeatureFinderMetabo -in inputVariable -out inputBaseName.featureXML -ini settingFileVariable
 ```
-
 
 Please note that you need to change `inputVariable`, `inputBaseName` and `settingFileVariable`! Please also note that the inputs to this tool are given by `-in`, the outputs by -out and settings by `-ini`.  
 
@@ -1585,12 +1586,13 @@ Help me: [processes](https://www.nextflow.io/docs/latest/process.html), [input e
 
 ### Process II
 
-II. The second process is called `process_masstrace_alignment_pos_OpenMS`  
-    4. Similar to the previous process it will get two inputs:  
-        a. The first one is the output of `process_masstrace_detection_pos_OpenMS` - the previous process  
-        b. The second one is from the alignment parameter file. Similar to the previous one this input is also repeating! Remember using **each**?  
-    5. The output for this process has the same `baseName` as input and it has `.featureXML` extension. However, these files are supposed to be kept in a different   output folder (let’s call it `out`). The output channel must be named `LinkerProcess`  
-    6. The command needed is a bit different from the previous one:  
+The second process is called `process_masstrace_alignment_pos_OpenMS`
+
+   4. Similar to the previous process it will get two inputs:  
+      a. The first one is the output of `process_masstrace_detection_pos_OpenMS` - the previous process  
+      b. The second one is from the alignment parameter file. Similar to the previous one this input is also repeating! Remember using **each**?  
+   5. The output for this process has the same `baseName` as input and it has `.featureXML` extension. However, these files are supposed to be kept in a different   output folder (let’s call it `out`). The output channel must be named `LinkerProcess`  
+   6. The command needed is a bit different from the previous one:  
 
 This command accepts ALL the featureXML files at **the same time** (look at collect!) and outputs the same number of files. For the command, the inputs must be separated by space (remember the join operation in the XCMS pipeline?). The output is the same as input however you need to put the output in a different folder (`out`) within the process! Think about a simple bash script. You create a folder and join the files in a way that they are written in a separate folder!  
 
@@ -1632,12 +1634,13 @@ println (string_separated)
 
 ### Process III
 
-III. The third process is called `process_masstrace_linker_pos_OpenMS` and is used to link (merge) multiple files into a single file  
-    7. It takes two inputs:  
-        a. The output from the alignment - the previous process  
-        b. The parameter file (`featureLinker.ini`)  
-    8. The output of this process is a single file and must be named “Aggregated.consensusXML” it will be sent over to a channel called “textExport”  
-    9. And the command:  
+The third process is called `process_masstrace_linker_pos_OpenMS` and is used to link (merge) multiple files into a single file
+
+   7. It takes two inputs:  
+      a. The output from the alignment - the previous process  
+      b. The parameter file (`featureLinker.ini`)  
+   8. The output of this process is a single file and must be named `Aggregated.consensusXML` it will be sent over to a channel called `textExport`.  
+   9. And the command:  
 
     This is similar to the previous step. You need to gather all the inputs separated by space (collect and join!). However, it will only output one file. Given the same three files above, an example of the command would be:  
 
@@ -1652,11 +1655,13 @@ Finally, this process needs quite a bit of RAM to go forward. Set the memory for
 
 ### Process IV
 
-IV. Finally the last step which takes the xml formatted output from the previous step and convert it into a csv file. Let’s call this process `process_masstrace_exporter_pos_OpenMS`
-    10. The input to the process is the output from the previous step
-    11. The output is a single file and must be called `Aggregated_clean.csv` and sent over to a channel called `out`
-    12. To run the command: 
-    This process will run two commands the first one does the conversion and the second one the cleaning. We will only need the last output (`Aggregated_clean.csv`)
+The last step which takes the xml formatted output from the previous step and convert it into a csv file. Let’s call this process `process_masstrace_exporter_pos_OpenMS`
+
+   10. The input to the process is the output from the previous step
+   11. The output is a single file and must be called `Aggregated_clean.csv` and sent over to a channel called `out`
+   12. To run the command: 
+
+This process will run two commands the first one does the conversion and the second one the cleaning. We will only need the last output (`Aggregated_clean.csv`)
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
 TextExporter -in input -out Aggregated.csv
