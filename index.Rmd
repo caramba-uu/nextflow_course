@@ -1667,8 +1667,8 @@ Remember that this process should publish its result to a specific directory (yo
 
 Help me: [publish the results](https://www.nextflow.io/docs/latest/process.html#publishdir)
 
-
-### Part 2.2 PCA (optional to test you skills - **DOES NOT COUNT TOWARDS GRADING**)
+<!--
+### Part X - PCA (optional to test you skills - **DOES NOT COUNT TOWARDS GRADING**)
 
 Given the output from the last step of the pipeline, do a PCA on the data. The output of the last step is a csv file (comma separated) and the first column is the header. The missing values are designated by NA. 
 
@@ -1700,6 +1700,6 @@ script section
 """
 }
 ```
-
+-->
 
 
