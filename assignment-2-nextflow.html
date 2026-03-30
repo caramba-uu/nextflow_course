@@ -597,8 +597,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>You are now ready to start!</p>
 <p><strong>The container for both of the following parts is “metaboigniter/course_docker:v5” and we want to use SLURM to run the jobs. </strong></p>
 <p><strong>IMPORTANT: DO NOT remove, change or add anything here and in its subfolders: </strong> /crex/proj/uppmax2026-1-94/metabolomics</p>
-<p><em>For part 1, please send us the modified main.nf, nextflow.config, and the modified command used to run (included in a file named command.txt).</em>
-<em>For part 2, you will need to send us the main.nf and the nextflow.config.</em></p>
+<p><em>For part 1, please send us the modified main.nf, nextflow.config, and the modified command used to run (included in a file named command.txt).</em><br />
+<em>For part 2, you will need to send us the main.nf file</em></p>
 <p><strong>IMPORTANT: Some time Uppmax file system might cause some of the processes to fail, if this happens, rerun the workflow with -resume option. This might actually pass the step that was previously shown as failed!</strong></p>
 <p><strong>Use -resume whenever you run the workflow to skip the steps which were completed before (save both computational and your time )</strong><br />
 For example</p>
@@ -636,7 +636,7 @@ For example</p>
 </div>
 <div id="part-2" class="section level2 hasAnchor" number="10.3">
 <h2><span class="header-section-number">10.3</span> Part 2<a href="assignment-2-nextflow.html#part-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><em>For part 2, you will need to send us the main.nf and the nextflow.config files</em></p>
+<p><strong>For part 2, you will need to send us the main.nf file</strong></p>
 <p>As talked before the pipeline in the part 1 does mass spectrometry data pre-processing using XCMS software suite. In this part of the exercise, you will need to build a pipeline from scratch that does the same thing using OpenMS. You can of course use the pipeline in part 1 as a template and try to modify it to do that.</p>
 <p><strong>Tip: Use echo to print the shell command executed by the nextflow, to verify the input and output are of desired format. You can pass “-debug true” to the nextflow command or have a directive “debug true” under a process to print for the respective process.</strong></p>
 <p>When running your pipeline, remember to use these flags and the <strong>nextflow.config</strong> file from the part1 <code>-profile uppmax --project "uppmax2026-1-94"</code>.
