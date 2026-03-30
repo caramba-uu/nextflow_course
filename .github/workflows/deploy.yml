@@ -6,6 +6,10 @@ on:
     branches:
       - main # Change to 'master' if that is your default branch name
 
+concurrency:
+  group: bookdown-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -23,12 +27,11 @@ jobs:
           r-version: 'release'
           use-public-rspm: true
 
-      - name: Setup Pandoc
-        uses: r-lib/actions/setup-pandoc@v2
-
-      - name: Install R Dependencies and Cache
+      - name: Install R Dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
+          cache: true
+          cache-version: 1
           packages: |
             any::rmarkdown
             any::bookdown
@@ -39,11 +42,6 @@ jobs:
         shell: Rscript {0}
         run: |
           bookdown::render_book("index.Rmd", output_dir = "_book")
-
-      - name: Debug output
-        run: |
-          echo "Contents of _book:"
-          ls -la _book
 
       - name: Deploy _book to website branch
         uses: peaceiris/actions-gh-pages@v3
