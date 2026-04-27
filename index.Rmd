@@ -1497,7 +1497,7 @@ You can open another terminal window and ssh to Uppmax and use jobinfo to see wh
 
 You can use jobinfo by logging in to uppmax via ssh using another terminal.
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-jobinfo -u $USER
+squeue -u $USER
 ```
 
 Please remember that there is a high chance that Uppmax becomes very slow because the jobs are heavy. So please consider canceling your jobs if you already know and have a feeling about how Uppmax runs your jobs
