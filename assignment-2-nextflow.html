@@ -616,7 +616,7 @@ For example</p>
 <div class="sourceCode" id="cb101"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb101-1"><a href="assignment-2-nextflow.html#cb101-1"></a><span class="fu">cp</span> -r /crex/proj/uppmax2026-1-94/metabolomics/xcms_pipeline .</span></code></pre></div>
 <p>Now you have all the required files in your folder. Try to run the pipeline</p>
 <div class="sourceCode" id="cb102"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb102-1"><a href="assignment-2-nextflow.html#cb102-1"></a><span class="bu">cd</span> xcms_pipeline </span></code></pre></div>
-<div class="sourceCode" id="cb103"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb103-1"><a href="assignment-2-nextflow.html#cb103-1"></a><span class="ex">nextflow</span> main.nf -profile uppmax --project <span class="st">&quot;uppmax2026-1-94&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb103-1"><a href="assignment-2-nextflow.html#cb103-1"></a><span class="ex">nextflow</span> main.nf -profile uppmax --project <span class="st">&quot;uppmax2026-1-94&quot;</span> -resume</span></code></pre></div>
 <p>You can open another terminal window and ssh to Uppmax and use jobinfo to see whether your jobs are running or not! If you realized that won’t run for some steps, it might be because of RAM, CPU, or running time. In the nextflow.config, you can change these parameters!</p>
 <p>You can use jobinfo by logging in to uppmax via ssh using another terminal.</p>
 <div class="sourceCode" id="cb104"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb104-1"><a href="assignment-2-nextflow.html#cb104-1"></a><span class="ex">squeue</span> -u <span class="va">$USER</span></span></code></pre></div>
@@ -646,7 +646,7 @@ For example</p>
 <p><strong>Tip: Use echo to print the shell command executed by the nextflow, to verify the input and output are of desired format. You can pass “-debug true” to the nextflow command or have a directive “debug true” under a process to print for the respective process.</strong></p>
 <p>When running your pipeline, remember to use these flags and the <strong>nextflow.config</strong> file from the part1 <code>-profile uppmax --project "uppmax2026-1-94"</code>.
 For example</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb107-1"><a href="assignment-2-nextflow.html#cb107-1"></a><span class="ex">nextflow</span> yourpipeline.nf -profile uppmax --project <span class="st">&quot;uppmax2026-1-94&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb107-1"><a href="assignment-2-nextflow.html#cb107-1"></a><span class="ex">nextflow</span> yourpipeline.nf -profile uppmax --project <span class="st">&quot;uppmax2026-1-94&quot;</span> -resume</span></code></pre></div>
 <div id="main-instructions" class="section level3 hasAnchor" number="10.3.1">
 <h3><span class="header-section-number">10.3.1</span> Main instructions<a href="assignment-2-nextflow.html#main-instructions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This is what you need to do</p>
