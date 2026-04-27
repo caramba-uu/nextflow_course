@@ -1425,7 +1425,7 @@ You need to do this every time you start the lab.
 First ssh to Uppmax
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-ssh -AX yourusername@rackham.uppmax.uu.se
+ssh -AX yourusername@pelle.uppmax.uu.se
 ```
 
 Make a directory in your userspace
