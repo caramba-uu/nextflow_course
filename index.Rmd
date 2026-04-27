@@ -1490,7 +1490,7 @@ cd xcms_pipeline
 ```
 
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-nextflow main.nf -profile uppmax --project "uppmax2026-1-94"
+nextflow main.nf -profile uppmax --project "uppmax2026-1-94" -resume
 ```
 
 You can open another terminal window and ssh to Uppmax and use jobinfo to see whether your jobs are running or not! If you realized that won’t run for some steps, it might be because of RAM, CPU, or running time. In the nextflow.config, you can change these parameters!
@@ -1546,7 +1546,7 @@ As talked before the pipeline in the part 1 does mass spectrometry data pre-proc
 When running your pipeline, remember to use these flags and the **nextflow.config** file from the part1 `-profile uppmax --project "uppmax2026-1-94"`.
 For example
 ```{bash, attr.source='.numberLines',eval=FALSE, class.source="nohide"}
-nextflow yourpipeline.nf -profile uppmax --project "uppmax2026-1-94"
+nextflow yourpipeline.nf -profile uppmax --project "uppmax2026-1-94" -resume
 ```
 
 
