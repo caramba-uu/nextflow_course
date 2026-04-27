@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2026-04-21" />
+<meta name="date" content="2026-04-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -584,7 +584,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="header">
 <h1 class="title">Introduction to Nextflow</h1>
-<p class="date"><em>2026-04-21</em></p>
+<p class="date"><em>2026-04-27</em></p>
 </div>
 <div id="introduction" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Introduction<a href="index.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
@@ -593,14 +593,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">1.1</span> Setting up the environment<a href="index.html#setting-up-the-environment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We are going to use UPPMAX for doing most of the hands-on work.</p>
 <p>First ssh to pelle cluster in UPPMAX</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb1-1"><a href="index.html#cb1-1"></a><span class="fu">ssh</span> -AX youusername@pelle.uppmax.uu.se</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb1-1"><a href="index.html#cb1-1"></a><span class="fu">ssh</span> -AX yourusername@pelle.uppmax.uu.se</span></code></pre></div>
 <p>Start an interactive uppmax session for two hours</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb2-1"><a href="index.html#cb2-1"></a><span class="ex">interactive</span> -A uppmax2026-1-94 -t 02:00:00</span></code></pre></div>
 <p>Make a directory in your user space (only if you have not done before)</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb3-1"><a href="index.html#cb3-1"></a><span class="fu">mkdir</span> -p /crex/proj/uppmax2026-1-94/nobackup/<span class="va">$USER</span>/nextflow_lab1</span></code></pre></div>
 <p>Navigate to the folder you have created</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb4-1"><a href="index.html#cb4-1"></a><span class="bu">cd</span> /crex/proj/uppmax2026-1-94/nobackup/<span class="va">$USER</span>/nextflow_lab1</span></code></pre></div>
-<p>Load Nexflow</p>
+<p>Load Nextflow</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb5-1"><a href="index.html#cb5-1"></a><span class="ex">module</span> load Nextflow/22.10.1</span></code></pre></div>
 <p>If because of any reason, you cannot use UPPMAX, Nextflow can be installed on any POSIX compatible system for example Linux, OS X, Windows Subsystem for Linux. Head to <a href="https://www.nextflow.io/docs/latest/getstarted.html#installation">Nextflow website</a> and follow the installation procedure.</p>
 </div>

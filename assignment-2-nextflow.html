@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2026-04-21" />
+<meta name="date" content="2026-04-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -589,12 +589,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">10.1</span> Set up the environment<a href="assignment-2-nextflow.html#set-up-the-environment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>You need to do this every time you start the lab.</p>
 <p>First ssh to Uppmax</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb95-1"><a href="assignment-2-nextflow.html#cb95-1"></a><span class="fu">ssh</span> -AX youusername@rackham.uppmax.uu.se</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb95-1"><a href="assignment-2-nextflow.html#cb95-1"></a><span class="fu">ssh</span> -AX yourusername@rackham.uppmax.uu.se</span></code></pre></div>
 <p>Make a directory in your userspace</p>
 <div class="sourceCode" id="cb96"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb96-1"><a href="assignment-2-nextflow.html#cb96-1"></a><span class="fu">mkdir</span> -p /crex/proj/uppmax2026-1-94/nobackup/<span class="va">$USER</span>/nextflow_lab</span></code></pre></div>
 <p>Navigate to the folder you have created</p>
 <div class="sourceCode" id="cb97"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb97-1"><a href="assignment-2-nextflow.html#cb97-1"></a><span class="bu">cd</span> /crex/proj/uppmax2026-1-94/nobackup/<span class="va">$USER</span>/nextflow_lab</span></code></pre></div>
-<p>Load Nexflow</p>
+<p>Load Nextflow</p>
 <div class="sourceCode" id="cb98"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb98-1"><a href="assignment-2-nextflow.html#cb98-1"></a><span class="ex">module</span> load Nextflow/22.10.1</span></code></pre></div>
 <p>Fix some environmental variables:</p>
 <div class="sourceCode" id="cb99"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb99-1"><a href="assignment-2-nextflow.html#cb99-1"></a><span class="bu">export</span> <span class="va">NXF_SINGULARITY_CACHEDIR=</span>/crex/proj/uppmax2026-1-94/metabolomics/singularity</span></code></pre></div>
@@ -603,7 +603,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>IMPORTANT: DO NOT remove, change or add anything here and in its subfolders: </strong> /crex/proj/uppmax2026-1-94/metabolomics</p>
 <p><em>For part 1, please send us the modified main.nf, nextflow.config, and the modified command used to run (included in a file named command.txt).</em><br />
 <em>For part 2, you will need to send us the main.nf file.</em></p>
-<p><strong>IMPORTANT: Some time Uppmax file system might cause some of the processes to fail, if this happens, rerun the workflow with -resume option. This might actually pass the step that was previously shown as failed!</strong></p>
+<p><strong>IMPORTANT: Sometimes the Uppmax file system might cause some of the processes to fail, if this happens, rerun the workflow with -resume option. This might actually pass the step that was previously shown as failed!</strong></p>
 <p><strong>Use -resume whenever you run the workflow to skip the steps which were completed before (save both computational and your time )</strong><br />
 For example</p>
 <div class="sourceCode" id="cb100"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb100-1"><a href="assignment-2-nextflow.html#cb100-1"></a><span class="ex">nextflow</span> yourpipeline.nf -profile uppmax --project <span class="st">&quot;uppmax2026-1-94&quot;</span> -resume</span></code></pre></div>
@@ -618,14 +618,14 @@ For example</p>
 <div class="sourceCode" id="cb102"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb102-1"><a href="assignment-2-nextflow.html#cb102-1"></a><span class="bu">cd</span> xcms_pipeline </span></code></pre></div>
 <div class="sourceCode" id="cb103"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb103-1"><a href="assignment-2-nextflow.html#cb103-1"></a><span class="ex">nextflow</span> main.nf -profile uppmax --project <span class="st">&quot;uppmax2026-1-94&quot;</span></span></code></pre></div>
 <p>You can open another terminal window and ssh to Uppmax and use jobinfo to see whether your jobs are running or not! If you realized that won’t run for some steps, it might be because of RAM, CPU, or running time. In the nextflow.config, you can change these parameters!</p>
-<p>You can the jobinfo by logging in to uppmax via ssh using another termial.</p>
+<p>You can use jobinfo by logging in to uppmax via ssh using another terminal.</p>
 <div class="sourceCode" id="cb104"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb104-1"><a href="assignment-2-nextflow.html#cb104-1"></a><span class="ex">jobinfo</span> -u <span class="va">$USER</span></span></code></pre></div>
 <p>Please remember that there is a high chance that Uppmax becomes very slow because the jobs are heavy. So please consider canceling your jobs if you already know and have a feeling about how Uppmax runs your jobs</p>
 <div class="sourceCode" id="cb105"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb105-1"><a href="assignment-2-nextflow.html#cb105-1"></a><span class="ex">scancel</span> -u <span class="va">$USER</span></span></code></pre></div>
 <ul>
 <li>Exercise one: There are some hardcoded parameters part of the pipeline:
 <ul>
-<li><p>If process process_masstrace_detection_pos_xcms we have the following parameters:</p>
+<li><p>In process process_masstrace_detection_pos_xcms we have the following parameters:</p>
 <p><code>peakwidthLow=5</code></p>
 <p><code>peakwidthHigh=10</code></p>
 <p><code>noise=1000</code></p>
@@ -697,10 +697,15 @@ For example</p>
 </li>
 <li>The command needed is a bit different from the previous one:</li>
 </ol>
-<p>This command accepts ALL the featureXML files at <strong>the same time</strong> (look at collect!) and outputs the same number of files. For the command, the inputs must be separated by space (remember the join operation in the XCMS pipeline?). The output is the same as input however you need to put the output in a different folder (<code>out</code>) within the process! Think about a simple bash script. You create a folder and join the files in a way that they are written in a separate folder!</p>
+<p>Unlike the FeatureFinder step, the alignment step should run once on all featureXML files together. Therefore, collect the featureXML files before passing them to this process.</p>
+<p>Unlike the FeatureFinder step, the alignment step should run once on all featureXML files at <strong>the same time</strong> (look at collect!). Therefore, collect the featureXML files from the previous process before passing them to this process. The alignment also outputs the same number of files. For the command, the inputs must be separated by space (remember the join operation in the XCMS pipeline?). The output is the same as input however you need to put the output in a different folder (<code>out</code>) within the process! Think about a simple bash script. You create a folder and join the files in a way that they are written in a separate folder!</p>
+<p>Inside the script block:<br />
+- create an output directory called out.<br />
+- join the input featureXML filenames with spaces for the -in argument.<br />
+- create matching output filenames inside out/ for the -out argument.</p>
 <p>Given three samples, x.featureXML, y.featureXML and z.featureXML, an example of the command is like</p>
 <div class="sourceCode" id="cb109"><pre class="sourceCode numberSource bash nohide numberLines"><code class="sourceCode bash"><span id="cb109-1"><a href="assignment-2-nextflow.html#cb109-1"></a><span class="fu">mkdir</span> out</span>
-<span id="cb109-2"><a href="assignment-2-nextflow.html#cb109-2"></a><span class="ex">MapAlignerPoseClustering</span> -in x.featureXML y.featureXML z.featureXMLL -out out/x.featureXMLL out/y.featureXML out/z.featureXML -ini setting.ini</span></code></pre></div>
+<span id="cb109-2"><a href="assignment-2-nextflow.html#cb109-2"></a><span class="ex">MapAlignerPoseClustering</span> -in x.featureXML y.featureXML z.featureXML -out out/x.featureXML out/y.featureXML out/z.featureXML -ini setting.ini</span></code></pre></div>
 <p><strong>Please remember the code above is just an example of a command you run in bash You will have to implement this using Nextflow!</strong></p>
 <p>Also note that the inputs to this tool/command are given by <code>-in</code>, the outputs by <code>-out</code> and settings by <code>-ini</code>.</p>
 <p>Finally, this process needs quite a bit of RAM to go forward. Set the memory for this to probably around 10 GB or even more!</p>
@@ -763,7 +768,7 @@ Can you add your script (PCA) as an extra node part of the pipeline? You don’t
 
 If you don’t know what PCA is or how to do it, please let us know!
 
-**If you encounter issues with Uppmax being way too slow or does not do anything, please let up know!**
+**If you encounter issues with Uppmax being way too slow or does not do anything, please let us know!**
 
 **If you are using python for PCA, use the following directive for the  process**
 
